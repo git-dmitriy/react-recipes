@@ -1,16 +1,24 @@
+import { Link } from 'react-router-dom';
+
 export function Header() {
   return (
     <nav className='#546e7a blue-grey darken-1'>
       <div className='nav-wrapper'>
-        <a href='#' className='brand-logo'>
+        <Link to='/' className='brand-logo'>
           React Recipes
-        </a>
+        </Link>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li>
-            <a href='#!'>Repository</a>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/contacts'>Contacts</Link>
           </li>
         </ul>
       </div>
     </nav>
-  )
+  );
 }
