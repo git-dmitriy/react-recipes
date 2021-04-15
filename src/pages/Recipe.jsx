@@ -2,17 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from '../api';
 import { Ingredients } from '../components/Recipe/Ingredients';
+import { YoutubeIframe } from '../components/Youtube/YoutubeIframe';
 
 export function Recipe() {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState({});
   const [imgPlaceholder, setImgPlaceholder] = useState('');
+  const [youtubeLink, setYoutubeLink] = useState('');
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
 
   useEffect(() => {
     getMealById(idMeal).then((data) => {
       setRecipe(data.meals[0]);
       setImgPlaceholder(data.meals[0].strMeal);
+      setYoutubeLink(data.meals[0].strYoutube);
     });
     console.log('recipe:', recipe);
   }, [idMeal]);
@@ -41,6 +44,11 @@ export function Recipe() {
         <div className='col xl12 m12 s12'>
           <Ingredients props={recipe} />
         </div>
+        {youtubeLink.length ? (
+          <div className='col xl12 m12 s12'>
+            <YoutubeIframe address={youtubeLink.slice(32)} />
+          </div>
+        ) : null}
       </div>
     </>
   );
