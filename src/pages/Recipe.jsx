@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { getMealById } from '../api';
 import { Preloader } from '../components/Preloader/Preloader';
 import { Ingredients } from '../components/Recipe/Ingredients';
@@ -11,6 +11,7 @@ export function Recipe() {
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
+  const { goBack } = useHistory();
 
   useEffect(() => {
     getMealById(idMeal).then((data) => {
@@ -27,6 +28,12 @@ export function Recipe() {
         <Preloader />
       ) : (
         <>
+          <button
+            className='btn '
+            style={{ marginBottom: '1rem' }}
+            onClick={goBack}>
+            GO BACK
+          </button>
           <div className='row'>
             <div className='col xl6 l6 m12'>
               {recipe.strMealThumb ? (
