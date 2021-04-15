@@ -7,12 +7,12 @@ export default function CategoryItem({
   strCategoryDescription,
 }) {
   return (
-    <div class='card'>
-      <div class='card-image'>
+    <div className='card'>
+      <div className='card-image'>
         <img src={strCategoryThumb} alt={strCategory} />
       </div>
-      <div class='card-content'>
-        <span class='card-title'>{strCategory}</span>
+      <div className='card-content'>
+        <span className='card-title'>{strCategory}</span>
         <p>{strCategoryDescription.slice(0, 60)}...</p>
       </div>
       <div className='card-action'>
