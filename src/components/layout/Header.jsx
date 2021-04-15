@@ -9,7 +9,7 @@ export function Header() {
         </Link>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li>
-            <Link to='/'>Home</Link>
+            <Link to='/'>Recipes</Link>
           </li>
           <li>
             <Link to='/about'>About</Link>
