@@ -14,6 +14,7 @@ export function Recipe() {
   const { goBack } = useHistory();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getMealById(idMeal).then((data) => {
       setRecipe(data.meals[0]);
       setImgPlaceholder(data.meals[0].strMeal);
