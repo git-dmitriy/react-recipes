@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { getMealById } from '../api';
+import { getMealById } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
 import { Ingredients } from '../components/Recipe/Ingredients';
 import { YoutubeIframe } from '../components/Youtube/YoutubeIframe';

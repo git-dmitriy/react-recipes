@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { getAllCategories } from '../api';
+import { getMealByName } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
 import CategoryList from '../components/Category/CategoryList';
 import { Search } from '../components/Search/Search';
