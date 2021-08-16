@@ -5,7 +5,7 @@ import { Preloader } from '../components/Preloader/Preloader';
 import CategoryList from '../components/Category/CategoryList';
 import { Search } from '../components/Search/Search';
 
-export function Home() {
+export function Categories() {
   const [catalog, setCatalog] = useState([]);
   const [filteredCatalog, setFilteredCatalog] = useState([]);
 

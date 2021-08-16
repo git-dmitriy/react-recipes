@@ -12,10 +12,10 @@ export function Header() {
             <Link to='/'>Recipes</Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link to='/categories'>Categories</Link>
           </li>
           <li>
-            <Link to='/contacts'>Contacts</Link>
+            <Link to='/about'>About</Link>
           </li>
         </ul>
       </div>
