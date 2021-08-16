@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getFilteredCategories } from '../helpers/api';
+import { getFilteredCategory } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
 import { MealsList } from '../components/Meals/MealsList';
 
@@ -9,7 +9,7 @@ export function Category() {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    getFilteredCategories(name).then((data) => {
+    getFilteredCategory(name).then((data) => {
       setMeals(data.meals);
     });
   }, [name]);
