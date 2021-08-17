@@ -19,6 +19,7 @@ export function Recipe() {
       setRecipe(data.meals[0]);
       setImgPlaceholder(data.meals[0].strMeal);
       setYoutubeLink(data.meals[0].strYoutube);
+      console.log(data);
     });
     console.log('recipe:', recipe);
   }, [idMeal]);
@@ -29,40 +30,58 @@ export function Recipe() {
         <Preloader />
       ) : (
         <>
-          <button
-            className='btn '
-            style={{ marginBottom: '1rem' }}
-            onClick={goBack}>
-            GO BACK
-          </button>
-          <div className='row'>
-            <div className='col xl6 l6 m12'>
-              {recipe.strMealThumb ? (
-                <img src={recipe.strMealThumb} alt={recipe.strMeal} />
-              ) : (
-                <img src={placeholder + imgPlaceholder} alt={recipe.strMeal} />
-              )}
-            </div>
-
-            <div className='col xl6 l6 m12'>
-              <h2>{recipe.strMeal}</h2>
-              <h3>Category: {recipe.strCategory || 'unknown'}</h3>
-              <h3>Country of origin: {recipe.strArea || 'unknown'}</h3>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col xl12'>
-              <p className='flow-text'>{recipe.strInstructions}</p>
-            </div>
-            <div className='col xl12 m12 s12'>
-              <Ingredients props={recipe} />
-            </div>
-            {youtubeLink.length ? (
-              <div className='col xl12 m12 s12'>
-                <YoutubeIframe address={youtubeLink.slice(32)} />
+          <section className='text-gray-600 body-font'>
+            <div className='container px-5 pt-14 pb-24 mx-auto flex flex-col'>
+              <div className='w-full lg:w-6/6 2xl:w-4/6 mx-auto'>
+                <div className='rounded-lg h-full overflow-hidden'>
+                  {recipe.strMealThumb ? (
+                    <img
+                      className='object-cover object-center h-full w-full'
+                      src={recipe.strMealThumb}
+                      alt={recipe.strMeal}
+                    />
+                  ) : (
+                    <img
+                      className='object-cover object-center h-full w-full'
+                      src={placeholder + imgPlaceholder}
+                      alt={recipe.strMeal}
+                    />
+                  )}
+                </div>
+                <div className='flex flex-col sm:flex-row mt-10'>
+                  <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
+                    <div className='flex flex-col items-center text-center justify-center'>
+                      <h2 className='font-medium title-font mt-4 text-gray-900 text-2xl'>
+                        {recipe.strMeal}
+                      </h2>
+                      <div className='w-12 h-1 bg-indigo-500 rounded mt-2 mb-4'></div>
+                      <p className='text-base'>
+                        Country:{' '}
+                        <span className='font-bold'>
+                          {recipe.strArea === 'Unknown'
+                            ? 'Origin not establish'
+                            : recipe.strArea}
+                        </span>
+                      </p>
+                      <p className='text-base'>
+                        Category:{' '}
+                        <span className='font-bold'>{recipe.strCategory}</span>
+                      </p>
+                    </div>
+                    <Ingredients props={recipe} />
+                  </div>
+                  <div className='sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'>
+                    <p className='leading-relaxed text-xl text-justify mb-4'>
+                      {recipe.strInstructions}
+                    </p>
+                  </div>
+                </div>
+                {youtubeLink.length ? (
+                  <YoutubeIframe address={youtubeLink.slice(32)} />
+                ) : null}
               </div>
-            ) : null}
-          </div>
+            </div>
+          </section>
         </>
       )}
     </>
