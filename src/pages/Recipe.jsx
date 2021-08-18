@@ -4,6 +4,7 @@ import { getMealById } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
 import { Ingredients } from '../components/Recipe/Ingredients';
 import { YoutubeIframe } from '../components/Youtube/YoutubeIframe';
+import { RecipeImage } from '../components/Recipe/RecipeImage';
 
 export function Recipe() {
   const { idMeal } = useParams();
@@ -14,14 +15,11 @@ export function Recipe() {
   const { goBack } = useHistory();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getMealById(idMeal).then((data) => {
       setRecipe(data.meals[0]);
-      setImgPlaceholder(data.meals[0].strMeal);
+      setImgPlaceholder(placeholder + data.meals[0].strMeal);
       setYoutubeLink(data.meals[0].strYoutube);
-      console.log(data);
     });
-    console.log('recipe:', recipe);
   }, [idMeal]);
 
   return (
@@ -34,19 +32,11 @@ export function Recipe() {
             <div className='container px-5 pt-14 pb-24 mx-auto flex flex-col'>
               <div className='w-full lg:w-6/6 2xl:w-4/6 mx-auto'>
                 <div className='rounded-lg h-full overflow-hidden'>
-                  {recipe.strMealThumb ? (
-                    <img
-                      className='object-cover object-center h-full w-full'
-                      src={recipe.strMealThumb}
-                      alt={recipe.strMeal}
-                    />
-                  ) : (
-                    <img
-                      className='object-cover object-center h-full w-full'
-                      src={placeholder + imgPlaceholder}
-                      alt={recipe.strMeal}
-                    />
-                  )}
+                  <RecipeImage
+                    imgLink={recipe.strMealThumb}
+                    altText={recipe.strMeal}
+                    imgPlaceholder={imgPlaceholder}
+                  />
                 </div>
                 <div className='flex flex-col sm:flex-row mt-10'>
                   <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
