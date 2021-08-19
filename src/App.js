@@ -2,10 +2,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
-import './App.css';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { Contacts } from './pages/Contacts';
 import { Categories } from './pages/Categories';
 import { NotFound } from './pages/NotFound';
 import { Category } from './pages/Category';
@@ -14,11 +12,11 @@ import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
-    <>
+    <div className='bg-yellow-50 text-gray-900'>
       <Router>
         <Header />
         <ScrollToTop />
-        <main className='container content'>
+        <main className='container mx-auto pb-10'>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/about' component={About} />
@@ -30,7 +28,7 @@ function App() {
         </main>
         <Footer />
       </Router>
-    </>
+    </div>
   );
 }
 
