@@ -44,7 +44,7 @@ export function Recipe() {
                       <h2 className='font-medium title-font mt-4 text-gray-900 text-2xl'>
                         {recipe.strMeal}
                       </h2>
-                      <div className='w-12 h-1 bg-indigo-500 rounded mt-2 mb-4'></div>
+                      <div className='w-12 h-1 bg-red-500 rounded mt-2 mb-4'></div>
                       <p className='text-base'>
                         Country:{' '}
                         <span className='font-bold'>

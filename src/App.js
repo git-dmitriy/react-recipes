@@ -12,11 +12,11 @@ import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
-    <>
+    <div className='bg-yellow-50 text-gray-900'>
       <Router>
         <Header />
         <ScrollToTop />
-        <main className='container'>
+        <main className='container mx-auto pb-10'>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/about' component={About} />
@@ -28,7 +28,7 @@ function App() {
         </main>
         <Footer />
       </Router>
-    </>
+    </div>
   );
 }
 
