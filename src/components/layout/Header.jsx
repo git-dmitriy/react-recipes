@@ -1,27 +1,32 @@
-import { NavLink } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
+import { Search } from '../Search/Search';
 
 export function Header() {
+  const { push } = useHistory();
+
+  const handleSearch = (searchQuery) => {
+    if (searchQuery.trim().length !== 0) {
+      push({
+        pathname: '/recipes',
+        search: `search=${searchQuery}`,
+      });
+    }
+  };
+
   return (
     <nav className='bg-yellow-200 shadow dark:bg-gray-800'>
       <ul className='container flex items-center text-lg justify-center p-6 mx-auto capitalize dark:text-gray-300'>
         <li>
-          <NavLink
-            activeClassName='border-b-2 border-red-500 font-bold'
-            exact
-            to='/'
-            className=' dark:text-gray-200 mx-1.5 sm:mx-6'
-          >
-            Find Recipe
-          </NavLink>
+          <Search cb={handleSearch} />
         </li>
 
         <li>
           <NavLink
             activeClassName='border-b-2 border-red-500 font-bold'
             to='/categories'
-            className='border-b-2 border-transparent hover:border-red-500 mx-1.5 sm:mx-6'
+            className='border-b-2 border-transparent hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:ring-2 focus:border-red-500'
           >
-            Categories
+            Recipes
           </NavLink>
         </li>
 
@@ -29,9 +34,9 @@ export function Header() {
           <NavLink
             activeClassName='border-b-2 border-red-500 font-bold'
             to='/about'
-            className='border-b-2 border-transparent  hover:border-red-500 mx-1.5 sm:mx-6'
+            className='border-b-2 border-transparent  hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:ring-2 focus:border-red-500'
           >
-            About
+            favorites
           </NavLink>
         </li>
       </ul>
