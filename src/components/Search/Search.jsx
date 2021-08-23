@@ -19,7 +19,7 @@ export function Search({ cb = Function.prototype }) {
       <div className='relative my-2 mx-auto'>
         <input
           type='search'
-          className='bg-purple-white shadow rounded-full w-52 sm:w-60 md:w-72 lg:w-80 xl:w-96 border-0 p-3 pl-9 min-w-full'
+          className='focus:outline-none focus:ring-2 focus:ring-red-500 shadow rounded-full w-52 sm:w-60 md:w-72 lg:w-80 xl:w-96 border-0 p-3 pl-9 min-w-full'
           placeholder='Search by name...'
           value={searchQuery}
           onChange={(e) => {
