@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Header />
         <ScrollToTop />
-        <main className='container mx-auto pb-10'>
+        <main className='container mx-auto pb-10 pt-5'>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/about' component={About} />
