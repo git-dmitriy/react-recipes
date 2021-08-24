@@ -10,26 +10,29 @@ import { Category } from './pages/Category';
 import { Recipe } from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
 import ScrollToTop from './components/layout/ScrollToTop';
+import { FavoritesState } from './context/favoritesState';
 
 function App() {
   return (
     <div className='bg-yellow-50 text-gray-900'>
-      <Router>
-        <Header />
-        <ScrollToTop />
-        <main className='container mx-auto pb-10 pt-5'>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/about' component={About} />
-            <Route path='/recipes' component={SearchResults} />
-            <Route path='/categories' component={Categories} />
-            <Route path='/category/:name' component={Category} />
-            <Route path='/meal/:idMeal' component={Recipe} />
-            <Route component={NotFound} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
+      <FavoritesState>
+        <Router>
+          <Header />
+          <ScrollToTop />
+          <main className='container mx-auto pb-10 pt-5'>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route path='/about' component={About} />
+              <Route path='/recipes' component={SearchResults} />
+              <Route path='/categories' component={Categories} />
+              <Route path='/category/:name' component={Category} />
+              <Route path='/meal/:idMeal' component={Recipe} />
+              <Route component={NotFound} />
+            </Switch>
+          </main>
+          <Footer />
+        </Router>
+      </FavoritesState>
     </div>
   );
 }
