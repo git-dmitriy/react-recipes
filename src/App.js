@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
+import Favorites from './pages/Favorites';
 import { Categories } from './pages/Categories';
 import { NotFound } from './pages/NotFound';
 import { Category } from './pages/Category';
@@ -22,7 +22,7 @@ function App() {
           <main className='container mx-auto pb-10 pt-5'>
             <Switch>
               <Route exact path='/' component={Home} />
-              <Route path='/about' component={About} />
+              <Route path='/favorites' component={Favorites} />
               <Route path='/recipes' component={SearchResults} />
               <Route path='/categories' component={Categories} />
               <Route path='/category/:name' component={Category} />

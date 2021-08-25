@@ -33,7 +33,7 @@ export function Header() {
         <li>
           <NavLink
             activeClassName='border-b-2 border-red-500 font-bold'
-            to='/about'
+            to='/favorites'
             className='border-b-2 border-transparent  hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:ring-2 focus:border-red-500'
           >
             favorites
