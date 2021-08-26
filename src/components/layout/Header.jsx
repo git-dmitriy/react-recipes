@@ -23,7 +23,8 @@ export function Header() {
         <li>
           <NavLink
             activeClassName='border-b-2 border-red-500'
-            to='/categories'
+            exact
+            to='/'
             className='border-b-2 border-transparent font-bold outline-none hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:ring-2 focus:border-red-500'
           >
             Recipes
