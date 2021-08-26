@@ -4,8 +4,9 @@ import { FavoriteContext } from './favoritesContext';
 import { favoriteReducer } from './favoritesReducer';
 
 export const FavoritesState = ({ children }) => {
+  const favorites = window.localStorage.getItem('favorites');
   const initialState = {
-    favorites: [],
+    favorites: JSON.parse(favorites) || [],
   };
 
   const [state, dispatch] = useReducer(favoriteReducer, initialState);
