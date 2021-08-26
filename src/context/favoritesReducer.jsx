@@ -1,0 +1,25 @@
+import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from './types';
+
+const handlers = {
+  [ADD_TO_FAVORITE]: (state, { payload }) => {
+    const favorites = [...state.favorites, payload];
+    window.localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    return {
+      favorites: [...state.favorites, payload],
+    };
+  },
+  [REMOVE_FROM_FAVORITE]: (state, { payload }) => {
+    const favorites = state.favorites.filter(
+      (item) => item.idMeal !== payload.idMeal
+    );
+    window.localStorage.setItem('favorites', JSON.stringify(favorites));
+    return { favorites };
+  },
+  DEFAULT: (state) => state,
+};
+
+export const favoriteReducer = (state, action) => {
+  const handler = handlers[action.type] || handlers.DEFAULT;
+  return handler(state, action);
+};
