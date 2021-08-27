@@ -21,10 +21,9 @@ function App() {
           <ScrollToTop />
           <main className='container mx-auto pb-10 pt-5'>
             <Switch>
-              <Route exact path='/' component={Home} />
+              <Route exact path='/' component={Categories} />
               <Route path='/favorites' component={Favorites} />
               <Route path='/recipes' component={SearchResults} />
-              <Route path='/categories' component={Categories} />
               <Route path='/category/:name' component={Category} />
               <Route path='/meal/:idMeal' component={Recipe} />
               <Route component={NotFound} />
