@@ -1,11 +1,11 @@
 export function Footer() {
   return (
-    <footer className='bg-gray-600 py-3 text-white'>
+    <footer className='bg-gray-900 py-3 text-white'>
       <div className='container mx-auto'>
         <div className='flex justify-center items-center'>
-          © {new Date().getFullYear()} Dmitriy shalberkin
+          © {new Date().getFullYear()} Dmitriy Shalberkin
           <a
-            className='mx-4 w-10 hover:text-gray-900 transition duration-300'
+            className='mx-4 w-10 hover:text-gray-400 transition duration-300'
             target='_blank'
             rel='noreferrer'
             href='https://github.com/git-dmitriy'
