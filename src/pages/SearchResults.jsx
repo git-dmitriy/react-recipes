@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { getMealByName } from '../helpers/api';
 import { useSearchQuery } from '../hooks/customHooks';
 import { MealsList } from '../components/Meals/MealsList';
@@ -8,17 +7,15 @@ import { NotFound } from '../components/Search/NotFound';
 
 const SearchResults = () => {
   const query = useSearchQuery();
-  const location = useLocation();
   const searchQuery = query.get('search');
-
   const [searchResults, setSearchResults] = useState('');
 
   useEffect(() => {
     getMealByName(searchQuery).then((data) => {
       setSearchResults(data.meals);
-      console.log(searchResults);
     });
-  }, [location]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   if (searchResults === null) {
     return <NotFound target={searchQuery} />;
