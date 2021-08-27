@@ -1,18 +1,22 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { MealsList } from '../components/Meals/MealsList';
 import { FavoriteContext } from '../context/favoritesContext';
-import { Preloader } from '../components/Preloader/Preloader';
 
 const Favorites = () => {
   const { state } = useContext(FavoriteContext);
 
+  if (state.favorites.length === 0) {
+    return (
+      <div className='flex justify-center'>
+        <h2 className='mx-auto font-bold'>
+          You haven't added any recipes yet.
+        </h2>
+      </div>
+    );
+  }
   return (
     <>
-      {!state.favorites.length ? (
-        <Preloader />
-      ) : (
-        <MealsList meals={state.favorites} />
-      )}
+      <MealsList meals={state.favorites} />
     </>
   );
 };
