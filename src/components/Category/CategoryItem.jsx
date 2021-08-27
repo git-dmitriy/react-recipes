@@ -14,7 +14,11 @@ export default function CategoryItem({
         </div>
         <div className='sm:w-2/4 w-3/5 flex flex-col items-start ml-4'>
           <h4 className='text-xl font-semibold'>{strCategory}</h4>
-          <p className='text-sm'>{strCategoryDescription.slice(0, 100)} ...</p>
+          <p className='text-sm sm:text-md'>
+            {strCategoryDescription.length > 50
+              ? strCategoryDescription.slice(0, 100) + '...'
+              : strCategoryDescription}
+          </p>
         </div>
       </Link>
     </li>
