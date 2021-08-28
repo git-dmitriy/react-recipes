@@ -1,5 +1,6 @@
 import { useHistory, NavLink } from 'react-router-dom';
 import { Search } from '../Search/Search';
+import GoBack from './GoBack';
 
 export function Header() {
   const { push } = useHistory();
@@ -15,7 +16,10 @@ export function Header() {
 
   return (
     <nav className='bg-yellow-200 shadow dark:bg-gray-800'>
-      <ul className='container flex items-center text-lg justify-center p-6 mx-auto capitalize dark:text-gray-300'>
+      <ul className='container flex items-center text-lg justify-around sm:justify-center p-2 sm:p-6 mx-auto capitalize dark:text-gray-300'>
+        <li>
+          <GoBack />
+        </li>
         <li>
           <Search cb={handleSearch} />
         </li>

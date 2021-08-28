@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getMealById } from '../helpers/api';
 import { FavoriteContext } from '../context/favoritesContext';
 import { Preloader } from '../components/Preloader/Preloader';
@@ -15,7 +15,6 @@ export function Recipe() {
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
-  const { goBack } = useHistory();
 
   useEffect(() => {
     getMealById(idMeal).then((data) => {
