@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getMealById } from '../helpers/api';
 import { FavoriteContext } from '../context/favoritesContext';
 import { Preloader } from '../components/Preloader/Preloader';
@@ -15,7 +15,6 @@ export function Recipe() {
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
-  const { goBack } = useHistory();
 
   useEffect(() => {
     getMealById(idMeal).then((data) => {
@@ -51,16 +50,26 @@ export function Recipe() {
                       <p className='text-base'>
                         Country:{' '}
                         <span className='font-bold'>
-                          {recipe.strArea === 'Unknown'
-                            ? 'Origin not establish'
-                            : recipe.strArea}
+                          {recipe.strArea === 'Unknown' ? (
+                            'Origin not establish'
+                          ) : (
+                            <Link to={`/country/${recipe.strArea}`}>
+                              {recipe.strArea}
+                            </Link>
+                          )}
                         </span>
                       </p>
                       <p className='text-base'>
                         Category:{' '}
-                        <span className='font-bold'>{recipe.strCategory}</span>
+                        <span className='font-bold'>
+                          {
+                            <Link to={`/category/${recipe.strCategory}`}>
+                              {recipe.strCategory}
+                            </Link>
+                          }
+                        </span>
                       </p>
-                      <div className='w-full mx-2'>
+                      <div className='w-full flex justify-center items-center mx-2 my-2'>
                         {!state.favorites.find(
                           (item) => item.idMeal === idMeal
                         ) ? (

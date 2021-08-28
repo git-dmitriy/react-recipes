@@ -1,5 +1,4 @@
 export function Ingredients({ props }) {
-  console.log('ingredinet:', props);
   return (
     <>
       <table className='w-full ms:w-auto table-fixed bg-yellow-100 border-separate mx-auto rounded-lg overflow-hidden mt-4'>
@@ -15,7 +14,7 @@ export function Ingredients({ props }) {
               return (
                 <tr
                   key={key}
-                  className={key.slice(-1) % 2 !== 0 ? 'bg-red-200' : ''}
+                  className={key.slice(-1) % 2 !== 0 ? 'bg-yellow-200' : ''}
                 >
                   <td className='md:px-4'>{props[key]}</td>
                   <td className='md:px-4'>
