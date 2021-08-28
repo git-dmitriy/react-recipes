@@ -70,7 +70,7 @@ export function Recipe() {
                           }
                         </span>
                       </p>
-                      <div className='w-full mx-2'>
+                      <div className='w-full flex justify-center items-center mx-2 my-2'>
                         {!state.favorites.find(
                           (item) => item.idMeal === idMeal
                         ) ? (
