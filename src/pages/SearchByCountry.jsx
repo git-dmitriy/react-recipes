@@ -16,7 +16,7 @@ const SearchByCountry = () => {
         console.warn('Something went wrong.', err);
       }
     })();
-  }, []);
+  }, [region]);
 
   return (
     <>
