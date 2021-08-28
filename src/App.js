@@ -10,6 +10,7 @@ import { Recipe } from './pages/Recipe';
 import SearchResults from './pages/SearchResults';
 import ScrollToTop from './components/layout/ScrollToTop';
 import { FavoritesState } from './context/favoritesState';
+import SearchByCountry from './pages/SearchByCountry';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path='/favorites' component={Favorites} />
                 <Route path='/recipes' component={SearchResults} />
                 <Route path='/category/:name' component={Category} />
+                <Route path='/country/:region' component={SearchByCountry} />
                 <Route path='/meal/:idMeal' component={Recipe} />
                 <Route component={NotFound} />
               </Switch>

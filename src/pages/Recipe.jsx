@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { getMealById } from '../helpers/api';
 import { FavoriteContext } from '../context/favoritesContext';
 import { Preloader } from '../components/Preloader/Preloader';
@@ -51,9 +51,13 @@ export function Recipe() {
                       <p className='text-base'>
                         Country:{' '}
                         <span className='font-bold'>
-                          {recipe.strArea === 'Unknown'
-                            ? 'Origin not establish'
-                            : recipe.strArea}
+                          {recipe.strArea === 'Unknown' ? (
+                            'Origin not establish'
+                          ) : (
+                            <Link to={`/country/${recipe.strArea}`}>
+                              {recipe.strArea}
+                            </Link>
+                          )}
                         </span>
                       </p>
                       <p className='text-base'>
