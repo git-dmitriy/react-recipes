@@ -11,11 +11,14 @@ export function Meal(props) {
   return (
     <>
       <li className='flex flex-col justify-between bg-yellow-200 rounded-lg p-4 m-2'>
-        <div className='bg-green-100 rounded-lg overflow-hidden'>
+        <Link
+          to={`/meal/${idMeal}`}
+          className='bg-green-100 rounded-lg overflow-hidden'
+        >
           <LazyLoad height={300} once>
             <img className='w-full' src={strMealThumb} alt={strMeal} />
           </LazyLoad>
-        </div>
+        </Link>
         <div className='flex flex-col items-start mt-4'>
           <div className='flex items-center justify-between w-full'>
             <h4 className='text-xl font-semibold w-11/12'>{strMeal}</h4>
