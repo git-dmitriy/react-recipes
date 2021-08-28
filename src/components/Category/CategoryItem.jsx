@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
 
 export default function CategoryItem({
-  idCategory,
   strCategory,
   strCategoryThumb,
   strCategoryDescription,
@@ -10,7 +10,9 @@ export default function CategoryItem({
     <li className='flex bg-yellow-200 rounded-lg p-4 m-2'>
       <Link to={`/category/${strCategory}`} className='flex'>
         <div className='sm:w-2/4 w-2/5 bg-yellow-50 rounded-lg flex items-center justify-center'>
-          <img className='w-full' src={strCategoryThumb} alt={strCategory} />
+          <LazyLoad height={108} once>
+            <img className='w-full' src={strCategoryThumb} alt={strCategory} />
+          </LazyLoad>
         </div>
         <div className='sm:w-2/4 w-3/5 flex flex-col items-start ml-4'>
           <h4 className='text-xl font-semibold'>{strCategory}</h4>

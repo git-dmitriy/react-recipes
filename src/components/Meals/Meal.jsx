@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { FavoriteContext } from '../../context/favoritesContext';
+import LazyLoad from 'react-lazyload';
 
 export function Meal(props) {
   const { idMeal, strMeal, strMealThumb } = props;
@@ -11,7 +12,9 @@ export function Meal(props) {
     <>
       <li className='flex flex-col justify-between bg-yellow-200 rounded-lg p-4 m-2'>
         <div className='bg-green-100 rounded-lg overflow-hidden'>
-          <img className='w-full' src={strMealThumb} alt={strMeal} />
+          <LazyLoad height={300} once>
+            <img className='w-full' src={strMealThumb} alt={strMeal} />
+          </LazyLoad>
         </div>
         <div className='flex flex-col items-start mt-4'>
           <div className='flex items-center justify-between w-full'>
