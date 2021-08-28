@@ -62,7 +62,13 @@ export function Recipe() {
                       </p>
                       <p className='text-base'>
                         Category:{' '}
-                        <span className='font-bold'>{recipe.strCategory}</span>
+                        <span className='font-bold'>
+                          {
+                            <Link to={`/category/${recipe.strCategory}`}>
+                              {recipe.strCategory}
+                            </Link>
+                          }
+                        </span>
                       </p>
                       <div className='w-full mx-2'>
                         {!state.favorites.find(
