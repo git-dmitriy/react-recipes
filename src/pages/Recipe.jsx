@@ -31,7 +31,7 @@ export function Recipe() {
       ) : (
         <>
           <section className='text-gray-600 body-font'>
-            <div className='container px-5 pt-14 pb-24 mx-auto flex flex-col'>
+            <div className='container px-5 pt-2 pb-24 mx-auto flex flex-col'>
               <div className='w-full lg:w-6/6 2xl:w-4/6 mx-auto'>
                 <div className='rounded-lg h-full overflow-hidden'>
                   <RecipeImage
