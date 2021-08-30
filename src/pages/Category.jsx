@@ -17,7 +17,6 @@ export function Category() {
         const category = data.categories.filter(
           (item) => item.strCategory === name
         );
-        console.log('🚀 ~ file: Category.jsx ~ line 24 ~ category', category);
         setCategoryInfo(category[0]);
       } catch (err) {
         console.warn(
