@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export function Search({ cb = Function.prototype }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const searchInput = useRef();
 
   const handleSubmit = () => {
     cb(searchQuery);
@@ -11,6 +12,8 @@ export function Search({ cb = Function.prototype }) {
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSubmit();
+      setSearchQuery('');
+      searchInput.current.blur();
     }
   };
 
@@ -22,6 +25,7 @@ export function Search({ cb = Function.prototype }) {
           className='focus:outline-none focus:ring-2 focus:ring-red-500 shadow rounded-full w-52 sm:w-60 md:w-72 lg:w-80 xl:w-96 border-0 p-3 pl-9 min-w-full'
           placeholder='Search by name...'
           value={searchQuery}
+          ref={searchInput}
           onChange={(e) => {
             setSearchQuery(e.target.value);
           }}
