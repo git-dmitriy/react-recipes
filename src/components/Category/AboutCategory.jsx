@@ -4,7 +4,7 @@ const AboutCategory = ({ categoryInfo }) => {
 
   return (
     <div className='hidden sm:block mx-auto xl:max-w-6xl max-w-4xl'>
-      <div className='flex bg-yellow-100 rounded-lg p-8 m-2'>
+      <div className='flex bg-yellow-100 rounded-lg p-8 m-2 mb-4'>
         <div className='sm:w-2/4 w-2/5 bg-yellow-50 rounded-lg flex items-center justify-center'>
           <img className='w-full' src={strCategoryThumb} alt={strCategory} />
         </div>
