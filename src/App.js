@@ -20,7 +20,7 @@ function App() {
           <div className='content'>
             <Header />
             <ScrollToTop />
-            <main className='container mx-auto py-5'>
+            <main className='container mx-auto py-5 mt-20'>
               <Switch>
                 <Route exact path='/' component={Categories} />
                 <Route path='/favorites' component={Favorites} />

@@ -13,7 +13,7 @@ export function Meal(props) {
       <li className='flex flex-col justify-between bg-yellow-200 rounded-lg p-4 m-2'>
         <Link
           to={`/meal/${idMeal}`}
-          className='bg-yellow-100 rounded-lg overflow-hidden flex'
+          className='bg-yellow-100 rounded-lg overflow-hidden flex block min-h-300'
         >
           <LazyLoad height={300} once>
             <img className='w-full' src={strMealThumb} alt={strMeal} />

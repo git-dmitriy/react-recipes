@@ -15,8 +15,8 @@ export function Header() {
   };
 
   return (
-    <nav className='bg-yellow-200 shadow dark:bg-gray-800'>
-      <ul className='container flex items-center text-lg justify-around sm:justify-center p-2 sm:p-6 mx-auto capitalize dark:text-gray-300'>
+    <nav className='bg-yellow-300 shadow dark:bg-gray-800 fixed top-0 w-full backdrop-blur-md backdrop-filter bg-opacity-50'>
+      <ul className='container flex items-center text-lg justify-around sm:justify-center px-2 sm:px-6 mx-auto capitalize dark:text-gray-300'>
         <li>
           <GoBack />
         </li>
