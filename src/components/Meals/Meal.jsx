@@ -15,7 +15,7 @@ export function Meal(props) {
           to={`/meal/${idMeal}`}
           className='bg-yellow-100 rounded-lg overflow-hidden flex block min-h-300'
         >
-          <LazyLoad height={300} once>
+          <LazyLoad height={300} offset={100} once>
             <img className='w-full' src={strMealThumb} alt={strMeal} />
           </LazyLoad>
         </Link>
