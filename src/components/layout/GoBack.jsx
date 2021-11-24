@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const GoBack = () => {
-  const { goBack } = useHistory();
+  const { goBack } = useNavigate();
   const location = useLocation();
   const [isHome, setIsHome] = useState(false);
 

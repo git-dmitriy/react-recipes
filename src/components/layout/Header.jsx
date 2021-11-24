@@ -1,9 +1,9 @@
-import { useHistory, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { Search } from '../Search/Search';
 import GoBack from './GoBack';
 
 export function Header() {
-  const { push } = useHistory();
+  const { push } = useNavigate();
 
   const handleSearch = (searchQuery) => {
     if (searchQuery.trim().length !== 0) {
@@ -13,6 +13,13 @@ export function Header() {
       });
     }
   };
+
+  const textLinkClassName =
+    'border-b-2 border-transparent font-bold outline-none hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:border-red-500';
+  const iconLinkClassName =
+    'border-b-2 border-transparent  outline-none hover:text-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:text-red-500';
+  const activeTextLink = 'border-b-2 border-red-500';
+  const activeIconLink = 'text-red-500';
 
   return (
     <nav className='bg-yellow-300 shadow dark:bg-gray-800 fixed top-0 w-full backdrop-blur-md backdrop-filter bg-opacity-50'>
@@ -26,10 +33,11 @@ export function Header() {
 
         <li>
           <NavLink
-            activeClassName='border-b-2 border-red-500'
-            exact
+            end
             to='/'
-            className='border-b-2 border-transparent font-bold outline-none hover:border-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:border-red-500'
+            className={({ isActive }) =>
+              textLinkClassName + (isActive ? activeTextLink : '')
+            }
           >
             Recipes
           </NavLink>
@@ -37,9 +45,10 @@ export function Header() {
 
         <li>
           <NavLink
-            activeClassName='text-red-500'
             to='/favorites'
-            className='border-b-2 border-transparent  outline-none hover:text-red-500 mx-1.5 sm:mx-6 focus:outline-none focus:text-red-500'
+            className={({ isActive }) =>
+              iconLinkClassName + (isActive ? activeIconLink : '')
+            }
           >
             <svg viewBox='0 0 212.045 212.045' className='w-6 fill-current'>
               <path

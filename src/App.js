@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
@@ -21,15 +21,15 @@ function App() {
             <Header />
             <ScrollToTop />
             <main className='container mx-auto py-5 mt-20'>
-              <Switch>
-                <Route exact path='/' component={Categories} />
-                <Route path='/favorites' component={Favorites} />
-                <Route path='/recipes' component={SearchResults} />
-                <Route path='/category/:name' component={Category} />
-                <Route path='/country/:region' component={SearchByCountry} />
-                <Route path='/meal/:idMeal' component={Recipe} />
-                <Route component={NotFound} />
-              </Switch>
+              <Routes>
+                <Route exact path='/' element={<Categories />} />
+                <Route path='favorites' element={<Favorites />} />
+                <Route path='recipes' element={<SearchResults />} />
+                <Route path='category/:name' element={<Category />} />
+                <Route path='country/:region' element={<SearchByCountry />} />
+                <Route path='meal/:idMeal' element={<Recipe />} />
+                <Route element={<NotFound />} />
+              </Routes>
             </main>
           </div>
           <Footer />
