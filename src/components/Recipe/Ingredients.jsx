@@ -1,4 +1,4 @@
-export function Ingredients({ props }) {
+export const Ingredients = ({ props }) => {
   return (
     <>
       <table className='w-full ms:w-auto table-fixed bg-yellow-100 border-separate mx-auto rounded-lg overflow-hidden mt-4'>
@@ -29,4 +29,4 @@ export function Ingredients({ props }) {
       </table>
     </>
   );
-}
+};

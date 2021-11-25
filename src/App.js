@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { FavoritesState } from './context/favoritesState';
 
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
-import Favorites from './pages/Favorites';
+import { Favorites } from './pages/Favorites';
 import { Categories } from './pages/Categories';
 import { NotFound } from './pages/NotFound';
 import { Category } from './pages/Category';
 import { Recipe } from './pages/Recipe';
-import SearchResults from './pages/SearchResults';
-import ScrollToTop from './components/layout/ScrollToTop';
-import { FavoritesState } from './context/favoritesState';
-import SearchByCountry from './pages/SearchByCountry';
+import { SearchResults } from './pages/SearchResults';
+import { ScrollToTop } from './components/layout/ScrollToTop';
+import { SearchByCountry } from './pages/SearchByCountry';
 
-function App() {
+export default function App() {
   return (
     <div className='bg-yellow-50 text-gray-900'>
       <FavoritesState>
@@ -38,5 +38,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

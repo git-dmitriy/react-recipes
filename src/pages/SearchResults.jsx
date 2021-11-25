@@ -5,7 +5,7 @@ import { MealsList } from '../components/Meals/MealsList';
 import { Preloader } from '../components/Preloader/Preloader';
 import { NotFound } from '../components/Search/NotFound';
 
-const SearchResults = () => {
+export const SearchResults = () => {
   const query = useSearchQuery();
   const searchQuery = query.get('search');
   const [searchResults, setSearchResults] = useState('');
@@ -31,5 +31,3 @@ const SearchResults = () => {
     </div>
   );
 };
-
-export default SearchResults;

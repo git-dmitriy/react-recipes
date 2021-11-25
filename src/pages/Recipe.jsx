@@ -8,7 +8,7 @@ import { YoutubeIframe } from '../components/Youtube/YoutubeIframe';
 import { RecipeImage } from '../components/Recipe/RecipeImage';
 import { BsFillBookmarkFill, BsBookmark } from 'react-icons/bs';
 
-export function Recipe() {
+export const Recipe = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState({});
   const { state, addToFavorites, removeFromFavorites } =
@@ -110,4 +110,4 @@ export function Recipe() {
       )}
     </>
   );
-}
+};

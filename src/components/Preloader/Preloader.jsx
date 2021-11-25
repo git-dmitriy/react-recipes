@@ -1,4 +1,4 @@
-export function Preloader() {
+export const Preloader = () => {
   let circle = 'h-5 w-5 bg-yellow-400 rounded-full';
 
   return (
@@ -10,4 +10,4 @@ export function Preloader() {
       </div>
     </div>
   );
-}
+};

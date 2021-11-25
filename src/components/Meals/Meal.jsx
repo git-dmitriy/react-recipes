@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { FavoriteContext } from '../../context/favoritesContext';
 import LazyLoad from 'react-lazyload';
-import BookmarkIcon from '../icons/BoobmarkIcon';
 import { BsFillBookmarkFill, BsBookmark } from 'react-icons/bs';
 
-export function Meal(props) {
+export const Meal = (props) => {
   const { idMeal, strMeal, strMealThumb } = props;
   const { addToFavorites, removeFromFavorites, state } =
     useContext(FavoriteContext);
@@ -54,4 +53,4 @@ export function Meal(props) {
       </li>
     </>
   );
-}
+};

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { MealsList } from '../components/Meals/MealsList';
 import { FavoriteContext } from '../context/favoritesContext';
+import { MealsList } from '../components/Meals/MealsList';
 
-const Favorites = () => {
+export const Favorites = () => {
   const { state } = useContext(FavoriteContext);
 
   if (state.favorites.length === 0) {
@@ -20,5 +20,3 @@ const Favorites = () => {
     </>
   );
 };
-
-export default Favorites;

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 
-export default function CategoryItem({
+export const CategoryItem = ({
   strCategory,
   strCategoryThumb,
   strCategoryDescription,
-}) {
+}) => {
   return (
     <li className='flex bg-yellow-200 rounded-lg p-4 m-2'>
       <Link to={`/category/${strCategory}`} className='flex'>
@@ -25,4 +25,4 @@ export default function CategoryItem({
       </Link>
     </li>
   );
-}
+};

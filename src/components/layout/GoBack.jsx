@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
-const GoBack = () => {
+export const GoBack = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,5 +30,3 @@ const GoBack = () => {
     </div>
   );
 };
-
-export default GoBack;

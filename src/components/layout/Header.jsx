@@ -1,10 +1,9 @@
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Search } from '../Search/Search';
-import GoBack from './GoBack';
-import BookmarkIcon from '../icons/BoobmarkIcon';
+import { GoBack } from './GoBack';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
-export function Header() {
+export const Header = () => {
   const { push } = useNavigate();
 
   const handleSearch = (searchQuery) => {
@@ -58,4 +57,4 @@ export function Header() {
       </ul>
     </nav>
   );
-}
+};

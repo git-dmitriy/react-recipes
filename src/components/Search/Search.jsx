@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { BsSearch } from 'react-icons/bs';
 
-export function Search({ cb = Function.prototype }) {
+export const Search = ({ cb = Function.prototype }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const searchInput = useRef();
 
@@ -42,4 +42,6 @@ export function Search({ cb = Function.prototype }) {
       </div>
     </form>
   );
-}
+};
+
+

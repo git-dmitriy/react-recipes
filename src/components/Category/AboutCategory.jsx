@@ -1,4 +1,4 @@
-const AboutCategory = ({ categoryInfo }) => {
+export const AboutCategory = ({ categoryInfo }) => {
   const { strCategoryThumb, strCategory, strCategoryDescription } =
     categoryInfo;
 
@@ -16,5 +16,3 @@ const AboutCategory = ({ categoryInfo }) => {
     </div>
   );
 };
-
-export default AboutCategory;

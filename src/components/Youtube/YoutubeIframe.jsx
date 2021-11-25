@@ -1,4 +1,4 @@
-export function YoutubeIframe({ address }) {
+export const YoutubeIframe = ({ address }) => {
   return (
     <div className='relative h-0 mt-8' style={{ paddingBottom: '56.25%' }}>
       <iframe
@@ -12,4 +12,4 @@ export function YoutubeIframe({ address }) {
       ></iframe>
     </div>
   );
-}
+};

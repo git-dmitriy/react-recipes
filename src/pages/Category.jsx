@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { getFilteredCategory, getAllCategories } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
 import { MealsList } from '../components/Meals/MealsList';
-import AboutCategory from '../components/Category/AboutCategory';
+import { AboutCategory } from '../components/Category/AboutCategory';
 
-export function Category() {
+export const Category = () => {
   const { name } = useParams();
   const [meals, setMeals] = useState([]);
   const [categoryInfo, setCategoryInfo] = useState([]);
@@ -40,4 +40,4 @@ export function Category() {
       {!meals.length ? <Preloader /> : <MealsList meals={meals} />}
     </>
   );
-}
+};

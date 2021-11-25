@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getAllCategories } from '../helpers/api';
 import { Preloader } from '../components/Preloader/Preloader';
-import CategoryList from '../components/Category/CategoryList';
+import { CategoryList } from '../components/Category/CategoryList';
 
-export function Categories() {
+export const Categories = () => {
   const [catalog, setCatalog] = useState([]);
 
   useEffect(() => {
@@ -15,4 +15,4 @@ export function Categories() {
   return (
     <>{!catalog.length ? <Preloader /> : <CategoryList catalog={catalog} />}</>
   );
-}
+};

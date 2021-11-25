@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getFilteredCategoryByCountry } from '../helpers/api';
 import { MealsList } from '../components/Meals/MealsList';
 
-const SearchByCountry = () => {
+export const SearchByCountry = () => {
   const { region } = useParams();
   const [meals, setMeals] = useState();
 
@@ -27,5 +27,3 @@ const SearchByCountry = () => {
     </>
   );
 };
-
-export default SearchByCountry;
