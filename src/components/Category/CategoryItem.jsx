@@ -7,18 +7,29 @@ export const CategoryItem = ({
   strCategoryDescription,
 }) => {
   return (
-    <li className='flex bg-yellow-200 rounded-lg p-4 m-2'>
-      <Link to={`/category/${strCategory}`} className='flex'>
-        <div className='sm:w-2/4 w-2/5 bg-yellow-50 rounded-lg flex items-center justify-center'>
-          <LazyLoad height={108} offset={100} once>
-            <img className='w-full' src={strCategoryThumb} alt={strCategory} />
+    <li className='rounded-3xl border border-gray-200 overflow-hidden bg-white mx-5 sm:mx-0 min-h-170p'>
+      <Link to={`/category/${strCategory}`} className='h-full flex'>
+        <div className='w-2/5 sm:w-2/4 bg-white relative'>
+          <LazyLoad
+            height={108}
+            offset={100}
+            once
+            className='h-full bg-gray-200'
+          >
+            <img
+              className='h-full object-cover'
+              width='320'
+              height='200'
+              src={strCategoryThumb}
+              alt={strCategory}
+            />
           </LazyLoad>
         </div>
-        <div className='sm:w-2/4 w-3/5 flex flex-col items-start ml-4'>
-          <h4 className='text-xl font-semibold'>{strCategory}</h4>
+        <div className='w-3/5 sm:w-2/4 flex flex-col items-start mx-4 my-4'>
+          <h4 className='text-xl font-semibold mb-5 sm:mb-0'>{strCategory}</h4>
           <p className='text-sm sm:text-md'>
             {strCategoryDescription.length > 50
-              ? strCategoryDescription.slice(0, 100) + '...'
+              ? strCategoryDescription.slice(0, 120) + '...'
               : strCategoryDescription}
           </p>
         </div>
