@@ -1,18 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getMealById } from '../helpers/api';
-import { FavoriteContext } from '../context/favoritesContext';
-import { Preloader } from '../components/Preloader/Preloader';
-import { Ingredients } from '../components/Recipe/Ingredients';
-import { YoutubeIframe } from '../components/Youtube/YoutubeIframe';
-import { RecipeImage } from '../components/Recipe/RecipeImage';
-import { BsFillBookmarkFill, BsBookmark } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
+import { getMealById } from 'helpers/api';
+import { FavoriteContext } from 'context/favoritesContext';
+import { Loader } from 'components/Loader/Loader';
+import { Ingredients } from 'components/Recipe/Ingredients';
+import { YoutubeIframe } from 'components/Youtube/YoutubeIframe';
+import { RecipeImage } from 'components/Recipe/RecipeImage';
+import { AddToFavorite } from 'components/layout/AddToFavorite';
+import { CategoriesLink } from 'components/Recipe/CategoriesLink';
+import { Layout } from 'components/layout/Layout';
 
 export const Recipe = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState({});
+  const [isFavorite, setIsFavorite] = useState(null);
+
   const { state, addToFavorites, removeFromFavorites } =
     useContext(FavoriteContext);
+
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
@@ -23,90 +28,58 @@ export const Recipe = () => {
       setImgPlaceholder(placeholder + data.meals[0].strMeal);
       setYoutubeLink(data.meals[0].strYoutube);
     });
-  }, [idMeal]);
+
+    setIsFavorite(!!state.favorites.find((item) => item.idMeal === idMeal));
+  }, [idMeal, state]);
 
   return (
     <>
       {!Object.keys(recipe).length ? (
-        <Preloader />
+        <Loader />
       ) : (
-        <section className='text-gray-600 body-font'>
-          <div className='container px-5 pt-2 pb-24 mx-auto flex flex-col'>
-            <div className='w-full lg:w-6/6 2xl:w-4/6 mx-auto'>
-              <div className='rounded-lg h-full overflow-hidden'>
+        <Layout>
+          <div className='flex flex-col items-center mb-10'>
+            <div className='flex justify-center items-center mb-5'>
+              <h2 className='text-gray-900 font-semibold text-3xl'>
+                {recipe.strMeal}
+              </h2>
+
+              <AddToFavorite
+                addToFavorites={() => addToFavorites(recipe)}
+                removeFromFavorites={() => removeFromFavorites(recipe)}
+                isFavorite={isFavorite}
+              />
+            </div>
+
+            <CategoriesLink
+              category={recipe.strCategory}
+              country={recipe.strArea}
+            />
+          </div>
+
+          <div className='flex flex-col-reverse sm:grid grid-cols-2 gap-10'>
+            <div className=''>
+              <p className='leading-relaxed text-xl text-justify mb-4'>
+                {recipe.strInstructions}
+              </p>
+            </div>
+
+            <div>
+              <div className='rounded-3xl overflow-hidden mb-10'>
                 <RecipeImage
                   imgLink={recipe.strMealThumb}
                   altText={recipe.strMeal}
                   imgPlaceholder={imgPlaceholder}
                 />
               </div>
-              <div className='flex flex-col sm:flex-row mt-10'>
-                <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
-                  <div className='flex flex-col items-center text-center justify-center'>
-                    <h2 className='font-medium title-font mt-4 text-gray-900 text-2xl'>
-                      {recipe.strMeal}
-                    </h2>
-                    <div className='w-12 h-1 bg-red-500 rounded mt-2 mb-4'></div>
-                    <p className='text-base'>
-                      Country:{' '}
-                      <span className='font-bold'>
-                        {recipe.strArea === 'Unknown' ? (
-                          'Origin not establish'
-                        ) : (
-                          <Link to={`/country/${recipe.strArea}`}>
-                            {recipe.strArea}
-                          </Link>
-                        )}
-                      </span>
-                    </p>
-                    <p className='text-base'>
-                      Category:{' '}
-                      <span className='font-bold'>
-                        {
-                          <Link to={`/category/${recipe.strCategory}`}>
-                            {recipe.strCategory}
-                          </Link>
-                        }
-                      </span>
-                    </p>
-                    <div className='w-full flex justify-center items-center mx-2 my-2'>
-                      {!state.favorites.find(
-                        (item) => item.idMeal === idMeal
-                      ) ? (
-                        <button
-                          className='leading-none rounded font-medium bg-transparent text-2xl text-gray-900 hover:text-red-500 transition duration-200 text-xs uppercase'
-                          onClick={() => {
-                            addToFavorites(recipe);
-                          }}
-                        >
-                          <BsBookmark className='fill-current' />
-                        </button>
-                      ) : (
-                        <button
-                          className='leading-none rounded font-medium bg-transparent text-2xl text-red-500 transition duration-200 text-xs uppercase'
-                          onClick={() => {
-                            removeFromFavorites(recipe);
-                          }}
-                        >
-                          <BsFillBookmarkFill className='fill-current' />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <Ingredients props={recipe} />
-                </div>
-                <div className='sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'>
-                  <p className='leading-relaxed text-xl text-justify mb-4'>
-                    {recipe.strInstructions}
-                  </p>
-                </div>
-              </div>
-              {youtubeLink.length ? (
-                <YoutubeIframe address={youtubeLink.slice(32)} />
-              ) : null}
+              <Ingredients props={recipe} />
             </div>
           </div>
-        </section>
+
+          {youtubeLink.length ? (
+            <YoutubeIframe address={youtubeLink.slice(32)} />
+          ) : null}
+        </Layout>
       )}
     </>
   );
