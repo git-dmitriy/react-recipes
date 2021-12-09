@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getMealByName } from '../helpers/api';
-import { useSearchQuery } from '../hooks/customHooks';
-import { MealsList } from '../components/Meals/MealsList';
-import { Preloader } from '../components/Preloader/Preloader';
-import { NotFound } from '../components/Search/NotFound';
+import { getMealByName } from 'helpers/api';
+import { useSearchQuery } from 'hooks/customHooks';
+import { MealsList } from 'components/meals/MealsList';
+import { Loader } from 'components/Loader';
+import { NotFound } from 'components/search/NotFound';
+import { Layout } from 'components/layout/Layout';
 
 export const SearchResults = () => {
   const query = useSearchQuery();
@@ -14,20 +15,19 @@ export const SearchResults = () => {
     getMealByName(searchQuery).then((data) => {
       setSearchResults(data.meals);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   if (searchResults === null) {
-    return <NotFound target={searchQuery} />;
+    return (
+      <Layout>
+        <NotFound target={searchQuery} />
+      </Layout>
+    );
   }
 
   return (
-    <div>
-      {!searchResults.length ? (
-        <Preloader />
-      ) : (
-        <MealsList meals={searchResults} />
-      )}
-    </div>
+    <Layout>
+      {!searchResults.length ? <Loader /> : <MealsList meals={searchResults} />}
+    </Layout>
   );
 };

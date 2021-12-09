@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
 import { FavoriteContext } from 'context/favoritesContext';
-import { Loader } from 'components/Loader/Loader';
-import { Ingredients } from 'components/Recipe/Ingredients';
-import { YoutubeIframe } from 'components/Youtube/YoutubeIframe';
-import { RecipeImage } from 'components/Recipe/RecipeImage';
-import { AddToFavorite } from 'components/layout/AddToFavorite';
-import { CategoriesLink } from 'components/Recipe/CategoriesLink';
+import { Loader } from 'components/Loader';
+import { Ingredients } from 'components/recipe/Ingredients';
+import { YoutubeIframe } from 'components/YoutubeIframe';
+import { RecipeImage } from 'components/recipe/RecipeImage';
+import { AddToFavorite } from 'components/AddToFavorites';
+import { CategoriesLink } from 'components/recipe/CategoriesLink';
 import { Layout } from 'components/layout/Layout';
 
 export const Recipe = () => {

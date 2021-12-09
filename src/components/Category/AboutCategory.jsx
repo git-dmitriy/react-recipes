@@ -1,14 +1,26 @@
+import Lazyload from 'react-lazyload';
+
 export const AboutCategory = ({ categoryInfo }) => {
   const { strCategoryThumb, strCategory, strCategoryDescription } =
     categoryInfo;
 
   return (
     <div className='hidden sm:block mx-auto xl:max-w-6xl max-w-4xl'>
-      <div className='flex bg-yellow-100 rounded-lg p-8 m-2 mb-4'>
-        <div className='sm:w-2/4 w-2/5 bg-yellow-50 rounded-lg flex items-center justify-center'>
-          <img className='w-full' src={strCategoryThumb} alt={strCategory} />
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10 p-8 m-2 mb-4'>
+        <div className=' flex items-start justify-center'>
+          <Lazyload
+            once
+            offset={100}
+            className='w-80 bg-gray-200 rounded-3xl overflow-hidden'
+          >
+            <img
+              className='w-full object-cover'
+              src={strCategoryThumb}
+              alt={strCategory}
+            />
+          </Lazyload>
         </div>
-        <div className='sm:w-2/4 w-3/5 flex flex-col justify-around items-start ml-8 pl-8 border-l-2 border-yellow-300'>
+        <div className=' flex flex-col justify-around items-start border-gray-400'>
           <h4 className='text-xl font-semibold'>{strCategory}</h4>
           <p className='text-md'>{strCategoryDescription}</p>
         </div>
