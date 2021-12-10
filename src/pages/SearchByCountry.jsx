@@ -1,9 +1,10 @@
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
-import { getFilteredCategoryByCountry } from '../helpers/api';
-import { MealsList } from '../components/Meals/MealsList';
+import { getFilteredCategoryByCountry } from 'helpers/api';
+import { MealsList } from 'components/meals/MealsList';
+import { Layout } from 'components/layout/Layout';
 
-const SearchByCountry = () => {
+export const SearchByCountry = () => {
   const { region } = useParams();
   const [meals, setMeals] = useState();
 
@@ -19,13 +20,11 @@ const SearchByCountry = () => {
   }, [region]);
 
   return (
-    <>
+    <Layout>
       <div className='max-w-4xl mx-auto text-center text-2xl mb-5'>
         {region} cuisine:
       </div>
       {meals && <MealsList meals={meals} />}
-    </>
+    </Layout>
   );
 };
-
-export default SearchByCountry;

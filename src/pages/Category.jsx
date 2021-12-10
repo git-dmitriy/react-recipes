@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getFilteredCategory, getAllCategories } from '../helpers/api';
-import { Preloader } from '../components/Preloader/Preloader';
-import { MealsList } from '../components/Meals/MealsList';
-import AboutCategory from '../components/Category/AboutCategory';
+import { getFilteredCategory, getAllCategories } from 'helpers/api';
+import { Loader } from 'components/Loader';
+import { MealsList } from 'components/meals/MealsList';
+import { AboutCategory } from 'components/category/AboutCategory';
+import { Layout } from 'components/layout/Layout';
 
-export function Category() {
+export const Category = () => {
   const { name } = useParams();
   const [meals, setMeals] = useState([]);
   const [categoryInfo, setCategoryInfo] = useState([]);
@@ -35,9 +36,15 @@ export function Category() {
   }, [name]);
 
   return (
-    <>
-      <AboutCategory categoryInfo={categoryInfo} />
-      {!meals.length ? <Preloader /> : <MealsList meals={meals} />}
-    </>
+    <Layout>
+      {!meals.length ? (
+        <Loader />
+      ) : (
+        <>
+          <AboutCategory categoryInfo={categoryInfo} />
+          <MealsList meals={meals} />
+        </>
+      )}
+    </Layout>
   );
-}
+};

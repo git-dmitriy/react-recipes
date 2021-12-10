@@ -1,42 +1,39 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { FavoritesState } from 'context/favoritesState';
 
-import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
-import Favorites from './pages/Favorites';
-import { Categories } from './pages/Categories';
-import { NotFound } from './pages/NotFound';
-import { Category } from './pages/Category';
-import { Recipe } from './pages/Recipe';
-import SearchResults from './pages/SearchResults';
-import ScrollToTop from './components/layout/ScrollToTop';
-import { FavoritesState } from './context/favoritesState';
-import SearchByCountry from './pages/SearchByCountry';
+import { Header } from 'components/layout/Header';
+import { Footer } from 'components/layout/Footer';
+import { Favorites } from 'pages/Favorites';
+import { Categories } from 'pages/Categories';
+import { Category } from 'pages/Category';
+import { Recipe } from 'pages/Recipe';
+import { SearchResults } from 'pages/SearchResults';
+import { ScrollToTop } from 'components/layout/ScrollToTop';
+import { SearchByCountry } from 'pages/SearchByCountry';
 
-function App() {
+export default function App() {
   return (
-    <div className='bg-yellow-50 text-gray-900'>
+    <div className='bg-gray-100 text-gray-900'>
       <FavoritesState>
         <Router>
           <div className='content'>
-            <Header />
             <ScrollToTop />
-            <main className='container mx-auto py-5 mt-20'>
-              <Switch>
-                <Route exact path='/' component={Categories} />
-                <Route path='/favorites' component={Favorites} />
-                <Route path='/recipes' component={SearchResults} />
-                <Route path='/category/:name' component={Category} />
-                <Route path='/country/:region' component={SearchByCountry} />
-                <Route path='/meal/:idMeal' component={Recipe} />
-                <Route component={NotFound} />
-              </Switch>
+            <main>
+              <Routes>
+                <Route path='/' element={<Categories />} />
+                <Route path='favorites' element={<Favorites />} />
+                <Route path='recipes' element={<SearchResults />} />
+                <Route path='category/:name' element={<Category />} />
+                <Route path='country/:region' element={<SearchByCountry />} />
+                <Route path='meal/:idMeal' element={<Recipe />} />
+                <Route path='/*' element={<Categories />} />
+              </Routes>
             </main>
           </div>
+          <Header />
           <Footer />
         </Router>
       </FavoritesState>
     </div>
   );
 }
-
-export default App;

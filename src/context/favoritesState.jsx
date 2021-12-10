@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
-import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from './types';
-import { FavoriteContext } from './favoritesContext';
-import { favoriteReducer } from './favoritesReducer';
+import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from 'context/types';
+import { FavoriteContext } from 'context/favoritesContext';
+import { favoriteReducer } from 'context/favoritesReducer';
 
 export const FavoritesState = ({ children }) => {
   const favorites = window.localStorage.getItem('favorites');
