@@ -1,9 +1,6 @@
 module.exports = {
-  purge: {
-    enabled: false,
-    content: ['./src/**/*.{jsx,js}'],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{jsx,js}'],
+  darkMode: 'media',
   theme: {
     extend: {
       animation: {
