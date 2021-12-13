@@ -7,7 +7,7 @@ export const CategoryItem = ({
   strCategoryDescription,
 }) => {
   return (
-    <li className='rounded-3xl border border-gray-200 overflow-hidden bg-white sm:mx-0 min-h-170p'>
+    <li className='rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900  sm:mx-0 min-h-170p'>
       <Link to={`/category/${strCategory}`} className='h-full flex'>
         <div className='w-2/5 sm:w-2/4 bg-white relative'>
           <LazyLoad

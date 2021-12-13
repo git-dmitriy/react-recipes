@@ -1,25 +1,28 @@
-import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from './types';
-
-const handlers = {
-  [ADD_TO_FAVORITE]: (state, { payload }) => {
-    const favorites = [...state.favorites, payload];
-    window.localStorage.setItem('favorites', JSON.stringify(favorites));
-
-    return {
-      favorites: [...state.favorites, payload],
-    };
-  },
-  [REMOVE_FROM_FAVORITE]: (state, { payload }) => {
-    const favorites = state.favorites.filter(
-      (item) => item.idMeal !== payload.idMeal
-    );
-    window.localStorage.setItem('favorites', JSON.stringify(favorites));
-    return { favorites };
-  },
-  DEFAULT: (state) => state,
-};
+import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE, SWITCH_THEME } from './types';
 
 export const favoriteReducer = (state, action) => {
-  const handler = handlers[action.type] || handlers.DEFAULT;
-  return handler(state, action);
+  let favorites = null;
+  switch (action.type) {
+    case ADD_TO_FAVORITE:
+      favorites = [...state.favorites, action.payload];
+      window.localStorage.setItem('favorites', JSON.stringify(favorites));
+      return { ...state, favorites };
+
+    case REMOVE_FROM_FAVORITE:
+      favorites = state.favorites.filter(
+        (item) => item.idMeal !== action.payload.idMeal
+      );
+      window.localStorage.setItem('favorites', JSON.stringify(favorites));
+      return { ...state, favorites };
+
+    case SWITCH_THEME:
+      window.localStorage.setItem('theme', action.payload);
+      return {
+        ...state,
+        theme: action.payload,
+      };
+
+    default:
+      return state;
+  }
 };

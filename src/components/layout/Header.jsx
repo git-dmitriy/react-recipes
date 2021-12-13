@@ -2,6 +2,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { Search } from 'components/search/Search';
 import { GoBack } from 'components/layout/GoBack';
 import { BsFillBookmarkFill } from 'react-icons/bs';
+import { ThemeSwitcher } from 'components/ThemeSwitcher';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -24,8 +25,7 @@ export const Header = () => {
 
   return (
     <nav className='bg-yellow-300 shadow dark:bg-gray-800 fixed top-0 w-full backdrop-blur-md backdrop-filter bg-opacity-50'>
-      <ul className='container flex items-center text-lg justify-around sm:justify-center px-2 sm:px-6 mx-auto capitalize dark:text-gray-300'>
-        <li className='mr-2'>
+      <ul className='container flex items-center text-lg justify-around sm:justify-center px-2 sm:px-6 mx-auto capitalize'>
           <GoBack />
         </li>
         <li>
@@ -53,6 +53,9 @@ export const Header = () => {
           >
             <BsFillBookmarkFill className='fill-current' />
           </NavLink>
+        </li>
+        <li className='flex items-center'>
+          <ThemeSwitcher />
         </li>
       </ul>
     </nav>

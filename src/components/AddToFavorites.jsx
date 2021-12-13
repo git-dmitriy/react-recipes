@@ -7,6 +7,7 @@ export const AddToFavorite = ({
   addToFavorites,
   removeFromFavorites,
   isFavorite,
+  isDark = false,
 }) => {
   return (
     <div className='mx-2 mt-2'>
@@ -19,7 +20,9 @@ export const AddToFavorite = ({
         </button>
       ) : (
         <button
-          className='text-2xl text-gray-900 hover:text-red-500 transition duration-200 uppercase'
+          className={`text-2xl text-gray-900 ${
+            isDark ? '' : 'dark:text-orange-200'
+          } hover:text-red-500 focus:text-red-500 transition duration-200 uppercase`}
           onClick={addToFavorites}
         >
           <BsFillBookmarkPlusFill className='fill-current' />

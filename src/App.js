@@ -10,11 +10,13 @@ import { Recipe } from 'pages/Recipe';
 import { SearchResults } from 'pages/SearchResults';
 import { ScrollToTop } from 'components/layout/ScrollToTop';
 import { SearchByCountry } from 'pages/SearchByCountry';
+import { Theme } from 'components/Theme';
 
 export default function App() {
   return (
-    <div className='bg-gray-100 text-gray-900'>
+    <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
       <FavoritesState>
+        <Theme />
         <Router>
           <div className='content'>
             <ScrollToTop />

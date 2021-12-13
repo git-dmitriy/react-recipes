@@ -1,5 +1,9 @@
 import React, { useReducer } from 'react';
-import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE } from 'context/types';
+import {
+  ADD_TO_FAVORITE,
+  SWITCH_THEME,
+  REMOVE_FROM_FAVORITE,
+} from 'context/types';
 import { FavoriteContext } from 'context/favoritesContext';
 import { favoriteReducer } from 'context/favoritesReducer';
 
@@ -7,6 +11,7 @@ export const FavoritesState = ({ children }) => {
   const favorites = window.localStorage.getItem('favorites');
   const initialState = {
     favorites: JSON.parse(favorites) || [],
+    theme: window.localStorage.getItem('theme') || 'light',
   };
 
   const [state, dispatch] = useReducer(favoriteReducer, initialState);
@@ -25,11 +30,21 @@ export const FavoritesState = ({ children }) => {
     });
   };
 
+  const switchTheme = (mode) => {
+    if (mode === 'light' || mode === 'dark') {
+      dispatch({
+        type: SWITCH_THEME,
+        payload: mode,
+      });
+    }
+  };
+
   return (
     <FavoriteContext.Provider
       value={{
         addToFavorites,
         removeFromFavorites,
+        switchTheme,
         state,
       }}
     >
