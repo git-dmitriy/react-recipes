@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 import { MealsList } from 'components/meals/MealsList';
 import { Layout } from 'components/layout/Layout';
 
 export const Favorites = () => {
-  const { state } = useContext(FavoriteContext);
+  const { state } = useContext(AppContext);
 
   if (state.favorites.length === 0) {
     return (

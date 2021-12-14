@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 import { Loader } from 'components/Loader';
 import { Ingredients } from 'components/recipe/Ingredients';
 import { YoutubeIframe } from 'components/YoutubeIframe';
@@ -15,8 +15,7 @@ export const Recipe = () => {
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(null);
 
-  const { state, addToFavorites, removeFromFavorites } =
-    useContext(FavoriteContext);
+  const { state, addToFavorites, removeFromFavorites } = useContext(AppContext);
 
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
@@ -39,8 +38,8 @@ export const Recipe = () => {
       ) : (
         <Layout>
           <div className='flex flex-col items-center mb-10'>
-            <div className='flex justify-center items-center mb-5'>
-              <h2 className='text-gray-900 font-semibold text-3xl'>
+            <div className='flex justify-center mb-5'>
+              <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
                 {recipe.strMeal}
               </h2>
 

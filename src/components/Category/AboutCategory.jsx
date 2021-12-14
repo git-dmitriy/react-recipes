@@ -5,7 +5,7 @@ export const AboutCategory = ({ categoryInfo }) => {
     categoryInfo;
 
   return (
-    <div className='hidden sm:block mx-auto xl:max-w-6xl max-w-4xl'>
+    <div className=' mx-auto xl:max-w-6xl max-w-4xl'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-10 p-8 m-2 mb-4'>
         <div className=' flex items-start justify-center'>
           <Lazyload

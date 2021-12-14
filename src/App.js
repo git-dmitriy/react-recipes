@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { FavoritesState } from 'context/favoritesState';
+import { AppState } from 'context/AppState';
 
 import { Header } from 'components/layout/Header';
 import { Footer } from 'components/layout/Footer';
@@ -10,11 +10,13 @@ import { Recipe } from 'pages/Recipe';
 import { SearchResults } from 'pages/SearchResults';
 import { ScrollToTop } from 'components/layout/ScrollToTop';
 import { SearchByCountry } from 'pages/SearchByCountry';
+import { Theme } from 'components/Theme';
 
 export default function App() {
   return (
-    <div className='bg-gray-100 text-gray-900'>
-      <FavoritesState>
+    <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+      <AppState>
+        <Theme />
         <Router>
           <div className='content'>
             <ScrollToTop />
@@ -33,7 +35,7 @@ export default function App() {
           <Header />
           <Footer />
         </Router>
-      </FavoritesState>
+      </AppState>
     </div>
   );
 }
