@@ -39,8 +39,8 @@ export const Recipe = () => {
       ) : (
         <Layout>
           <div className='flex flex-col items-center mb-10'>
-            <div className='flex justify-center items-center mb-5'>
-              <h2 className='text-gray-900 font-semibold text-3xl'>
+            <div className='flex justify-center mb-5'>
+              <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
                 {recipe.strMeal}
               </h2>
 

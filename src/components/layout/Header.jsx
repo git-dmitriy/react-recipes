@@ -26,6 +26,7 @@ export const Header = () => {
   return (
     <nav className='bg-yellow-300 shadow dark:bg-gray-800 fixed top-0 w-full backdrop-blur-md backdrop-filter bg-opacity-50'>
       <ul className='container flex items-center text-lg justify-around sm:justify-center px-2 sm:px-6 mx-auto capitalize'>
+        <li className='fixed top-28 left-4 sm:static'>
           <GoBack />
         </li>
         <li>

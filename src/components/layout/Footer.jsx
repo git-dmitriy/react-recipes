@@ -5,6 +5,7 @@ import LazyLoad from 'react-lazyload';
 export const Footer = () => {
   return (
     <footer className='bg-gray-900 dark:bg-gray-800 py-3 text-white'>
+      <div className='container mx-auto px-2 flex justify-around items-center'>
         <div className=''>
           <div className='flex items-center text-2xl font-bold cursor-default sm:mr-20'>
             <LazyLoad once offset={100} height={412} className='w-10 mr-2'>
@@ -14,7 +15,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className='flex justify-center items-center'>
-          <span className='mr-3'>
+          <span className='mr-3 text-right'>
             © {new Date().getFullYear()} Dmitriy Shalberkin
           </span>
           <a
