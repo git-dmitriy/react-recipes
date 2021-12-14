@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 import { AddToFavorite } from 'components/AddToFavorites';
 import LazyLoad from 'react-lazyload';
 
 export const Meal = (props) => {
   const { idMeal, strMeal, strMealThumb } = props;
-  const { addToFavorites, removeFromFavorites, state } =
-    useContext(FavoriteContext);
+  const { addToFavorites, removeFromFavorites, state } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(null);
 
   useEffect(() => {

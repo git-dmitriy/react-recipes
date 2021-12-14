@@ -4,17 +4,17 @@ import {
   SWITCH_THEME,
   REMOVE_FROM_FAVORITE,
 } from 'context/types';
-import { FavoriteContext } from 'context/favoritesContext';
-import { favoriteReducer } from 'context/favoritesReducer';
+import { AppContext } from 'context/AppContext';
+import { reducer } from 'context/reducer';
 
-export const FavoritesState = ({ children }) => {
+export const AppState = ({ children }) => {
   const favorites = window.localStorage.getItem('favorites');
   const initialState = {
     favorites: JSON.parse(favorites) || [],
     theme: window.localStorage.getItem('theme') || 'light',
   };
 
-  const [state, dispatch] = useReducer(favoriteReducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const addToFavorites = (item) => {
     dispatch({
@@ -40,7 +40,7 @@ export const FavoritesState = ({ children }) => {
   };
 
   return (
-    <FavoriteContext.Provider
+    <AppContext.Provider
       value={{
         addToFavorites,
         removeFromFavorites,
@@ -49,6 +49,6 @@ export const FavoritesState = ({ children }) => {
       }}
     >
       {children}
-    </FavoriteContext.Provider>
+    </AppContext.Provider>
   );
 };

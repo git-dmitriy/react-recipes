@@ -1,6 +1,6 @@
 import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE, SWITCH_THEME } from './types';
 
-export const favoriteReducer = (state, action) => {
+export const reducer = (state, action) => {
   let favorites = null;
   switch (action.type) {
     case ADD_TO_FAVORITE:

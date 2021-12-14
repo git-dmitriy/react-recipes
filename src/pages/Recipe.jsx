@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 import { Loader } from 'components/Loader';
 import { Ingredients } from 'components/recipe/Ingredients';
 import { YoutubeIframe } from 'components/YoutubeIframe';
@@ -15,8 +15,7 @@ export const Recipe = () => {
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(null);
 
-  const { state, addToFavorites, removeFromFavorites } =
-    useContext(FavoriteContext);
+  const { state, addToFavorites, removeFromFavorites } = useContext(AppContext);
 
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');

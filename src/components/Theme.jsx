@@ -1,8 +1,8 @@
 import { useEffect, useContext, useRef } from 'react';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 
 export const Theme = () => {
-  const { state } = useContext(FavoriteContext);
+  const { state } = useContext(AppContext);
   console.log('theme was render');
 
   const darkClasses = useRef([

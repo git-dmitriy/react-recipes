@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { FavoriteContext } from 'context/favoritesContext';
+import { AppContext } from 'context/AppContext';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export const ThemeSwitcher = () => {
-  const { state, switchTheme } = useContext(FavoriteContext);
+  const { state, switchTheme } = useContext(AppContext);
 
   const onClickHandler = () => {
     if (state.theme === 'dark') {
