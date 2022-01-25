@@ -14,6 +14,7 @@ import { MealItemTypes } from 'appTypes';
 export const Recipe: React.FC = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState<MealItemTypes | null>(null);
+  const [isRecipeExist, setIsRecipeExist] = useState<boolean>(true);
 
   const { state } = useContext(AppContext);
 
@@ -22,19 +23,39 @@ export const Recipe: React.FC = () => {
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
 
   useEffect(() => {
+    let cleanupFuse = true;
+
     if (idMeal) {
-      getMealById(idMeal).then((data) => {
-        setRecipe(data.meals[0]);
-        setImgPlaceholder(placeholder + data.meals[0].strMeal);
-        setYoutubeLink(data.meals[0].strYoutube);
-      });
+      getMealById(idMeal)
+        .then((data) => {
+          if (!data.meals) {
+            cleanupFuse && setIsRecipeExist(false);
+          }
+
+          if (cleanupFuse) {
+            setRecipe(data.meals[0]);
+            setImgPlaceholder(placeholder + data.meals[0].strMeal);
+            setYoutubeLink(data.meals[0].strYoutube);
+          }
+        })
+        .catch((e) => console.warn(e));
     }
-  }, [idMeal, state.favorites]);
+    return () => {
+      cleanupFuse = false;
+    };
+  }, [idMeal, state.favorites, isRecipeExist]);
+
+  if (!isRecipeExist) {
+    return (
+      <Layout>
+        <h1>There is no such recipe</h1>
+      </Layout>
+    );
+  }
 
   if (!recipe) {
     return <Loader />;
   }
-
   return (
     <>
       <Layout>

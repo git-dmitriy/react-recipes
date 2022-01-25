@@ -16,11 +16,19 @@ export const SearchResults: React.FC = () => {
   );
 
   useEffect(() => {
+    let cleanupFuse = true;
+
     if (searchQuery) {
-      getMealByName(searchQuery).then((data) => {
-        setSearchResults(data.meals);
-      });
+      getMealByName(searchQuery)
+        .then((data) => {
+          cleanupFuse && setSearchResults(data.meals);
+        })
+        .catch((e) => console.log('disconnected'));
     }
+
+    return () => {
+      cleanupFuse = false;
+    };
   }, [searchQuery]);
 
   if (searchResults === null) {

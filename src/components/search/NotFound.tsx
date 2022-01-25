@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getRandomMeal } from '../../helpers/api';
-import { Meal } from '../meals/Meal';
+import { getRandomMeal } from 'helpers/api';
+import { Meal } from 'components/meals/Meal';
 
 type P = {
   target: string;
@@ -8,11 +8,16 @@ type P = {
 
 export const NotFound: React.FC<P> = ({ target }) => {
   const [randomMeal, setRandomMeal] = useState();
+
   useEffect(() => {
+    let cleanupFuse = true;
     getRandomMeal().then((data) => {
-      setRandomMeal(data.meals[0]);
+      cleanupFuse && setRandomMeal(data.meals[0]);
     });
-    // eslint-||disable-next-line|| react-hooks/exhaustive-deps
+
+    return () => {
+      cleanupFuse = false;
+    };
   }, []);
 
   return (

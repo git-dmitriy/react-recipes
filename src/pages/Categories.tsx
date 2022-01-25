@@ -10,19 +10,29 @@ export const Categories: React.FC = () => {
   const [disconnected, setDisconnected] = useState<boolean>(false);
 
   useEffect(() => {
+    let cleanupFuse = true;
+
     getAllCategories()
       .then((data) => {
         const categories = data.categories.sort(
           (a: CategoryItemTypes, b: CategoryItemTypes) =>
             a.strCategory > b.strCategory ? 1 : -1
         );
-        setCatalog(categories);
+        cleanupFuse && setCatalog(categories);
       })
       .catch(() => setDisconnected(true));
+
+    return () => {
+      cleanupFuse = false;
+    };
   }, []);
 
   if (disconnected) {
-    return <h1>Disconnected</h1>;
+    return (
+      <Layout>
+        <h1>Disconnected</h1>
+      </Layout>
+    );
   }
 
   return (

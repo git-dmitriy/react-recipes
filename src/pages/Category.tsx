@@ -13,36 +13,43 @@ export const Category: React.FC = () => {
   const [categoryInfo, setCategoryInfo] = useState<CategoryItemTypes | null>(
     null
   );
+  const [isCategoryExist, setIsCategoryExist] = useState(true);
 
   useEffect(() => {
+    let cleanupFuse = true;
+
     if (name) {
-      (async () => {
-        try {
-          const data = await getAllCategories();
-          const category = data.categories.filter(
-            (item: CategoryItemTypes) => item.strCategory === name
-          );
-          setCategoryInfo(category[0]);
-        } catch (err) {
-          console.warn(
-            'Something went wrong with fetching categories info.',
-            err
-          );
+      getAllCategories().then((data) => {
+        const category = data.categories.filter(
+          (item: CategoryItemTypes) => item.strCategory === name
+        );
+        if (category.length === 0) {
+          cleanupFuse && setIsCategoryExist(false);
         }
 
-        try {
-          const meals = await getFilteredCategory(name);
-          setMeals(meals.meals);
-        } catch (err) {
-          console.warn('Something went wrong with fetching meals.', err);
-        }
-      })();
+        cleanupFuse && setCategoryInfo(category[0]);
+        getFilteredCategory(name).then((data) => {
+          cleanupFuse && setMeals(data.meals);
+        });
+      });
+
+      return () => {
+        cleanupFuse = false;
+      };
     }
-  }, [name]);
+  }, [isCategoryExist]);
+
+  if (isCategoryExist === false) {
+    return (
+      <Layout>
+        <h1>There is no {name} category</h1>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      {!meals.length ? (
+      {meals.length === 0 ? (
         <Loader />
       ) : (
         <>

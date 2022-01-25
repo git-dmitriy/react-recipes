@@ -7,19 +7,35 @@ import { Layout } from 'components/layout/Layout';
 export const SearchByCountry: React.FC = () => {
   const { region } = useParams();
   const [meals, setMeals] = useState();
+  const [isCountryExist, setIsCountryExist] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      try {
-        if (region) {
-          const data = await getFilteredCategoryByCountry(region);
-          setMeals(await data.meals);
-        }
-      } catch (err) {
-        console.warn('Something went wrong.', err);
-      }
-    })();
+    let cleanupFuse = true;
+
+    if (region) {
+      getFilteredCategoryByCountry(region)
+        .then((data) => {
+          if (!data.meals) {
+            setIsCountryExist(false);
+            return;
+          }
+          cleanupFuse && setMeals(data.meals);
+        })
+        .catch((e) => console.warn(e));
+    }
+
+    return () => {
+      cleanupFuse = false;
+    };
   }, [region]);
+
+  if (!isCountryExist) {
+    return (
+      <Layout>
+        <h1>There is no {region} cusine</h1>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
