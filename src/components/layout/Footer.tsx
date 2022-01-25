@@ -1,6 +1,5 @@
 import { FaGithub } from 'react-icons/fa';
 import LazyLoad from 'react-lazyload';
-const logo = require('logo.svg') as string;
 
 export const Footer: React.FC = () => {
   return (
@@ -14,7 +13,11 @@ export const Footer: React.FC = () => {
               height={412}
               classNamePrefix='w-10 mr-2 '
             >
-              <img src={logo} alt='logo' className='w-full' />
+              <img
+                src={require('logo.svg').default}
+                alt='logo'
+                className='w-full'
+              />
             </LazyLoad>
             <span>Recipes</span>
           </div>
