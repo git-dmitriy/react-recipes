@@ -14,7 +14,7 @@ export const Meal: React.FC<P> = (props) => {
         to={`/meal/${idMeal}`}
         className='block rounded-lg overflow-hidden min-h-300 hover:opacity-90 transition-opacity'
       >
-        <LazyLoad height={300} offset={100} once>
+        <LazyLoad height={350} offset={600} once>
           <img className='w-full' src={strMealThumb} alt={strMeal} />
         </LazyLoad>
         <div className='text-center my-2 mx-3 min-h-full'>

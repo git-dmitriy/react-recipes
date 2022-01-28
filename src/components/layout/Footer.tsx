@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
             <LazyLoad
               once
               offset={100}
-              height={412}
+              height={40}
               classNamePrefix='w-10 mr-2 '
             >
               <img

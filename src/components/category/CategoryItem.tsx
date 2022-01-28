@@ -15,8 +15,8 @@ export const CategoryItem: React.FC<CategoryItemTypes> = ({
       >
         <div className='w-2/5 sm:w-2/4 bg-white relative'>
           <LazyLoad
-            height={108}
-            offset={100}
+            height={180}
+            offset={400}
             once
             classNamePrefix='h-full bg-gray-200 '
           >
