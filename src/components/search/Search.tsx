@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent, KeyboardEventHandler } from 'react';
+import { useState, useRef, KeyboardEventHandler } from 'react';
 import { BsSearch } from 'react-icons/bs';
 
 type P = {

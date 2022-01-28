@@ -11,6 +11,7 @@ import { SearchResults } from 'pages/SearchResults';
 import { ScrollToTop } from 'components/layout/ScrollToTop';
 import { SearchByCountry } from 'pages/SearchByCountry';
 import { Theme } from 'components/Theme';
+import { Loader } from 'components/Loader';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Router>
           <div className='content'>
             <ScrollToTop />
+            <Loader />
             <main>
               <Routes>
                 <Route path='/' element={<Categories />} />

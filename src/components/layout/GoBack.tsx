@@ -16,10 +16,17 @@ export const GoBack: React.FC = () => {
     }
   }, [location]);
 
+  const onClickHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <div className='flex items-center sm:mx-6'>
       {!isHome ? (
-        <button className='w-5 text-3xl' onClick={() => navigate(-1)}>
+        <button
+          className='w-5 text-3xl hover:opacity-70 transition-opacity'
+          onClick={onClickHandler}
+        >
           <FaArrowLeft className='fill-current' />
         </button>
       ) : (

@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
-import { getRandomMeal } from '../../helpers/api';
-import { Meal } from '../meals/Meal';
+import { useContext, useEffect, useState } from 'react';
+import { getRandomMeal } from 'helpers/api';
+import { Meal } from 'components/meals/Meal';
+import { Layout } from 'components/layout/Layout';
+import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 type P = {
   target: string;
@@ -8,12 +11,37 @@ type P = {
 
 export const NotFound: React.FC<P> = ({ target }) => {
   const [randomMeal, setRandomMeal] = useState();
+  const [disconnected, setDisconnected] = useState(false);
+
+  const { setIsLoading } = useContext(AppContext);
+
   useEffect(() => {
-    getRandomMeal().then((data) => {
-      setRandomMeal(data.meals[0]);
-    });
-    // eslint-||disable-next-line|| react-hooks/exhaustive-deps
+    let cleanupFuse = true;
+
+    setIsLoading(true);
+
+    getRandomMeal()
+      .then((data) => {
+        cleanupFuse && setRandomMeal(data.meals[0]);
+      })
+      .catch((e) => {
+        console.warn(e);
+        setDisconnected(true);
+      })
+      .finally(() => setIsLoading(false));
+
+    return () => {
+      cleanupFuse = false;
+    };
   }, []);
+
+  if (disconnected) {
+    return (
+      <Layout>
+        <LostConnection />
+      </Layout>
+    );
+  }
 
   return (
     <div className='flex flex-col-reverse justify-around items-center my-6 px-2'>

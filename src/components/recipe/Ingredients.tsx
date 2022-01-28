@@ -16,7 +16,6 @@ export const Ingredients: React.FC<P> = ({ props }) => {
       <tbody>
         {Object.keys(props).map((key: any) => {
           if (key.includes('Ingredient') && props[key]) {
-            console.log('key:', key);
             return (
               <tr
                 key={key}

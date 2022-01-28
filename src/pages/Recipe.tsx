@@ -1,48 +1,74 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
-import { AppContext } from 'context/AppContext';
-import { Loader } from 'components/Loader';
 import { Ingredients } from 'components/recipe/Ingredients';
 import { YoutubeIframe } from 'components/YoutubeIframe';
 import { RecipeImage } from 'components/recipe/RecipeImage';
-import { AddToFavorite } from 'components/AddToFavorites';
+import { FavoriteToggle } from 'components/FavoriteToggle';
 import { CategoriesLink } from 'components/recipe/CategoriesLink';
 import { Layout } from 'components/layout/Layout';
 import { MealItemTypes } from 'appTypes';
+import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 export const Recipe: React.FC = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState<MealItemTypes | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const { state, addToFavorites, removeFromFavorites } = useContext(AppContext);
-
+  const [isRecipeExist, setIsRecipeExist] = useState(true);
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
+  const [disconnected, setDisconnected] = useState(false);
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
+  const { setIsLoading } = useContext(AppContext);
 
   useEffect(() => {
-    if (idMeal) {
-      getMealById(idMeal).then((data) => {
-        setRecipe(data.meals[0]);
-        setImgPlaceholder(placeholder + data.meals[0].strMeal);
-        setYoutubeLink(data.meals[0].strYoutube);
-      });
+    let cleanupFuse = true;
 
-      setIsFavorite(!!state.favorites.find((item) => item.idMeal === idMeal));
+    setIsLoading(true);
+
+    if (idMeal) {
+      getMealById(idMeal)
+        .then((data) => {
+          if (!data.meals) {
+            cleanupFuse && setIsRecipeExist(false);
+          }
+
+          if (cleanupFuse) {
+            setRecipe(data.meals[0]);
+            setImgPlaceholder(placeholder + data.meals[0].strMeal);
+            setYoutubeLink(data.meals[0].strYoutube);
+          }
+        })
+        .catch((e) => {
+          console.warn(e);
+          setDisconnected(true);
+        })
+        .finally(() => setIsLoading(false));
     }
+    return () => {
+      cleanupFuse = false;
+    };
   }, [idMeal]);
 
-  if (!recipe) {
-    return <div>no recipe...</div>;
+  if (!isRecipeExist) {
+    return (
+      <Layout>
+        <h2 className='text-2xl text-center'>There is no such recipe</h2>
+      </Layout>
+    );
+  }
+
+  if (disconnected) {
+    return (
+      <Layout>
+        <LostConnection />
+      </Layout>
+    );
   }
 
   return (
     <>
-      {!Object.keys(recipe).length ? (
-        <Loader />
-      ) : (
+      {recipe && (
         <Layout>
           <div className='flex flex-col items-center mb-10'>
             <div className='flex justify-center mb-5'>
@@ -50,11 +76,7 @@ export const Recipe: React.FC = () => {
                 {recipe.strMeal}
               </h2>
 
-              <AddToFavorite
-                addToFavorites={() => addToFavorites(recipe)}
-                removeFromFavorites={() => removeFromFavorites(recipe)}
-                isFavorite={isFavorite}
-              />
+              <FavoriteToggle meal={recipe} />
             </div>
 
             <CategoriesLink

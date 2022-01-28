@@ -3,6 +3,7 @@ import {
   ADD_TO_FAVORITE,
   SWITCH_THEME,
   REMOVE_FROM_FAVORITE,
+  SET_IS_LOADING,
 } from 'context/types';
 import { AppContext } from 'context/AppContext';
 import { reducer } from 'context/reducer';
@@ -14,6 +15,7 @@ export const AppState: React.FC = ({ children }) => {
   const initialState: StateTypes = {
     favorites: JSON.parse(favorites),
     theme: window.localStorage.getItem('theme') || 'light',
+    isLoading: false,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -41,10 +43,18 @@ export const AppState: React.FC = ({ children }) => {
     }
   };
 
+  const setIsLoading = (status = false) => {
+    dispatch({
+      type: SET_IS_LOADING,
+      payload: status,
+    });
+  };
+
   const value: ContextTypes = {
     addToFavorites,
     removeFromFavorites,
     switchTheme,
+    setIsLoading,
     state,
   };
 

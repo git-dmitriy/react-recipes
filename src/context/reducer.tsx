@@ -1,4 +1,9 @@
-import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE, SWITCH_THEME } from './types';
+import {
+  ADD_TO_FAVORITE,
+  REMOVE_FROM_FAVORITE,
+  SWITCH_THEME,
+  SET_IS_LOADING,
+} from 'context/types';
 import { StateTypes, ActionTypes } from 'appTypes';
 
 export const reducer = (state: StateTypes, action: ActionTypes) => {
@@ -21,6 +26,12 @@ export const reducer = (state: StateTypes, action: ActionTypes) => {
       return {
         ...state,
         theme: action.payload,
+      };
+
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     default:

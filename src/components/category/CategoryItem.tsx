@@ -8,12 +8,15 @@ export const CategoryItem: React.FC<CategoryItemTypes> = ({
   strCategoryDescription,
 }) => {
   return (
-    <li className='rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900  sm:mx-0 min-h-170p'>
-      <Link to={`/category/${strCategory}`} className='h-full flex'>
+    <li className='rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900 sm:mx-0 min-h-170p'>
+      <Link
+        to={`/category/${strCategory}`}
+        className='h-full flex hover:opacity-90 transition-opacity'
+      >
         <div className='w-2/5 sm:w-2/4 bg-white relative'>
           <LazyLoad
-            height={108}
-            offset={100}
+            height={180}
+            offset={400}
             once
             classNamePrefix='h-full bg-gray-200 '
           >
