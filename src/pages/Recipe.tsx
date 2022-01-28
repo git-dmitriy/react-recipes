@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
-import { Loader } from 'components/Loader';
 import { Ingredients } from 'components/recipe/Ingredients';
 import { YoutubeIframe } from 'components/YoutubeIframe';
 import { RecipeImage } from 'components/recipe/RecipeImage';
@@ -10,6 +9,7 @@ import { CategoriesLink } from 'components/recipe/CategoriesLink';
 import { Layout } from 'components/layout/Layout';
 import { MealItemTypes } from 'appTypes';
 import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 export const Recipe: React.FC = () => {
   const { idMeal } = useParams();
@@ -19,9 +19,12 @@ export const Recipe: React.FC = () => {
   const [youtubeLink, setYoutubeLink] = useState('');
   const [disconnected, setDisconnected] = useState(false);
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
+  const { setIsLoading } = useContext(AppContext);
 
   useEffect(() => {
     let cleanupFuse = true;
+
+    setIsLoading(true);
 
     if (idMeal) {
       getMealById(idMeal)
@@ -39,7 +42,8 @@ export const Recipe: React.FC = () => {
         .catch((e) => {
           console.warn(e);
           setDisconnected(true);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
     return () => {
       cleanupFuse = false;
@@ -54,10 +58,6 @@ export const Recipe: React.FC = () => {
     );
   }
 
-  if (!recipe) {
-    return <Loader />;
-  }
-
   if (disconnected) {
     return (
       <Layout>
@@ -68,45 +68,47 @@ export const Recipe: React.FC = () => {
 
   return (
     <>
-      <Layout>
-        <div className='flex flex-col items-center mb-10'>
-          <div className='flex justify-center mb-5'>
-            <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
-              {recipe.strMeal}
-            </h2>
+      {recipe && (
+        <Layout>
+          <div className='flex flex-col items-center mb-10'>
+            <div className='flex justify-center mb-5'>
+              <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
+                {recipe.strMeal}
+              </h2>
 
-            <FavoriteToggle meal={recipe} />
-          </div>
-
-          <CategoriesLink
-            category={recipe.strCategory || ''}
-            country={recipe.strArea || ''}
-          />
-        </div>
-
-        <div className='flex flex-col-reverse sm:grid grid-cols-2 gap-10'>
-          <div className=''>
-            <p className='leading-relaxed text-xl text-justify mb-4'>
-              {recipe.strInstructions}
-            </p>
-          </div>
-
-          <div>
-            <div className='rounded-3xl overflow-hidden mb-10'>
-              <RecipeImage
-                imgLink={recipe.strMealThumb}
-                altText={recipe.strMeal}
-                imgPlaceholder={imgPlaceholder}
-              />
+              <FavoriteToggle meal={recipe} />
             </div>
-            <Ingredients props={recipe} />
-          </div>
-        </div>
 
-        {youtubeLink.length ? (
-          <YoutubeIframe address={youtubeLink.slice(32)} />
-        ) : null}
-      </Layout>
+            <CategoriesLink
+              category={recipe.strCategory || ''}
+              country={recipe.strArea || ''}
+            />
+          </div>
+
+          <div className='flex flex-col-reverse sm:grid grid-cols-2 gap-10'>
+            <div className=''>
+              <p className='leading-relaxed text-xl text-justify mb-4'>
+                {recipe.strInstructions}
+              </p>
+            </div>
+
+            <div>
+              <div className='rounded-3xl overflow-hidden mb-10'>
+                <RecipeImage
+                  imgLink={recipe.strMealThumb}
+                  altText={recipe.strMeal}
+                  imgPlaceholder={imgPlaceholder}
+                />
+              </div>
+              <Ingredients props={recipe} />
+            </div>
+          </div>
+
+          {youtubeLink.length ? (
+            <YoutubeIframe address={youtubeLink.slice(32)} />
+          ) : null}
+        </Layout>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getMealByName } from 'helpers/api';
 import { useSearchQuery } from 'hooks/customHooks';
 import { MealsList } from 'components/meals/MealsList';
@@ -8,6 +8,7 @@ import { Layout } from 'components/layout/Layout';
 
 import { MealItemTypes } from 'appTypes';
 import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 export const SearchResults: React.FC = () => {
   const query = useSearchQuery();
@@ -16,9 +17,12 @@ export const SearchResults: React.FC = () => {
     null
   );
   const [disconnected, setDisconnected] = useState(false);
+  const { setIsLoading } = useContext(AppContext);
 
   useEffect(() => {
     let cleanupFuse = true;
+
+    setIsLoading(true);
 
     if (searchQuery) {
       getMealByName(searchQuery)
@@ -28,7 +32,8 @@ export const SearchResults: React.FC = () => {
         .catch((e) => {
           console.warn(e);
           setDisconnected(true);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
 
     return () => {

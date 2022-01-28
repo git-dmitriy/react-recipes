@@ -1,18 +1,22 @@
 import { useParams } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { getFilteredCategoryByCountry } from 'helpers/api';
 import { MealsList } from 'components/meals/MealsList';
 import { Layout } from 'components/layout/Layout';
 import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 export const SearchByCountry: React.FC = () => {
   const { region } = useParams();
   const [meals, setMeals] = useState();
   const [isCountryExist, setIsCountryExist] = useState(true);
   const [disconnected, setDisconnected] = useState(false);
+  const { setIsLoading } = useContext(AppContext);
 
   useEffect(() => {
     let cleanupFuse = true;
+
+    setIsLoading(true);
 
     if (region) {
       getFilteredCategoryByCountry(region)
@@ -26,7 +30,8 @@ export const SearchByCountry: React.FC = () => {
         .catch((e) => {
           console.warn(e);
           setDisconnected(true);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
 
     return () => {

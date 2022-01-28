@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFilteredCategory, getAllCategories } from 'helpers/api';
-import { Loader } from 'components/Loader';
 import { MealsList } from 'components/meals/MealsList';
 import { AboutCategory } from 'components/category/AboutCategory';
 import { Layout } from 'components/layout/Layout';
 import { CategoryItemTypes } from 'appTypes';
 import { LostConnection } from 'components/LostConnection';
+import { AppContext } from 'context/AppContext';
 
 export const Category: React.FC = () => {
   const { name } = useParams();
@@ -17,8 +17,12 @@ export const Category: React.FC = () => {
   const [isCategoryExist, setIsCategoryExist] = useState(true);
   const [disconnected, setDisconnected] = useState(false);
 
+  const { setIsLoading } = useContext(AppContext);
+
   useEffect(() => {
     let cleanupFuse = true;
+
+    setIsLoading(true);
 
     if (name) {
       getAllCategories()
@@ -39,7 +43,8 @@ export const Category: React.FC = () => {
         .catch((e) => {
           console.warn(e);
           setDisconnected(true);
-        });
+        })
+        .finally(() => setIsLoading(false));
 
       return () => {
         cleanupFuse = false;
@@ -65,14 +70,8 @@ export const Category: React.FC = () => {
 
   return (
     <Layout>
-      {meals.length === 0 ? (
-        <Loader />
-      ) : (
-        <>
-          {categoryInfo ? <AboutCategory categoryInfo={categoryInfo} /> : null}
-          <MealsList meals={meals} />
-        </>
-      )}
+      {categoryInfo ? <AboutCategory categoryInfo={categoryInfo} /> : null}
+      {meals.length !== 0 && <MealsList meals={meals} />}
     </Layout>
   );
 };
