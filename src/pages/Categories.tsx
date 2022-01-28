@@ -4,10 +4,11 @@ import { Loader } from 'components/Loader';
 import { CategoryList } from 'components/category/CategoryList';
 import { Layout } from 'components/layout/Layout';
 import { CategoryItemTypes } from 'appTypes';
+import { LostConnection } from 'components/LostConnection';
 
 export const Categories: React.FC = () => {
   const [catalog, setCatalog] = useState([]);
-  const [disconnected, setDisconnected] = useState<boolean>(false);
+  const [disconnected, setDisconnected] = useState(false);
 
   useEffect(() => {
     let cleanupFuse = true;
@@ -20,7 +21,10 @@ export const Categories: React.FC = () => {
         );
         cleanupFuse && setCatalog(categories);
       })
-      .catch(() => setDisconnected(true));
+      .catch((e) => {
+        console.warn(e);
+        setDisconnected(true);
+      });
 
     return () => {
       cleanupFuse = false;
@@ -30,7 +34,7 @@ export const Categories: React.FC = () => {
   if (disconnected) {
     return (
       <Layout>
-        <h1>Disconnected</h1>
+        <LostConnection />
       </Layout>
     );
   }

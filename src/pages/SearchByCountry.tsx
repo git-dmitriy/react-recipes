@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react';
 import { getFilteredCategoryByCountry } from 'helpers/api';
 import { MealsList } from 'components/meals/MealsList';
 import { Layout } from 'components/layout/Layout';
+import { LostConnection } from 'components/LostConnection';
 
 export const SearchByCountry: React.FC = () => {
   const { region } = useParams();
   const [meals, setMeals] = useState();
   const [isCountryExist, setIsCountryExist] = useState(true);
+  const [disconnected, setDisconnected] = useState(false);
 
   useEffect(() => {
     let cleanupFuse = true;
@@ -21,7 +23,10 @@ export const SearchByCountry: React.FC = () => {
           }
           cleanupFuse && setMeals(data.meals);
         })
-        .catch((e) => console.warn(e));
+        .catch((e) => {
+          console.warn(e);
+          setDisconnected(true);
+        });
     }
 
     return () => {
@@ -32,7 +37,17 @@ export const SearchByCountry: React.FC = () => {
   if (!isCountryExist) {
     return (
       <Layout>
-        <h1>There is no {region} cusine</h1>
+        <h2 className='text-2xl text-center'>
+          There are no recipes for {region} cuisine
+        </h2>
+      </Layout>
+    );
+  }
+
+  if (disconnected) {
+    return (
+      <Layout>
+        <LostConnection />
       </Layout>
     );
   }

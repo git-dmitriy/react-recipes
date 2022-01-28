@@ -7,6 +7,7 @@ import { NotFound } from 'components/search/NotFound';
 import { Layout } from 'components/layout/Layout';
 
 import { MealItemTypes } from 'appTypes';
+import { LostConnection } from 'components/LostConnection';
 
 export const SearchResults: React.FC = () => {
   const query = useSearchQuery();
@@ -14,6 +15,7 @@ export const SearchResults: React.FC = () => {
   const [searchResults, setSearchResults] = useState<null | MealItemTypes[]>(
     null
   );
+  const [disconnected, setDisconnected] = useState(false);
 
   useEffect(() => {
     let cleanupFuse = true;
@@ -23,7 +25,10 @@ export const SearchResults: React.FC = () => {
         .then((data) => {
           cleanupFuse && setSearchResults(data.meals);
         })
-        .catch((e) => console.log('disconnected'));
+        .catch((e) => {
+          console.warn(e);
+          setDisconnected(true);
+        });
     }
 
     return () => {
@@ -35,6 +40,14 @@ export const SearchResults: React.FC = () => {
     return (
       <Layout>
         <NotFound target={searchQuery || ''} />
+      </Layout>
+    );
+  }
+
+  if (disconnected) {
+    return (
+      <Layout>
+        <LostConnection />{' '}
       </Layout>
     );
   }

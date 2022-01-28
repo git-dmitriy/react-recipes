@@ -1,7 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMealById } from 'helpers/api';
-import { AppContext } from 'context/AppContext';
 import { Loader } from 'components/Loader';
 import { Ingredients } from 'components/recipe/Ingredients';
 import { YoutubeIframe } from 'components/YoutubeIframe';
@@ -10,16 +9,15 @@ import { FavoriteToggle } from 'components/FavoriteToggle';
 import { CategoriesLink } from 'components/recipe/CategoriesLink';
 import { Layout } from 'components/layout/Layout';
 import { MealItemTypes } from 'appTypes';
+import { LostConnection } from 'components/LostConnection';
 
 export const Recipe: React.FC = () => {
   const { idMeal } = useParams();
   const [recipe, setRecipe] = useState<MealItemTypes | null>(null);
-  const [isRecipeExist, setIsRecipeExist] = useState<boolean>(true);
-
-  const { state } = useContext(AppContext);
-
+  const [isRecipeExist, setIsRecipeExist] = useState(true);
   const [imgPlaceholder, setImgPlaceholder] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
+  const [disconnected, setDisconnected] = useState(false);
   const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
 
   useEffect(() => {
@@ -38,17 +36,20 @@ export const Recipe: React.FC = () => {
             setYoutubeLink(data.meals[0].strYoutube);
           }
         })
-        .catch((e) => console.warn(e));
+        .catch((e) => {
+          console.warn(e);
+          setDisconnected(true);
+        });
     }
     return () => {
       cleanupFuse = false;
     };
-  }, [idMeal, state.favorites, isRecipeExist]);
+  }, [idMeal]);
 
   if (!isRecipeExist) {
     return (
       <Layout>
-        <h1>There is no such recipe</h1>
+        <h2 className='text-2xl text-center'>There is no such recipe</h2>
       </Layout>
     );
   }
@@ -56,6 +57,15 @@ export const Recipe: React.FC = () => {
   if (!recipe) {
     return <Loader />;
   }
+
+  if (disconnected) {
+    return (
+      <Layout>
+        <LostConnection />
+      </Layout>
+    );
+  }
+
   return (
     <>
       <Layout>
