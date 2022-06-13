@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
+import { CategoryLinkTypes } from 'appTypes';
 
-type P = {
-  country: string;
-  category: string;
-};
-
-export const CategoriesLink: React.FC<P> = ({ country, category }) => {
+export const CategoriesLink: React.FC<CategoryLinkTypes> = ({
+  country,
+  category,
+}) => {
   return (
     <div>
       <p>

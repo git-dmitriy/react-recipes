@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AppState } from 'context/AppState';
-
 import { Header } from 'components/layout/Header';
 import { Footer } from 'components/layout/Footer';
 import { Favorites } from 'pages/Favorites';

@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
 import { getRandomMeal } from 'helpers/api';
-import { Meal } from 'components/meals/Meal';
+import { Meal } from 'components/meals/Meals';
 import { Layout } from 'components/layout/Layout';
 import { LostConnection } from 'components/LostConnection';
 import { AppContext } from 'context/AppContext';
+import { MealItemTypes } from 'appTypes';
 
 type P = {
   target: string;
 };
 
 export const NotFound: React.FC<P> = ({ target }) => {
-  const [randomMeal, setRandomMeal] = useState();
+  const [randomMeal, setRandomMeal] = useState<MealItemTypes>();
   const [disconnected, setDisconnected] = useState(false);
 
   const { setIsLoading } = useContext(AppContext);

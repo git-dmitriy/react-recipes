@@ -3,9 +3,7 @@ import { FavoriteToggle } from 'components/FavoriteToggle';
 import LazyLoad from 'react-lazyload';
 import { MealItemTypes } from 'appTypes';
 
-type P = MealItemTypes;
-
-export const Meal: React.FC<P> = (props) => {
+export const Meal: React.FC<MealItemTypes> = (props) => {
   const { idMeal, strMeal, strMealThumb } = props;
 
   return (

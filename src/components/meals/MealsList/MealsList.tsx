@@ -1,4 +1,4 @@
-import { Meal } from './Meal';
+import { Meal } from 'components/meals/Meals';
 import { MealItemTypes } from 'appTypes';
 
 type P = {

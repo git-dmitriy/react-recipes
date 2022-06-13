@@ -10,7 +10,7 @@ export const Loader: React.FC = () => {
   return (
     <div
       className='fixed inset-0 h-screen flex justify-center items-center my-8'
-      style={{ opacity: state.isLoading ? 1 : 0 }}
+      style={{ opacity: isLoading ? 1 : 0 }}
     >
       <div className='flex'>
         <div className={`${circle} mr-1 animate-bounce`}></div>

@@ -2,6 +2,12 @@ import { useEffect, useContext, useRef } from 'react';
 import { AppContext } from 'context/AppContext';
 
 export const Theme = () => {
+  /* 
+
+  check if classes add to body
+
+*/
+
   const { state } = useContext(AppContext);
 
   const darkClasses = useRef([

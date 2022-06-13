@@ -5,8 +5,16 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 import { ThemeSwitcher } from 'components/ThemeSwitcher';
 
 export const Header: React.FC = () => {
-  const navigate = useNavigate();
+  /* 
+    move search logic into search component
+  */
 
+  /* 
+    Create snapshot
+
+  */
+
+  const navigate = useNavigate();
   const handleSearch = (searchQuery: string) => {
     if (searchQuery.trim().length !== 0) {
       navigate({
@@ -17,9 +25,11 @@ export const Header: React.FC = () => {
   };
 
   const textLinkClassName =
-    'border-b-2 border-transparent font-bold outline-none hover:opacity-70 mx-1.5 sm:mx-6 transition-opacity';
+    'border-b-2 border-transparent font-bold ' +
+    'outline-none hover:opacity-70 mx-1.5 sm:mx-6 transition-opacity';
   const iconLinkClassName =
-    'block border-b-2 border-transparent outline-none hover:opacity-70 ml-1.5 mr-0.5 sm:ml-6 sm:mr-2 transition-opacity text-2xl';
+    'block border-b-2 border-transparent outline-none hover:opacity-70 ' +
+    'ml-1.5 mr-0.5 sm:ml-6 sm:mr-2 transition-opacity text-2xl';
   const activeTextLink = ' border-b-2 border-red-500';
   const activeIconLink = ' text-red-500';
 

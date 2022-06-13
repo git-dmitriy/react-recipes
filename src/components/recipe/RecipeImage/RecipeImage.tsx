@@ -1,14 +1,17 @@
-type P = {
-  imgLink: string;
-  altText: string;
-  imgPlaceholder: string;
-};
+import { RecipeImageTypes } from 'appTypes';
 
-export const RecipeImage: React.FC<P> = ({
+export const RecipeImage: React.FC<RecipeImageTypes> = ({
   imgLink,
   altText,
   imgPlaceholder,
 }) => {
+  /* 
+    show image if provided
+
+    if image not provided show placeholder
+  
+  */
+
   if (!imgLink) {
     return (
       <img
