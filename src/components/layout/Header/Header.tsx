@@ -1,29 +1,10 @@
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Search } from 'components/search/Search';
 import { GoBack } from 'components/layout/GoBack';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { ThemeSwitcher } from 'components/ThemeSwitcher';
 
 export const Header: React.FC = () => {
-  /* 
-    move search logic into search component
-  */
-
-  /* 
-    Create snapshot
-
-  */
-
-  const navigate = useNavigate();
-  const handleSearch = (searchQuery: string) => {
-    if (searchQuery.trim().length !== 0) {
-      navigate({
-        pathname: '/recipes',
-        search: `search=${searchQuery}`,
-      });
-    }
-  };
-
   const textLinkClassName =
     'border-b-2 border-transparent font-bold ' +
     'outline-none hover:opacity-70 mx-1.5 sm:mx-6 transition-opacity';
@@ -40,7 +21,7 @@ export const Header: React.FC = () => {
           <GoBack />
         </li>
         <li>
-          <Search cb={handleSearch} />
+          <Search />
         </li>
 
         <li>
