@@ -23,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint -c .eslintrc --ext .tsx,.ts ."
   },
   "eslintConfig": {
     "extends": [
@@ -45,7 +46,12 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "autoprefixer": "^10.4.0",
+    "eslint": "^8.17.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-testing-library": "^5.5.1",
     "postcss": "^8.4.4",
     "react-scripts": "5.0.0-next.58",
     "react-test-renderer": "^17.0.2",
