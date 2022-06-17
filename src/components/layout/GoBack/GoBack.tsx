@@ -8,18 +8,6 @@ export const GoBack: React.FC = () => {
 
   const [isHome, setIsHome] = useState(false);
 
-  /* 
-  if path is not a homepage show component
-
-  if path is homepage hide component
-  
-  if component on page you can click on it and 
-    you should move to previous page
-    if no previous shall move to homepage
-
-
-*/
-
   useEffect(() => {
     if (location.pathname === '/') {
       setIsHome(true);
@@ -29,7 +17,11 @@ export const GoBack: React.FC = () => {
   }, [location]);
 
   const onClickHandler = () => {
-    navigate(-1);
+    if (window.history.length === 1) {
+      navigate('/');
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
