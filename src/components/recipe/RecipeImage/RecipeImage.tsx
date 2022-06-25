@@ -5,13 +5,6 @@ export const RecipeImage: React.FC<RecipeImageTypes> = ({
   altText,
   imgPlaceholder,
 }) => {
-  /* 
-    show image if provided
-
-    if image not provided show placeholder
-  
-  */
-
   if (!imgLink) {
     return (
       <img

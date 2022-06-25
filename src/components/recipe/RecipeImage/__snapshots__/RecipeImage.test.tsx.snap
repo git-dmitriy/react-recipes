@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render an image element with a placeholder link 1`] = `
+<img
+  alt="English Breakfast"
+  className="object-cover object-center w-full"
+  src="https://via.placeholder.com/500.png/546E7A?text=English Breakfast"
+/>
+`;
+
+exports[`should render an image element with the provided link 1`] = `
+<img
+  alt="English Breakfast"
+  className="object-cover object-center w-full"
+  src="https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg"
+/>
+`;
