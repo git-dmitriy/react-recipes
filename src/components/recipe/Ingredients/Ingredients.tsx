@@ -14,12 +14,14 @@ export const Ingredients: React.FC<P> = ({ props }) => {
         </tr>
       </thead>
       <tbody>
-        {Object.keys(props).map((key: any) => {
+        {Object.keys(props).map((key: string) => {
           if (key.includes('Ingredient') && props[key]) {
             return (
               <tr
                 key={key}
-                className={key.slice(-1) % 2 !== 0 ? 'bg-yellow-200' : ''}
+                className={
+                  parseInt(key.slice(-1), 10) % 2 !== 0 ? 'bg-yellow-200' : ''
+                }
               >
                 <td className='pl-6'>{props[key]}</td>
                 <td className='pl-6 border-l border-yellow-100'>
