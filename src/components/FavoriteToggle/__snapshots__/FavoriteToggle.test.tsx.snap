@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component without errors 1`] = `
+<div
+  className="mx-2 mt-2"
+>
+  <button
+    className="text-2xl text-gray-900 dark:text-orange-200 hover:text-red-500 transition duration-200 uppercase"
+    onClick={[Function]}
+  >
+    <svg
+      className="fill-current"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 16 16"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;

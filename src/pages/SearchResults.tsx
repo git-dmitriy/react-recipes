@@ -5,7 +5,6 @@ import { MealsList } from 'components/meals/MealsList';
 import { Loader } from 'components/Loader';
 import { NotFound } from 'components/search/NotFound';
 import { Layout } from 'components/layout/Layout';
-
 import { MealItemTypes } from 'appTypes';
 import { LostConnection } from 'components/LostConnection';
 import { AppContext } from 'context/AppContext';

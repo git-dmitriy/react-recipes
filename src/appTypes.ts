@@ -5,6 +5,11 @@ export type CategoryItemTypes = {
   strCategoryDescription: string;
 };
 
+export type CategoryLinkTypes = {
+  country: string;
+  category: string;
+};
+
 export type MealItemTypes = {
   idMeal: string;
   strMeal: string;
@@ -19,6 +24,12 @@ export type RecipeItemTypes = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
+};
+
+export type RecipeImageTypes = {
+  imgLink?: string;
+  altText: string;
+  imgPlaceholder: string;
 };
 
 export type StateTypes = {
