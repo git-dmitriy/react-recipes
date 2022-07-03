@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFilteredCategory, getAllCategories } from 'helpers/api';
 import { MealsList } from 'components/meals/MealsList';
