@@ -5,6 +5,7 @@ import { Layout } from 'components/layout/Layout';
 import { LostConnection } from 'components/LostConnection';
 import { AppContext } from 'context/AppContext';
 import { MealItemTypes } from 'appTypes';
+import { motion } from 'framer-motion';
 
 type P = {
   target: string;
@@ -45,7 +46,12 @@ export const NotFound: React.FC<P> = ({ target }) => {
   }
 
   return (
-    <div className='flex flex-col justify-around items-center my-6 px-2'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className='flex flex-col justify-around items-center my-6 px-2'
+    >
       <div className='w-full sm:w-1/2 pl-2 flex flex-col items-center text-center'>
         <h2 className=''>
           <span className='font-bold block'>Nothing found</span> for &quot;
@@ -57,6 +63,6 @@ export const NotFound: React.FC<P> = ({ target }) => {
       <ul className='rounded-lg overflow-hidden w-4/6 sm:w-1/2'>
         {randomMeal && <Meal {...randomMeal} />}
       </ul>
-    </div>
+    </motion.div>
   );
 };
