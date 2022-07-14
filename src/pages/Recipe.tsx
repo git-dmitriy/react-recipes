@@ -10,6 +10,7 @@ import { Layout } from 'components/layout/Layout';
 import { MealItemTypes } from 'appTypes';
 import { LostConnection } from 'components/LostConnection';
 import { AppContext } from 'context/AppContext';
+import { motion } from 'framer-motion';
 
 export const Recipe: React.FC = () => {
   const { idMeal } = useParams();
@@ -70,7 +71,12 @@ export const Recipe: React.FC = () => {
     <>
       {recipe && (
         <Layout>
-          <div className='flex flex-col items-center mb-10'>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className='flex flex-col items-center mb-10'
+          >
             <div className='flex justify-center mb-5'>
               <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
                 {recipe.strMeal}
@@ -83,27 +89,24 @@ export const Recipe: React.FC = () => {
               category={recipe.strCategory || ''}
               country={recipe.strArea || ''}
             />
-          </div>
 
-          <div className='flex flex-col-reverse sm:grid grid-cols-2 gap-10'>
-            <div className=''>
+            <div className='flex flex-col-reverse mt-6 sm:grid grid-cols-2 gap-10'>
               <p className='leading-relaxed text-xl text-justify mb-4'>
                 {recipe.strInstructions}
               </p>
-            </div>
 
-            <div>
-              <div className='rounded-3xl overflow-hidden mb-10'>
-                <RecipeImage
-                  imgLink={recipe.strMealThumb}
-                  altText={recipe.strMeal}
-                  imgPlaceholder={imgPlaceholder}
-                />
+              <div>
+                <div className='rounded-3xl overflow-hidden mb-10'>
+                  <RecipeImage
+                    imgLink={recipe.strMealThumb}
+                    altText={recipe.strMeal}
+                    imgPlaceholder={imgPlaceholder}
+                  />
+                </div>
+                <Ingredients props={recipe} />
               </div>
-              <Ingredients props={recipe} />
             </div>
-          </div>
-
+          </motion.div>
           {youtubeLink.length ? (
             <YoutubeIframe address={youtubeLink.slice(32)} />
           ) : null}

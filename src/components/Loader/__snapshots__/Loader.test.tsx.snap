@@ -3,7 +3,7 @@
 exports[`should render transparent loader when loading is false 1`] = `
 <div
   aria-busy={false}
-  className="fixed inset-0 flex justify-center items-center my-8 opacity-0"
+  className="fixed inset-0 flex justify-center items-center my-20 opacity-0"
   role="alert"
 >
   <div
@@ -25,7 +25,7 @@ exports[`should render transparent loader when loading is false 1`] = `
 exports[`should show loader when loading 1`] = `
 <div
   aria-busy={true}
-  className="fixed inset-0 flex justify-center items-center my-8 opacity-100"
+  className="fixed inset-0 flex justify-center items-center my-20 opacity-100"
   role="alert"
 >
   <div

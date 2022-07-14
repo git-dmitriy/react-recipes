@@ -11,7 +11,7 @@ export const Loader = () => {
     <div
       role='alert'
       aria-busy={isLoading ? true : false}
-      className={`fixed inset-0 flex justify-center items-center my-8 ${
+      className={`fixed inset-0 flex justify-center items-center my-20 ${
         isLoading ? 'opacity-100' : 'opacity-0'
       }`}
     >

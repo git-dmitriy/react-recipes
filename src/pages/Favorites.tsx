@@ -11,7 +11,7 @@ export const Favorites: React.FC = () => {
       <Layout>
         <div className='flex justify-center'>
           <h2 className='mx-auto font-bold'>
-            You haven`&apos;`t added any recipes yet.
+            You haven&apos;t added any recipes yet.
           </h2>
         </div>
       </Layout>

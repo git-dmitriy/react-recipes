@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render correctly 1`] = `
-<li
+<article
   className="relative w-full z-0 bg-white dark:bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-900 dark:text-gray-900"
 >
   <a
@@ -16,7 +16,7 @@ exports[`should render correctly 1`] = `
         className="lazyload-placeholder"
         style={
           Object {
-            "height": 350,
+            "height": 437,
           }
         }
       />
@@ -64,5 +64,5 @@ exports[`should render correctly 1`] = `
       </button>
     </div>
   </div>
-</li>
+</article>
 `;
