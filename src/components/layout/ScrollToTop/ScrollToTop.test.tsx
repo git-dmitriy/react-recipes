@@ -1,6 +1,6 @@
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { ScrollToTop } from './ScrollToTop';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 window.scrollTo = jest.fn();
 
