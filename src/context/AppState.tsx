@@ -9,7 +9,9 @@ import { AppContext } from 'context/AppContext';
 import { reducer } from 'context/reducer';
 import { StateTypes, MealItemTypes, ContextTypes } from 'appTypes';
 
-export const AppState: React.FC = ({ children }) => {
+type P = { children: React.ReactNode };
+
+export const AppState = ({ children }: P) => {
   const favorites = window.localStorage.getItem('favorites') || '[]';
 
   const initialState: StateTypes = {
