@@ -1,42 +1,35 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AppState } from 'context/AppState';
-import { Header } from 'components/layout/Header';
-import { Footer } from 'components/layout/Footer';
-import { Favorites } from 'pages/Favorites';
-import { Categories } from 'pages/Categories';
-import { Category } from 'pages/Category';
-import { Recipe } from 'pages/Recipe';
-import { SearchResults } from 'pages/SearchResults';
-import { ScrollToTop } from 'components/layout/ScrollToTop';
-import { SearchByCountry } from 'pages/SearchByCountry';
-import { Theme } from 'components/Theme';
-import { Loader } from 'components/Loader';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-export default function App() {
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
-    <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
-      <AppState>
-        <Theme />
-        <Router>
-          <div className='content'>
-            <ScrollToTop />
-            <Loader />
-            <main>
-              <Routes>
-                <Route path='/' element={<Categories />} />
-                <Route path='favorites' element={<Favorites />} />
-                <Route path='recipes' element={<SearchResults />} />
-                <Route path='category/:name' element={<Category />} />
-                <Route path='country/:region' element={<SearchByCountry />} />
-                <Route path='meal/:idMeal' element={<Recipe />} />
-                <Route path='/*' element={<Categories />} />
-              </Routes>
-            </main>
-          </div>
-          <Header />
-          <Footer />
-        </Router>
-      </AppState>
-    </div>
-  );
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
+
+export default App
