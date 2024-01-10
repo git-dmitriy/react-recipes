@@ -1,17 +1,17 @@
-import React, { useReducer } from 'react';
+import React, {useReducer} from 'react';
 import {
     ADD_TO_FAVORITE,
     SWITCH_THEME,
     REMOVE_FROM_FAVORITE,
     SET_IS_LOADING,
-} from 'context/contextTypes.ts';
-import { AppContext } from 'context/AppContext';
-import { reducer } from 'context/reducer';
-import { StateTypes, MealItemTypes, ContextTypes } from 'appTypes';
+} from '@context/contextTypes.ts';
+import {AppContext} from '@context/AppContext';
+import {reducer} from '@context/reducer';
+import {StateTypes, MealItemTypes, ContextTypes} from '@/appTypes';
 
 type P = { children: React.ReactNode };
 
-export const AppState = ({ children }: P) => {
+export const AppState = ({children}: P) => {
     const favorites = window.localStorage.getItem('favorites') || '[]';
 
     const initialState: StateTypes = {

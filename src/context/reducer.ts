@@ -3,8 +3,8 @@ import {
     REMOVE_FROM_FAVORITE,
     SWITCH_THEME,
     SET_IS_LOADING,
-} from 'context/contextTypes.ts';
-import {StateTypes, ActionTypes} from 'appTypes';
+} from '@context/contextTypes.ts';
+import {StateTypes, ActionTypes} from '@/appTypes';
 
 export const reducer = (state: StateTypes, action: ActionTypes) => {
     let favorites = null;
