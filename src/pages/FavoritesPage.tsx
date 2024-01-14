@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '@context/AppContext';
 import { MealsList } from '@components/MealsList';
-import { Layout } from '@components/layout/Layout';
+import { Layout } from '@components/Layout';
 
 export const FavoritesPage: React.FC = () => {
     const { state } = useContext(AppContext);

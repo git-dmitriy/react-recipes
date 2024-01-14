@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getAllCategories } from '@/api-utils.ts';
-import { CategoryList } from 'src/components/CategoryList';
+import { CategoryList } from '@components/CategoryList';
 import { Layout } from '@components/Layout';
 import { CategoryItemTypes } from '@/appTypes';
 import { LostConnection } from '@components/LostConnection';

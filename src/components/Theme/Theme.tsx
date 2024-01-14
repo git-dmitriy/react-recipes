@@ -6,7 +6,7 @@ export const Theme = () => {
     const firstRender = useRef(true);
 
     useEffect(() => {
-        if (firstRender.current === true) {
+        if (firstRender.current) {
             document.body.classList.add(
                 'bg-yellow-200',
                 'selection:bg-yellow-400',

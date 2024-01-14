@@ -9,15 +9,15 @@ type P = {
 export const CategoryList: React.FC<P> = ({ catalog }) => {
     console.log('render category list');
 
-    const variants = {
-        visible: (item: number) => ({
-            opacity: 1,
-            transition: {
-                delay: item * 0.03,
-            },
-        }),
-        hidden: { opacity: 0 },
-    };
+    // const variants = {
+    //     visible: (item: number) => ({
+    //         opacity: 1,
+    //         transition: {
+    //             delay: item * 0.03,
+    //         },
+    //     }),
+    //     hidden: { opacity: 0 },
+    // };
 
     return (
         <ul className='mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-items-center gap-5 md:gap-7 xl:max-w-6xl max-w-4xl'>

@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {AppState} from '@context/AppState.tsx';
+import {Header} from '@components/Header';
+import {Footer} from '@components/Footer';
+import { FavoritesPage } from '@pages/FavoritesPage';
+import {CategoriesPage} from '@pages/CategoriesPage';
+import { RecipePage } from '@pages/RecipePage';
+import { SearchResultsPage } from '@pages/SearchResultsPage';
+import { ScrollToTop } from '@components/ScrollToTop';
+import { SearchByCountryPage } from '@pages/SearchByCountryPage';
+import { Theme } from '@components/Theme';
+import {SingleCategoryPage} from "@pages/SingleCategoryPage.tsx";
+import { Loader } from '@components/Loader';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export default function App() {
+    return (
+        <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+            <AppState>
+                <Theme />
+                <Router>
+                    <div className='content'>
+                        <ScrollToTop />
+                        <Loader />
+                        <main>
+                            <Routes>
+                                <Route path='/' element={<CategoriesPage />} />
+                                <Route path='favorites' element={<FavoritesPage />} />
+                                <Route path='recipes' element={<SearchResultsPage />} />
+                                <Route path='category/:name' element={<SingleCategoryPage/>} />
+                                <Route path='country/:region' element={<SearchByCountryPage />} />
+                                <Route path='meal/:idMeal' element={<RecipePage />} />
+                                <Route path='/*' element={<CategoriesPage/>}/>
+                            </Routes>
+                        </main>
+                    </div>
+                    <Header/>
+                    <Footer/>
+                </Router>
+            </AppState>
+        </div>
+    );
 }
-
-export default App
