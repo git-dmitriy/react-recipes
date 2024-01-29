@@ -1,10 +1,11 @@
 import {RecipeImageTypes} from '@/appTypes';
 
-export const RecipeImage: React.FC<RecipeImageTypes> = ({
-                                                            imgLink,
-                                                            altText,
-                                                            imgPlaceholder,
-                                                        }) => {
+export const RecipeImage: React.FC<RecipeImageTypes> = (
+    {
+        imgLink,
+        altText,
+        imgPlaceholder,
+    }) => {
     if (!imgLink) {
         return (
             <img
