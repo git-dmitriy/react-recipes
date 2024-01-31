@@ -1,0 +1,45 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should render transparent loader when loading is false 1`] = `
+<div
+  aria-busy={false}
+  className="fixed inset-0 flex justify-center items-center my-20 opacity-0"
+  role="alert"
+>
+  <div
+    className="flex"
+  >
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce"
+    />
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce200"
+    />
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full animate-bounce400"
+    />
+  </div>
+</div>
+`;
+
+exports[`should show loader when loading 1`] = `
+<div
+  aria-busy={true}
+  className="fixed inset-0 flex justify-center items-center my-20 opacity-100"
+  role="alert"
+>
+  <div
+    className="flex"
+  >
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce"
+    />
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce200"
+    />
+    <div
+      className="h-5 w-5 bg-yellow-400 rounded-full animate-bounce400"
+    />
+  </div>
+</div>
+`;
