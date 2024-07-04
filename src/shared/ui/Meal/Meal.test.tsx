@@ -1,0 +1,33 @@
+import renderer from 'react-test-renderer';
+import {Meal} from './Meal.tsx';
+import {MemoryRouter} from 'react-router-dom';
+import {AppContext} from '@app/context/AppContext.ts';
+import {ContextTypes} from '@shared/model/appTypes/appTypes.ts';
+import {it, expect} from 'vitest';
+
+const context = {
+    state: {
+        theme: 'light',
+        favorites: [],
+    },
+};
+
+const data = {
+    idMeal: '52965',
+    strMeal: 'Breakfast Potatoes',
+    strMealThumb: 'https://www.themealdb.com/images/media/meals/1550441882.jpg',
+};
+
+it('should render correctly', () => {
+    const tree = renderer
+        .create(
+            <AppContext.Provider value={context as ContextTypes}>
+                <MemoryRouter>
+                    <Meal {...data} />
+                </MemoryRouter>
+            </AppContext.Provider>
+        )
+        .toJSON();
+
+    expect(tree).toMatchSnapshot();
+});
