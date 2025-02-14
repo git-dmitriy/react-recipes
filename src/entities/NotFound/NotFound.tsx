@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import {getRandomMeal} from '@shared/api/apiUtils';
-import {Meal} from '@shared/ui/Meal';
+import {Meal} from '@entities/meals/Meal';
 import {Layout} from '@shared/ui/Layout';
 import {LostConnection} from '@shared/ui/LostConnection';
 import {AppContext} from '@app/context/AppContext.ts';

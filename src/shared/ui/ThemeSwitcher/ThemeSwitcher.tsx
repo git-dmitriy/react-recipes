@@ -30,3 +30,19 @@ export const ThemeSwitcher: React.FC = () => {
         </button>
     );
 };
+
+
+
+// export const ThemeSwitcher = (onClickHandler: ()=>void, theme: string ) => {
+// const {state, switchTheme} = useContext(AppContext);
+//
+// // декомпозировать этот функционал
+//
+// const onClickHandler = () => {
+//     if (state.theme === 'dark') {
+//         switchTheme('light');
+//     }
+//     if (state.theme === 'light') {
+//         switchTheme('dark');
+//     }
+// };

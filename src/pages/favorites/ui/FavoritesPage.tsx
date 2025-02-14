@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '@app/context/AppContext.ts';
-import { MealsList } from '@shared/ui/MealsList';
+import { MealsList } from '@entities/meals/MealsList';
 import { Layout } from '@shared/ui/Layout';
 
 export const FavoritesPage: React.FC = () => {

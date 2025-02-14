@@ -24,10 +24,10 @@
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
       "@app/*": ["src/app/*"],
       "@shared/*": ["src/shared/*"],
       "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
     }
   },
   "include": ["./src"],

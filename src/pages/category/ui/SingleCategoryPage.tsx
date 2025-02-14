@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import {getFilteredCategory, getAllCategories} from '@shared/api/apiUtils/apiUtils.ts';
-import {MealsList} from '@shared/ui/MealsList';
+import {MealsList} from '@entities/meals/MealsList';
 import {AboutCategory} from '@shared/ui/AboutCategory';
 import {Layout} from '@shared/ui/Layout';
 import {CategoryItemTypes} from '@shared/model/appTypes/appTypes.ts';

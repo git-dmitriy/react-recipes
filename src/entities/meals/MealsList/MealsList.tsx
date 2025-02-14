@@ -1,4 +1,4 @@
-import {Meal} from '@shared/ui/Meal';
+import {Meal} from '@entities/meals/Meal';
 import {MealItemTypes} from '@shared/model/appTypes/appTypes.ts';
 // import { motion } from 'framer-motion';
 

@@ -1,4 +1,4 @@
-import { CategoryItem } from '@shared/ui/CategoryItem';
+import { CategoryItem } from 'src/entities/CategoryItem';
 import { CategoryItemTypes } from '@shared/model/appTypes/appTypes.ts';
 // import { motion } from 'framer-motion';
 

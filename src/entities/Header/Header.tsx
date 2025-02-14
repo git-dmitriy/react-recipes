@@ -1,6 +1,5 @@
 import {NavLink} from 'react-router-dom';
-import {Search} from '@features/Search';
-// import { GoBack } from '@components/Layout/GoBack';
+import {Search} from '@shared/ui/Search';
 import {BsFillBookmarkFill} from 'react-icons/bs';
 import {ThemeSwitcher} from '@shared/ui/ThemeSwitcher';
 import {GoBack} from "@shared/ui/GoBack";

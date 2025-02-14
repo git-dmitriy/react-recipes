@@ -1,7 +1,7 @@
 import {useParams} from 'react-router';
 import {useState, useEffect, useContext} from 'react';
 import {getFilteredCategoryByCountry} from '@shared/api/apiUtils/apiUtils.ts';
-import {MealsList} from '@shared/ui/MealsList';
+import {MealsList} from '@entities/meals/MealsList';
 import {Layout} from '@shared/ui/Layout';
 import {LostConnection} from '@shared/ui/LostConnection';
 import {AppContext} from '@app/context/AppContext.ts';

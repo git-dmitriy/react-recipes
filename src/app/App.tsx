@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {AppState} from '@app/context/AppState.tsx';
-import {Header} from '@shared/ui/Header';
+import {Header} from 'src/entities/Header';
 import {Footer} from '@shared/ui/Footer';
 import { FavoritesPage } from '@pages/favorites';
 import {CategoriesPage} from '@pages/categories';

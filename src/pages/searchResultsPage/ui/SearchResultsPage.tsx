@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { getMealByName } from '@shared/api/apiUtils/apiUtils.ts';
-import { useSearchQuery } from '@hooks/useSearchQuery.tsx';
-import { MealsList } from '@shared/ui/MealsList';
+import { useSearchQuery } from '@shared/hooks/useSearchQuery/useSearchQuery.tsx';
+import { MealsList } from '@entities/meals/MealsList';
 import { Loader } from '@shared/ui/Loader';
-import { NotFound } from '@shared/ui/NotFound';
+import { NotFound } from '@entities/NotFound';
 import { Layout } from '@shared/ui/Layout';
 import { MealItemTypes } from '@shared/model/appTypes/appTypes.ts';
 import { LostConnection } from '@shared/ui/LostConnection';
