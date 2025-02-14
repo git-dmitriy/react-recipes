@@ -55,7 +55,7 @@ export const NotFound: React.FC<P> = ({target}) => {
                     {target}&quot;
                 </h2>
                 <div>Try to cook this</div>
-                <div className='w-12 h-1 bg-red-500 rounded mt-2 mb-4'/>
+                <div className='w-12 h-1 bg-red-500 rounded-sm mt-2 mb-4'/>
             </div>
             <ul className='rounded-lg overflow-hidden w-4/6 sm:w-1/2'>
                 {randomMeal && <Meal {...randomMeal} />}
