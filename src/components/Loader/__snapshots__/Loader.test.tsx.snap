@@ -7,7 +7,7 @@ exports[`should render transparent loader when loading is false 1`] = `
     <div>
       <div
         aria-busy="false"
-        class="fixed inset-0 flex justify-center items-center my-20 opacity-0"
+        class="fixed inset-0 flex justify-center items-center my-20"
         role="alert"
       >
         <div
@@ -29,7 +29,7 @@ exports[`should render transparent loader when loading is false 1`] = `
   "container": <div>
     <div
       aria-busy="false"
-      class="fixed inset-0 flex justify-center items-center my-20 opacity-0"
+      class="fixed inset-0 flex justify-center items-center my-20"
       role="alert"
     >
       <div
@@ -108,7 +108,7 @@ exports[`should show loader when loading 1`] = `
     <div>
       <div
         aria-busy="true"
-        class="fixed inset-0 flex justify-center items-center my-20 opacity-100"
+        class="fixed inset-0 flex justify-center items-center my-20"
         role="alert"
       >
         <div
@@ -130,7 +130,7 @@ exports[`should show loader when loading 1`] = `
   "container": <div>
     <div
       aria-busy="true"
-      class="fixed inset-0 flex justify-center items-center my-20 opacity-100"
+      class="fixed inset-0 flex justify-center items-center my-20"
       role="alert"
     >
       <div

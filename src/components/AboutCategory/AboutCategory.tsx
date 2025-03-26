@@ -1,4 +1,5 @@
 import {CategoryItemTypes} from '@/appTypes';
+import {motion} from 'motion/react';
 
 type P = {
     categoryInfo: CategoryItemTypes;
@@ -9,7 +10,12 @@ export const AboutCategory: React.FC<P> = ({categoryInfo}) => {
         categoryInfo;
 
     return (
-        <div className=' mx-auto xl:max-w-6xl max-w-4xl'>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            transition={{duration: 0.3}}
+            exit={{opacity: 0}}
+            className=' mx-auto xl:max-w-6xl max-w-4xl'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10 p-8 m-2 mb-4'>
                 <div className=' flex items-start justify-center'>
                     <div
@@ -27,6 +33,6 @@ export const AboutCategory: React.FC<P> = ({categoryInfo}) => {
                     <p className='text-md'>{strCategoryDescription}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
