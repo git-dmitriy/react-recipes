@@ -1,7 +1,7 @@
-import renderer from 'react-test-renderer';
-import { Loader } from './Loader';
-import { AppContext } from '@/context/AppContext';
-import { it, expect, vi } from 'vitest';
+import {Loader} from './Loader';
+import {AppContext} from '@/context/AppContext';
+import {it, expect, vi} from 'vitest';
+import {render} from "@testing-library/react";
 
 
 const context = {
@@ -17,13 +17,11 @@ const context = {
 };
 
 it('should render transparent loader when loading is false', () => {
-    const tree = renderer
-        .create(
-            <AppContext.Provider value={context}>
-                <Loader />
-            </AppContext.Provider>
-        )
-        .toJSON();
+    const tree = render(
+        <AppContext.Provider value={context}>
+            <Loader/>
+        </AppContext.Provider>
+    )
 
     expect(tree).toMatchSnapshot();
 });
@@ -41,13 +39,11 @@ it('should show loader when loading', () => {
         setIsLoading: vi.fn(),
     };
 
-    const tree = renderer
-        .create(
-            <AppContext.Provider value={context}>
-                <Loader />
-            </AppContext.Provider>
-        )
-        .toJSON();
+    const tree = render(
+        <AppContext.Provider value={context}>
+            <Loader/>
+        </AppContext.Provider>
+    )
 
     expect(tree).toMatchSnapshot();
 });

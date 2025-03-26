@@ -1,5 +1,4 @@
 import {render, screen} from '@testing-library/react';
-import renderer from 'react-test-renderer';
 import {RecipeImage} from './RecipeImage';
 import {it, expect} from 'vitest';
 
@@ -11,28 +10,24 @@ const data = {
 };
 
 it('should render an image element with the provided link', () => {
-    const tree = renderer
-        .create(
-            <RecipeImage
-                imgLink={data.imgLink}
-                imgPlaceholder={data.imgPlaceholder}
-                altText={data.altText}
-            />
-        )
-        .toJSON();
+    const tree = render(
+        <RecipeImage
+            imgLink={data.imgLink}
+            imgPlaceholder={data.imgPlaceholder}
+            altText={data.altText}
+        />
+    )
 
     expect(tree).toMatchSnapshot();
 });
 
 it('should render an image element with a placeholder link', () => {
-    const tree = renderer
-        .create(
-            <RecipeImage
-                imgPlaceholder={data.imgPlaceholder}
-                altText={data.altText}
-            />
-        )
-        .toJSON();
+    const tree = render(
+        <RecipeImage
+            imgPlaceholder={data.imgPlaceholder}
+            altText={data.altText}
+        />
+    )
 
     expect(tree).toMatchSnapshot();
 });

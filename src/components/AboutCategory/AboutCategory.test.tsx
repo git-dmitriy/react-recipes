@@ -1,6 +1,6 @@
-import renderer from 'react-test-renderer';
 import {AboutCategory} from './AboutCategory';
 import {it, expect} from "vitest";
+import {render} from "@testing-library/react";
 
 const data = {
     idCategory: '1',
@@ -11,9 +11,7 @@ const data = {
 };
 
 it('should render correctly', () => {
-    const tree = renderer
-        .create(<AboutCategory categoryInfo={{...data}}/>)
-        .toJSON();
+    const {container} = render(<AboutCategory categoryInfo={{...data}}/>);
 
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
 });

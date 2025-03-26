@@ -1,9 +1,9 @@
-import renderer from 'react-test-renderer';
 import {LostConnection} from './LostConnection';
 import {it, expect} from 'vitest';
+import {render} from "@testing-library/react";
 
 it('should render correctly', () => {
-    const tree = renderer.create(<LostConnection/>).toJSON();
+    const tree = render(<LostConnection/>);
 
     expect(tree).toMatchSnapshot();
 });

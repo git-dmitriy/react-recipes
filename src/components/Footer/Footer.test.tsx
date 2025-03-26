@@ -1,4 +1,3 @@
-import renderer from 'react-test-renderer';
 import {Footer} from '@components/Footer';
 import {render, screen, cleanup} from '@testing-library/react';
 import {afterEach, it, expect} from 'vitest'
@@ -6,7 +5,8 @@ import {afterEach, it, expect} from 'vitest'
 afterEach(cleanup);
 
 it('renders correctly', () => {
-    const tree = renderer.create(<Footer/>).toJSON();
+    const tree = render(<Footer/>);
+
     expect(tree).toMatchSnapshot();
 });
 

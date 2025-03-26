@@ -1,5 +1,4 @@
 import {NotFound} from './NotFound';
-import renderer from 'react-test-renderer';
 import {AppContext} from '@context/AppContext';
 import {ContextTypes} from '@/appTypes';
 import {MemoryRouter} from 'react-router-dom';
@@ -40,17 +39,13 @@ const context = {
 it('should render correctly', () => {
     const target = '';
 
-    const tree = renderer
-        .create(
-            <>
-                <AppContext.Provider value={context as ContextTypes}>
-                    <MemoryRouter>
-                        <NotFound target={target}/>
-                    </MemoryRouter>
-                </AppContext.Provider>
-            </>
-        )
-        .toJSON();
+    const tree = render(
+        <AppContext.Provider value={context as ContextTypes}>
+            <MemoryRouter>
+                <NotFound target={target}/>
+            </MemoryRouter>
+        </AppContext.Provider>
+    )
 
     expect(tree).toMatchSnapshot();
 });

@@ -1,7 +1,7 @@
-import renderer from 'react-test-renderer';
 import {CategoryItem} from './CategoryItem';
 import {MemoryRouter} from 'react-router-dom';
 import {it, expect} from 'vitest'
+import {render} from "@testing-library/react";
 
 const data = {
     idCategory: '13',
@@ -12,13 +12,10 @@ const data = {
 };
 
 it('should render correctly', () => {
-    const tree = renderer
-        .create(
-            <MemoryRouter>
-                <CategoryItem {...data} />
-            </MemoryRouter>
-        )
-        .toJSON();
-
+    const tree = render(
+        <MemoryRouter>
+            <CategoryItem {...data} />
+        </MemoryRouter>
+    )
     expect(tree).toMatchSnapshot();
 });
