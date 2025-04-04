@@ -6,26 +6,27 @@ exports[`should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <article
-        class="rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900 sm:mx-0 min-h-170p"
+        class="grid rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900 sm:mx-0 min-h-170p"
       >
         <a
-          class="h-full flex hover:opacity-90 transition-opacity"
+          class="h-full grid grid-rows-1 grid-cols-5 hover:opacity-90 transition-opacity"
           data-discover="true"
           href="/category/Breakfast"
         >
           <div
-            class="w-2/5 sm:w-2/4 bg-white relative"
+            class="col-span-2 bg-white relative"
           >
             <img
               alt="Breakfast"
               class="h-full object-cover"
               height="200"
+              loading="lazy"
               src="https://www.themealdb.com/images/category/breakfast.png"
               width="320"
             />
           </div>
           <div
-            class="w-3/5 sm:w-2/4 flex flex-col items-start mx-4 my-4"
+            class="col-span-3 flex flex-col items-start mx-4 my-4"
           >
             <h1
               class="text-xl font-semibold mb-5 sm:mb-0"
@@ -33,9 +34,9 @@ exports[`should render correctly 1`] = `
               Breakfast
             </h1>
             <p
-              class="text-sm sm:text-md"
+              class="text-sm sm:text-md line-clamp-5"
             >
-              Breakfast is the first meal of a day. The word in English refers to breaking the fasting period of the previous night. T...
+              Breakfast is the first meal of a day. The word in English refers to breaking the fasting period of the previous night. There is a strong likelihood for one or more "typical", or "traditional", breakfast menus to exist in most places, but their composition varies widely from place to place, and has varied over time, so that globally a very wide range of preparations and ingredients are now associated with breakfast.
             </p>
           </div>
         </a>
@@ -44,26 +45,27 @@ exports[`should render correctly 1`] = `
   </body>,
   "container": <div>
     <article
-      class="rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900 sm:mx-0 min-h-170p"
+      class="grid rounded-3xl border border-gray-200 dark:border-gray-900 overflow-hidden bg-white dark:bg-orange-100 dark:text-gray-900 sm:mx-0 min-h-170p"
     >
       <a
-        class="h-full flex hover:opacity-90 transition-opacity"
+        class="h-full grid grid-rows-1 grid-cols-5 hover:opacity-90 transition-opacity"
         data-discover="true"
         href="/category/Breakfast"
       >
         <div
-          class="w-2/5 sm:w-2/4 bg-white relative"
+          class="col-span-2 bg-white relative"
         >
           <img
             alt="Breakfast"
             class="h-full object-cover"
             height="200"
+            loading="lazy"
             src="https://www.themealdb.com/images/category/breakfast.png"
             width="320"
           />
         </div>
         <div
-          class="w-3/5 sm:w-2/4 flex flex-col items-start mx-4 my-4"
+          class="col-span-3 flex flex-col items-start mx-4 my-4"
         >
           <h1
             class="text-xl font-semibold mb-5 sm:mb-0"
@@ -71,9 +73,9 @@ exports[`should render correctly 1`] = `
             Breakfast
           </h1>
           <p
-            class="text-sm sm:text-md"
+            class="text-sm sm:text-md line-clamp-5"
           >
-            Breakfast is the first meal of a day. The word in English refers to breaking the fasting period of the previous night. T...
+            Breakfast is the first meal of a day. The word in English refers to breaking the fasting period of the previous night. There is a strong likelihood for one or more "typical", or "traditional", breakfast menus to exist in most places, but their composition varies widely from place to place, and has varied over time, so that globally a very wide range of preparations and ingredients are now associated with breakfast.
           </p>
         </div>
       </a>

@@ -24,20 +24,20 @@ exports[`should render correctly 1`] = `
             class="text-center my-2 mx-3 min-h-full"
           >
             <h4
-              class="text-2xl font-semibold"
+              class="text-2xl font-semibold line-clamp-1"
             >
               Breakfast Potatoes
             </h4>
           </div>
         </a>
         <div
-          class="absolute top-4 right-4 p-1 bg-white bg-opacity-50 backdrop-opacity-50 backdrop-filter backdrop-blur-2xl rounded-2xl"
+          class="absolute top-4 right-4 p-1 bg-white/50 backdrop-opacity-50 backdrop-filter backdrop-blur-2xl rounded-2xl"
         >
           <div
             class="mx-2 mt-2"
           >
             <button
-              class="text-2xl text-gray-900  hover:text-red-500 transition duration-200 uppercase"
+              class="cursor-pointer text-2xl text-gray-900  hover:text-red-500 transition duration-200 uppercase"
             >
               <svg
                 class="fill-current"
@@ -80,20 +80,20 @@ exports[`should render correctly 1`] = `
           class="text-center my-2 mx-3 min-h-full"
         >
           <h4
-            class="text-2xl font-semibold"
+            class="text-2xl font-semibold line-clamp-1"
           >
             Breakfast Potatoes
           </h4>
         </div>
       </a>
       <div
-        class="absolute top-4 right-4 p-1 bg-white bg-opacity-50 backdrop-opacity-50 backdrop-filter backdrop-blur-2xl rounded-2xl"
+        class="absolute top-4 right-4 p-1 bg-white/50 backdrop-opacity-50 backdrop-filter backdrop-blur-2xl rounded-2xl"
       >
         <div
           class="mx-2 mt-2"
         >
           <button
-            class="text-2xl text-gray-900  hover:text-red-500 transition duration-200 uppercase"
+            class="cursor-pointer text-2xl text-gray-900  hover:text-red-500 transition duration-200 uppercase"
           >
             <svg
               class="fill-current"

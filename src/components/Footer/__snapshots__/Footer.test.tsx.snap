@@ -20,6 +20,7 @@ exports[`renders correctly 1`] = `
               <img
                 alt="logo"
                 class="size-12"
+                loading="lazy"
                 src="/src/assets/logo.svg"
               />
               <span
@@ -81,6 +82,7 @@ exports[`renders correctly 1`] = `
             <img
               alt="logo"
               class="size-12"
+              loading="lazy"
               src="/src/assets/logo.svg"
             />
             <span

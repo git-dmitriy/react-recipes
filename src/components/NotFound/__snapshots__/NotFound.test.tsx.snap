@@ -26,7 +26,7 @@ exports[`should render correctly 1`] = `
             Try to cook this
           </div>
           <div
-            class="w-12 h-1 bg-red-500 rounded-sm mt-2 mb-4"
+            class="w-12 h-1 bg-red-500 rounded-xs mt-2 mb-4"
           />
         </div>
         <ul
@@ -57,7 +57,7 @@ exports[`should render correctly 1`] = `
           Try to cook this
         </div>
         <div
-          class="w-12 h-1 bg-red-500 rounded-sm mt-2 mb-4"
+          class="w-12 h-1 bg-red-500 rounded-xs mt-2 mb-4"
         />
       </div>
       <ul

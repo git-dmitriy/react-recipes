@@ -25,6 +25,7 @@ export const AboutCategory: React.FC<P> = ({categoryInfo}) => {
                             className='w-full object-cover'
                             src={strCategoryThumb}
                             alt={strCategory}
+                            loading="lazy"
                         />
                     </div>
                 </div>

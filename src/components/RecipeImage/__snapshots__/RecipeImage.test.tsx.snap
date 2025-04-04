@@ -8,6 +8,7 @@ exports[`should render an image element with a placeholder link 1`] = `
       <img
         alt="English Breakfast"
         class="object-cover object-center w-full"
+        loading="lazy"
         src="https://via.placeholder.com/500.png/546E7A?text=English Breakfast"
       />
     </div>
@@ -16,6 +17,7 @@ exports[`should render an image element with a placeholder link 1`] = `
     <img
       alt="English Breakfast"
       class="object-cover object-center w-full"
+      loading="lazy"
       src="https://via.placeholder.com/500.png/546E7A?text=English Breakfast"
     />
   </div>,
@@ -81,6 +83,7 @@ exports[`should render an image element with the provided link 1`] = `
       <img
         alt="English Breakfast"
         class="object-cover object-center w-full"
+        loading="lazy"
         src="https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg"
       />
     </div>
@@ -89,6 +92,7 @@ exports[`should render an image element with the provided link 1`] = `
     <img
       alt="English Breakfast"
       class="object-cover object-center w-full"
+      loading="lazy"
       src="https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg"
     />
   </div>,

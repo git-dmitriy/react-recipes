@@ -9,7 +9,7 @@ export const FavoritesPage: React.FC = () => {
     if (state.favorites.length === 0) {
         return (
             <Layout>
-                <div className='flex justify-center'>
+                <div className='grid place-items-center'>
                     <h2 className='mx-auto font-bold'>
                         You haven&apos;t added any recipes yet.
                     </h2>

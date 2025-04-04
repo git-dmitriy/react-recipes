@@ -18,6 +18,7 @@ exports[`should render correctly 1`] = `
           <img
             alt="Beef"
             class="w-full object-cover"
+            loading="lazy"
             src="https://www.themealdb.com/images/category/beef.png"
           />
         </div>

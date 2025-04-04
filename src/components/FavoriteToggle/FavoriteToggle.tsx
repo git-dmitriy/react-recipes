@@ -36,14 +36,14 @@ export const FavoriteToggle: React.FC<P> = ({meal, isDark = false}) => {
         <div className='mx-2 mt-2'>
             {isFavorite ? (
                 <button
-                    className='text-2xl text-red-500 transition duration-200 uppercase'
+                    className='cursor-pointer text-2xl text-red-500 transition duration-200 uppercase'
                     onClick={removeFromFavorite}
                 >
                     <BsFillBookmarkCheckFill className='fill-current'/>
                 </button>
             ) : (
                 <button
-                    className={`text-2xl text-gray-900 ${
+                    className={`cursor-pointer text-2xl text-gray-900 ${
                         isDark ? '' : 'dark:text-orange-200'
                     } hover:text-red-500 transition duration-200 uppercase`}
                     onClick={addToFavorite}

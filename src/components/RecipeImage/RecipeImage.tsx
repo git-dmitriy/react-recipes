@@ -12,6 +12,7 @@ export const RecipeImage: React.FC<RecipeImageTypes> = (
                 className='object-cover object-center w-full'
                 src={imgPlaceholder}
                 alt={altText}
+                loading="lazy"
             />
         );
     }
@@ -21,6 +22,7 @@ export const RecipeImage: React.FC<RecipeImageTypes> = (
             className='object-cover object-center w-full'
             src={imgLink}
             alt={altText}
+            loading="lazy"
         />
     );
 };
