@@ -24,7 +24,7 @@ export default function App() {
                     <motion.main className='content h-full'>
                         <Layout>
                             <ScrollToTop/>
-                            {/*<Loader/>*/}
+                            <Loader/>
                             <Routes>
                                 <Route path='/' element={<CategoriesPage/>}/>
                                 <Route path='favorites' element={<FavoritesPage/>}/>

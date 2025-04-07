@@ -14,7 +14,7 @@ export const Loader = () => {
             transition={{duration: 0.3}}
             role='alert'
             aria-busy={isLoading}
-            className='fixed inset-0 flex justify-center items-center my-20'
+            className={`fixed inset-0 flex justify-center items-center my-20 ${isLoading ? 'z-10' : '-z-10'}`}
         >
             <div className='flex'>
                 <div className={`${circle} mr-1 animate-bounce`}></div>

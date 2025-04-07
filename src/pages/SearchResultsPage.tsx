@@ -53,7 +53,7 @@ export const SearchResultsPage: React.FC = () => {
 
     return (
         <>
-            {!searchResults.length ? <Loader /> : <MealsList meals={searchResults} />}
+            {!!searchResults.length && <MealsList meals={searchResults} />}
         </>
     );
 };
