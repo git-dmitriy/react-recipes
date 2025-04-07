@@ -19,8 +19,8 @@ export const Header: React.FC = () => {
     return (
         <nav
             className='bg-yellow-300/50 shadow-xs dark:bg-gray-800 w-full'>
-            <ul className='container flex items-center text-lg justify-around justify-center px-2 sm:px-6 mx-auto capitalize'>
-                <li className='fixed top-28 left-4 sm:static'>
+            <ul className='container flex items-center text-lg justify-center px-2 sm:px-6 mx-auto capitalize'>
+                <li className='fixed top-28 left-4 sm:static z-10'>
                     <GoBack/>
                 </li>
                 <li>
