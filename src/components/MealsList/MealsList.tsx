@@ -18,11 +18,11 @@ export const MealsList: React.FC<P> = ({meals}) => {
     };
 
     return (
-        <ul className='mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center xl:max-w-6xl max-w-4xl'>
+        <ul className='mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 justify-items-center xl:max-w-6xl max-w-4xl'>
             {meals.map((meal, idx) => (
                 <motion.li
                     key={meal.idMeal}
-                    className='flex'
+                    className='flex w-full'
                     variants={variants}
                     initial='hidden'
                     animate='visible'

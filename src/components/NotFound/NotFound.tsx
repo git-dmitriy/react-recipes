@@ -42,9 +42,9 @@ export const NotFound: React.FC<P> = ({target}) => {
 
     return (
         <div
-            className='flex flex-col justify-around items-center my-6 px-2'
+            className='h-full grid place-items-center content-center my-6 px-2'
         >
-            <div className='w-full sm:w-1/2 pl-2 flex flex-col items-center text-center'>
+            <div className='w-full sm:w-1/2 pl-2 grid justify-items-center text-center'>
                 <h2 className=''>
                     <span className='font-bold block'>Nothing found</span> for &quot;
                     {target}&quot;
@@ -52,7 +52,7 @@ export const NotFound: React.FC<P> = ({target}) => {
                 <div>Try to cook this</div>
                 <div className='w-12 h-1 bg-red-500 rounded-xs mt-2 mb-4'/>
             </div>
-            <ul className='rounded-lg overflow-hidden w-4/6 sm:w-1/2'>
+            <ul className='rounded-lg overflow-hidden w-4/6 sm:w-2/3 md:2/4 lg:w-md'>
                 {randomMeal && <Meal {...randomMeal} />}
             </ul>
         </div>

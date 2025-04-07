@@ -35,7 +35,7 @@ export const GoBack: React.FC = () => {
                     exit={{opacity: 0}}
                     animate={{opacity: 1}}
                     transition={{duration: .3}}
-                    className='w-5 text-3xl hover:opacity-70 transition-opacity'
+                    className='cursor-pointer w-5 text-3xl hover:opacity-70 transition-opacity'
                     onClick={onClickHandler}
                 >
                     <FaArrowLeft className='fill-current'/>
