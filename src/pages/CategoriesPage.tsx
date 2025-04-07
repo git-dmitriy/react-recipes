@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { getAllCategories } from '@/api-utils.ts';
 import { CategoryList } from '@components/CategoryList';
-import { Layout } from '@components/Layout';
 import { CategoryItemTypes } from '@/appTypes';
 import { LostConnection } from '@components/LostConnection';
 import { AppContext } from '@context/AppContext';
@@ -37,13 +36,11 @@ export const CategoriesPage: React.FC = () => {
 
     if (disconnected) {
         return (
-            <Layout>
-                <LostConnection />
-            </Layout>
+            <LostConnection/>
         );
     }
 
     return (
-        <Layout>{!!catalog.length && <CategoryList catalog={catalog} />}</Layout>
+        <>{!!catalog.length && <CategoryList catalog={catalog} />}</>
     );
 };

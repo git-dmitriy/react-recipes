@@ -1,25 +1,21 @@
 import React, { useContext } from 'react';
 import { AppContext } from '@context/AppContext';
 import { MealsList } from '@components/MealsList';
-import { Layout } from '@components/Layout';
 
 export const FavoritesPage: React.FC = () => {
     const { state } = useContext(AppContext);
 
     if (state.favorites.length === 0) {
         return (
-            <Layout>
-                <div className='grid place-items-center'>
-                    <h2 className='mx-auto font-bold'>
-                        You haven&apos;t added any recipes yet.
-                    </h2>
-                </div>
-            </Layout>
+            <div className='h-full grid place-items-center'>
+                <h2 className='mx-auto font-bold'>
+                    You haven&apos;t added any recipes yet.
+                </h2>
+            </div>
         );
     }
+
     return (
-        <Layout>
-            <MealsList meals={state.favorites} />
-        </Layout>
+        <MealsList meals={state.favorites}/>
     );
 };

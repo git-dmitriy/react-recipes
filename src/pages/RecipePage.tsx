@@ -6,7 +6,6 @@ import {YoutubeIframe} from '@components/YoutubeIframe';
 import {RecipeImage} from '@components/RecipeImage';
 import {FavoriteToggle} from '@components/FavoriteToggle';
 import {CategoriesLink} from '@components/CategoriesLink';
-import {Layout} from '@components/Layout';
 import {MealItemTypes} from '@/appTypes';
 import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
@@ -53,62 +52,61 @@ export const RecipePage: React.FC = () => {
 
     if (!isRecipeExist) {
         return (
-            <Layout>
+            <>
                 <h2 className='text-2xl text-center'>There is no such recipe</h2>
-            </Layout>
+            </>
         );
     }
 
     if (disconnected) {
         return (
-            <Layout>
+            <>
                 <LostConnection/>
-            </Layout>
+            </>
         );
     }
 
-    return (
-        <>
-            {recipe && (
-                <Layout>
-                    <div
-                        className='flex flex-col items-center mb-10'
-                    >
-                        <div className='flex justify-center mb-5'>
-                            <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
-                                {recipe.strMeal}
-                            </h2>
+    if (recipe) {
+        return (
+            <>
+                <div
+                    className='flex flex-col items-center mb-10'
+                >
+                    <div className='flex justify-center mb-5'>
+                        <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
+                            {recipe.strMeal}
+                        </h2>
 
-                            <FavoriteToggle meal={recipe}/>
-                        </div>
+                        <FavoriteToggle meal={recipe}/>
+                    </div>
 
-                        <CategoriesLink
-                            category={recipe.strCategory || ''}
-                            country={recipe.strArea || ''}
-                        />
+                    <CategoriesLink
+                        category={recipe.strCategory || ''}
+                        country={recipe.strArea || ''}
+                    />
 
-                        <div className='flex flex-col-reverse mt-6 sm:grid grid-cols-2 gap-10'>
-                            <p className='leading-relaxed text-xl text-justify mb-4'>
-                                {recipe.strInstructions}
-                            </p>
+                    <div className='flex flex-col-reverse mt-6 sm:grid grid-cols-2 gap-10'>
+                        <p className='leading-relaxed text-xl text-justify mb-4'>
+                            {recipe.strInstructions}
+                        </p>
 
-                            <div>
-                                <div className='rounded-3xl overflow-hidden mb-10'>
-                                    <RecipeImage
-                                        imgLink={recipe.strMealThumb}
-                                        altText={recipe.strMeal}
-                                        imgPlaceholder={imgPlaceholder}
-                                    />
-                                </div>
-                                <Ingredients props={recipe}/>
+                        <div>
+                            <div className='rounded-3xl overflow-hidden mb-10'>
+                                <RecipeImage
+                                    imgLink={recipe.strMealThumb}
+                                    altText={recipe.strMeal}
+                                    imgPlaceholder={imgPlaceholder}
+                                />
                             </div>
+                            <Ingredients props={recipe}/>
                         </div>
                     </div>
-                    {youtubeLink.length ? (
-                        <YoutubeIframe address={youtubeLink.slice(32)}/>
-                    ) : null}
-                </Layout>
-            )}
-        </>
-    );
+                </div>
+
+                {youtubeLink.length ? (
+                    <YoutubeIframe address={youtubeLink.slice(32)}/>
+                ) : null}
+            </>
+        )
+    }
 };

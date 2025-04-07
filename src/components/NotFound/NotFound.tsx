@@ -1,7 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import {getRandomMeal} from '@/api-utils.ts';
 import {Meal} from '@components/Meal';
-import {Layout} from '@components/Layout';
 import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
 import {MealItemTypes} from '@/appTypes';
@@ -38,11 +37,7 @@ export const NotFound: React.FC<P> = ({target}) => {
     }, []);
 
     if (disconnected) {
-        return (
-            <Layout>
-                <LostConnection/>
-            </Layout>
-        );
+        return <LostConnection/>;
     }
 
     return (

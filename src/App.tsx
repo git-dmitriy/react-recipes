@@ -12,18 +12,19 @@ import {Theme} from '@components/Theme';
 import {SingleCategoryPage} from "@pages/SingleCategoryPage.tsx";
 import {Loader} from '@components/Loader';
 import {motion} from 'motion/react';
+import {Layout} from "@components/Layout";
 
 export default function App() {
     return (
-        <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+        <Router>
             <AppState>
-                <Theme/>
-                <Router>
-                    <div className='content'>
-                        <ScrollToTop/>
-                        <Loader/>
-                        <motion.main
-                        >
+                <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+                    <Theme/>
+                    <Header/>
+                    <motion.main className='content h-full'>
+                        <Layout>
+                            <ScrollToTop/>
+                            {/*<Loader/>*/}
                             <Routes>
                                 <Route path='/' element={<CategoriesPage/>}/>
                                 <Route path='favorites' element={<FavoritesPage/>}/>
@@ -33,12 +34,11 @@ export default function App() {
                                 <Route path='meal/:idMeal' element={<RecipePage/>}/>
                                 <Route path='/*' element={<CategoriesPage/>}/>
                             </Routes>
-                        </motion.main>
-                    </div>
-                    <Header/>
+                        </Layout>
+                    </motion.main>
                     <Footer/>
-                </Router>
+                </div>
             </AppState>
-        </div>
+        </Router>
     );
 }

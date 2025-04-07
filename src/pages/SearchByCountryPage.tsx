@@ -2,7 +2,6 @@ import {useParams} from 'react-router';
 import {useState, useEffect, useContext} from 'react';
 import {getFilteredCategoryByCountry} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
-import {Layout} from '@components/Layout';
 import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
 
@@ -41,28 +40,24 @@ export const SearchByCountryPage: React.FC = () => {
 
     if (!isCountryExist) {
         return (
-            <Layout>
-                <h2 className='text-2xl text-center'>
-                    There are no recipes for {region} cuisine
-                </h2>
-            </Layout>
+            <h2 className='text-2xl text-center'>
+                There are no recipes for {region} cuisine
+            </h2>
         );
     }
 
     if (disconnected) {
         return (
-            <Layout>
-                <LostConnection/>
-            </Layout>
+            <LostConnection/>
         );
     }
 
     return (
-        <Layout>
+        <>
             <div className='max-w-4xl mx-auto text-center text-2xl mb-5'>
                 {region} cuisine:
             </div>
             {meals && <MealsList meals={meals}/>}
-        </Layout>
+        </>
     );
 };

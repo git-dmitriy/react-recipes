@@ -3,7 +3,6 @@ import {useParams} from 'react-router-dom';
 import {getFilteredCategory, getAllCategories} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
 import {AboutCategory} from '@components/AboutCategory';
-import {Layout} from '@components/Layout';
 import {CategoryItemTypes} from '@/appTypes';
 import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
@@ -54,24 +53,22 @@ export const SingleCategoryPage: React.FC = () => {
 
     if (isCategoryExist === false) {
         return (
-            <Layout>
-                <h2 className='text-2xl text-center'>There is no {name} category</h2>
-            </Layout>
+            <div className="h-full grid place-items-center">
+                <h2 className='text-2xl text-center'>There is no such category "{name}"</h2>
+            </div>
         );
     }
 
     if (disconnected) {
         return (
-            <Layout>
-                <LostConnection/>
-            </Layout>
+            <LostConnection/>
         );
     }
 
     return (
-        <Layout>
+        <>
             {categoryInfo ? <AboutCategory categoryInfo={categoryInfo}/> : null}
             {meals.length !== 0 && <MealsList meals={meals}/>}
-        </Layout>
+        </>
     );
 };

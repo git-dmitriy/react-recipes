@@ -4,7 +4,6 @@ import { useSearchQuery } from '@hooks/useSearchQuery';
 import { MealsList } from '@components/MealsList';
 import { Loader } from '@components/Loader';
 import { NotFound } from '@components/NotFound';
-import { Layout } from '@components/Layout';
 import { MealItemTypes } from '@/appTypes';
 import { LostConnection } from '@components/LostConnection';
 import { AppContext } from '@context/AppContext';
@@ -42,23 +41,19 @@ export const SearchResultsPage: React.FC = () => {
 
     if (searchResults === null) {
         return (
-            <Layout>
-                <NotFound target={searchQuery || ''} />
-            </Layout>
+            <NotFound target={searchQuery || ''}/>
         );
     }
 
     if (disconnected) {
         return (
-            <Layout>
-                <LostConnection />{' '}
-            </Layout>
+            <LostConnection/>
         );
     }
 
     return (
-        <Layout>
+        <>
             {!searchResults.length ? <Loader /> : <MealsList meals={searchResults} />}
-        </Layout>
+        </>
     );
 };
