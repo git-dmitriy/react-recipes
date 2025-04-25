@@ -6,10 +6,10 @@ exports[`should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col justify-around items-center my-6 px-2"
+        class="h-full grid place-items-center content-center my-6 px-2"
       >
         <div
-          class="w-full sm:w-1/2 pl-2 flex flex-col items-center text-center"
+          class="w-full sm:w-1/2 pl-2 grid justify-items-center text-center"
         >
           <h2
             class=""
@@ -30,17 +30,17 @@ exports[`should render correctly 1`] = `
           />
         </div>
         <ul
-          class="rounded-lg overflow-hidden w-4/6 sm:w-1/2"
+          class="rounded-lg overflow-hidden w-4/6 sm:w-2/3 md:2/4 lg:w-md"
         />
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex flex-col justify-around items-center my-6 px-2"
+      class="h-full grid place-items-center content-center my-6 px-2"
     >
       <div
-        class="w-full sm:w-1/2 pl-2 flex flex-col items-center text-center"
+        class="w-full sm:w-1/2 pl-2 grid justify-items-center text-center"
       >
         <h2
           class=""
@@ -61,7 +61,7 @@ exports[`should render correctly 1`] = `
         />
       </div>
       <ul
-        class="rounded-lg overflow-hidden w-4/6 sm:w-1/2"
+        class="rounded-lg overflow-hidden w-4/6 sm:w-2/3 md:2/4 lg:w-md"
       />
     </div>
   </div>,

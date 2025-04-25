@@ -6,16 +6,15 @@ exports[`should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <article
-        class="relative w-full z-0 bg-white dark:bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-900 dark:text-gray-900"
+        class="block min-h-300 hover:opacity-90 focus-visible:opacity-90 transition-opacity relative w-full z-0 bg-white dark:bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-900 dark:text-gray-900"
       >
         <a
-          class="block rounded-lg overflow-hidden min-h-300 hover:opacity-90 transition-opacity"
           data-discover="true"
           href="/meal/52965"
         >
           <img
             alt="Breakfast Potatoes"
-            class="min-w-full"
+            class="min-w-full aspect-ratio-4/3"
             height="437"
             src="https://www.themealdb.com/images/media/meals/1550441882.jpg"
             width="355"
@@ -62,16 +61,15 @@ exports[`should render correctly 1`] = `
   </body>,
   "container": <div>
     <article
-      class="relative w-full z-0 bg-white dark:bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-900 dark:text-gray-900"
+      class="block min-h-300 hover:opacity-90 focus-visible:opacity-90 transition-opacity relative w-full z-0 bg-white dark:bg-gray-100 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-900 dark:text-gray-900"
     >
       <a
-        class="block rounded-lg overflow-hidden min-h-300 hover:opacity-90 transition-opacity"
         data-discover="true"
         href="/meal/52965"
       >
         <img
           alt="Breakfast Potatoes"
-          class="min-w-full"
+          class="min-w-full aspect-ratio-4/3"
           height="437"
           src="https://www.themealdb.com/images/media/meals/1550441882.jpg"
           width="355"
