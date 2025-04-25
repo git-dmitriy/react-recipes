@@ -7,33 +7,27 @@ import {RecipeImage} from '@components/RecipeImage';
 import {FavoriteToggle} from '@components/FavoriteToggle';
 import {CategoriesLink} from '@components/CategoriesLink';
 import {MealItemTypes} from '@/appTypes';
-import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
-
 
 export const RecipePage: React.FC = () => {
     const {idMeal} = useParams();
     const [recipe, setRecipe] = useState<MealItemTypes | null>(null);
-    const [isRecipeExist, setIsRecipeExist] = useState(true);
+    const [recipeNotExist, setRecipeNotExist] = useState(false);
     const [imgPlaceholder, setImgPlaceholder] = useState('');
     const [youtubeLink, setYoutubeLink] = useState('');
-    const [disconnected, setDisconnected] = useState(false);
     const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
     const {setIsLoading} = useContext(AppContext);
 
     useEffect(() => {
-        let cleanupFuse = true;
 
         setIsLoading(true);
 
         if (idMeal) {
             getMealById(idMeal)
                 .then((data) => {
-                    if (!data.meals) {
-                        cleanupFuse && setIsRecipeExist(false);
-                    }
-
-                    if (cleanupFuse) {
+                    if (data.meals === 'Invalid ID') {
+                        setRecipeNotExist(true);
+                    } else {
                         setRecipe(data.meals[0]);
                         setImgPlaceholder(placeholder + data.meals[0].strMeal);
                         setYoutubeLink(data.meals[0].strYoutube);
@@ -41,28 +35,19 @@ export const RecipePage: React.FC = () => {
                 })
                 .catch((e) => {
                     console.warn(e);
-                    setDisconnected(true);
+                    setRecipeNotExist(true);
                 })
                 .finally(() => setIsLoading(false));
         }
         return () => {
-            cleanupFuse = false;
         };
     }, [idMeal]);
 
-    if (!isRecipeExist) {
+    if (recipeNotExist) {
         return (
-            <>
+            <div className="h-100 grid place-items-center">
                 <h2 className='text-2xl text-center'>There is no such recipe</h2>
-            </>
-        );
-    }
-
-    if (disconnected) {
-        return (
-            <>
-                <LostConnection/>
-            </>
+            </div>
         );
     }
 
@@ -103,7 +88,7 @@ export const RecipePage: React.FC = () => {
                     </div>
                 </div>
 
-                {youtubeLink.length ? (
+                {youtubeLink?.length ? (
                     <YoutubeIframe address={youtubeLink.slice(32)}/>
                 ) : null}
             </>

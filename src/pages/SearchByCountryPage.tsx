@@ -2,19 +2,15 @@ import {useParams} from 'react-router';
 import {useState, useEffect, useContext} from 'react';
 import {getFilteredCategoryByCountry} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
-import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
 
 export const SearchByCountryPage: React.FC = () => {
     const {region} = useParams();
     const [meals, setMeals] = useState();
     const [isCountryExist, setIsCountryExist] = useState(true);
-    const [disconnected, setDisconnected] = useState(false);
     const {setIsLoading} = useContext(AppContext);
 
     useEffect(() => {
-        let cleanupFuse = true;
-
         setIsLoading(true);
 
         if (region) {
@@ -24,31 +20,25 @@ export const SearchByCountryPage: React.FC = () => {
                         setIsCountryExist(false);
                         return;
                     }
-                    cleanupFuse && setMeals(data.meals);
+                    setMeals(data.meals);
                 })
                 .catch((e) => {
                     console.warn(e);
-                    setDisconnected(true);
                 })
                 .finally(() => setIsLoading(false));
         }
 
         return () => {
-            cleanupFuse = false;
         };
     }, [region]);
 
     if (!isCountryExist) {
         return (
-            <h2 className='text-2xl text-center'>
-                There are no recipes for {region} cuisine
-            </h2>
-        );
-    }
-
-    if (disconnected) {
-        return (
-            <LostConnection/>
+            <div className='h-100 grid place-items-center'>
+                <h2 className='text-2xl text-center'>
+                    There are no recipes for {region} cuisine
+                </h2>
+            </div>
         );
     }
 

@@ -7,7 +7,6 @@ type P = {
 };
 
 export const CategoryList: React.FC<P> = ({catalog}) => {
-    console.log('render category list');
 
     const variants = {
         visible: (item: number) => ({

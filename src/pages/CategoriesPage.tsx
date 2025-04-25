@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getAllCategories } from '@/api-utils.ts';
-import { CategoryList } from '@components/CategoryList';
-import { CategoryItemTypes } from '@/appTypes';
-import { LostConnection } from '@components/LostConnection';
-import { AppContext } from '@context/AppContext';
+import React, {useState, useEffect, useContext} from 'react';
+import {getAllCategories} from '@/api-utils.ts';
+import {CategoryList} from '@components/CategoryList';
+import {CategoryItemTypes} from '@/appTypes';
+import {AppContext} from '@context/AppContext';
 
 export const CategoriesPage: React.FC = () => {
     const [catalog, setCatalog] = useState([]);
-    const [disconnected, setDisconnected] = useState(false);
-    const { setIsLoading } = useContext(AppContext);
+    const {setIsLoading} = useContext(AppContext);
 
     useEffect(() => {
-        let cleanupFuse = true;
 
         setIsLoading(true);
 
@@ -21,26 +18,18 @@ export const CategoriesPage: React.FC = () => {
                     (a: CategoryItemTypes, b: CategoryItemTypes) =>
                         a.strCategory > b.strCategory ? 1 : -1
                 );
-                cleanupFuse && setCatalog(categories);
+                setCatalog(categories);
             })
             .catch((e) => {
                 console.warn(e);
-                setDisconnected(true);
             })
             .finally(() => setIsLoading(false));
 
         return () => {
-            cleanupFuse = false;
         };
     }, []);
 
-    if (disconnected) {
-        return (
-            <LostConnection/>
-        );
-    }
-
     return (
-        <>{!!catalog.length && <CategoryList catalog={catalog} />}</>
+        <>{!!catalog.length && <CategoryList catalog={catalog}/>}</>
     );
 };

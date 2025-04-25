@@ -4,7 +4,6 @@ import {getFilteredCategory, getAllCategories} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
 import {AboutCategory} from '@components/AboutCategory';
 import {CategoryItemTypes} from '@/appTypes';
-import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
 
 export const SingleCategoryPage: React.FC = () => {
@@ -14,12 +13,10 @@ export const SingleCategoryPage: React.FC = () => {
         null
     );
     const [isCategoryExist, setIsCategoryExist] = useState(true);
-    const [disconnected, setDisconnected] = useState(false);
 
     const {setIsLoading} = useContext(AppContext);
 
     useEffect(() => {
-        let cleanupFuse = true;
 
         setIsLoading(true);
 
@@ -31,22 +28,18 @@ export const SingleCategoryPage: React.FC = () => {
                     );
 
                     if (category.length === 0) {
-                        cleanupFuse && setIsCategoryExist(false);
+                        setIsCategoryExist(false);
                     }
 
-                    cleanupFuse && setCategoryInfo(category[0]);
-                    getFilteredCategory(name).then((data) => {
-                        cleanupFuse && setMeals(data.meals);
-                    });
+                    setCategoryInfo(category[0]);
+                    getFilteredCategory(name).then((data) => setMeals(data.meals));
                 })
                 .catch((e) => {
                     console.warn(e);
-                    setDisconnected(true);
                 })
                 .finally(() => setIsLoading(false));
 
             return () => {
-                cleanupFuse = false;
             };
         }
     }, [name]);
@@ -56,12 +49,6 @@ export const SingleCategoryPage: React.FC = () => {
             <div className="h-full grid place-items-center">
                 <h2 className='text-2xl text-center'>There is no such category "{name}"</h2>
             </div>
-        );
-    }
-
-    if (disconnected) {
-        return (
-            <LostConnection/>
         );
     }
 
