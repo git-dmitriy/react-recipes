@@ -1,42 +1,47 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AppState } from 'context/AppState';
-import { Header } from 'components/layout/Header';
-import { Footer } from 'components/layout/Footer';
-import { Favorites } from 'pages/Favorites';
-import { Categories } from 'pages/Categories';
-import { Category } from 'pages/Category';
-import { Recipe } from 'pages/Recipe';
-import { SearchResults } from 'pages/SearchResults';
-import { ScrollToTop } from 'components/layout/ScrollToTop';
-import { SearchByCountry } from 'pages/SearchByCountry';
-import { Theme } from 'components/Theme';
-import { Loader } from 'components/Loader';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {AppState} from '@context/AppState.tsx';
+import {Header} from '@components/Header';
+import {Footer} from '@components/Footer';
+import {FavoritesPage} from '@pages/FavoritesPage';
+import {CategoriesPage} from '@pages/CategoriesPage';
+import {RecipePage} from '@pages/RecipePage';
+import {SearchResultsPage} from '@pages/SearchResultsPage';
+import {ScrollToTop} from '@components/ScrollToTop';
+import {SearchByCountryPage} from '@pages/SearchByCountryPage';
+import {Theme} from '@components/Theme';
+import {SingleCategoryPage} from "@pages/SingleCategoryPage.tsx";
+import {motion} from 'motion/react';
+import {Layout} from "@components/Layout";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 export default function App() {
-  return (
-    <div className='bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
-      <AppState>
-        <Theme />
+    const queryClient = new QueryClient();
+
+    return (
         <Router>
-          <div className='content'>
-            <ScrollToTop />
-            <Loader />
-            <main>
-              <Routes>
-                <Route path='/' element={<Categories />} />
-                <Route path='favorites' element={<Favorites />} />
-                <Route path='recipes' element={<SearchResults />} />
-                <Route path='category/:name' element={<Category />} />
-                <Route path='country/:region' element={<SearchByCountry />} />
-                <Route path='meal/:idMeal' element={<Recipe />} />
-                <Route path='/*' element={<Categories />} />
-              </Routes>
-            </main>
-          </div>
-          <Header />
-          <Footer />
+            <QueryClientProvider client={queryClient}>
+                <AppState>
+                    <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+                        <Theme/>
+                        <Header/>
+                        <motion.main className='content h-full'>
+                            <Layout>
+                                <ScrollToTop/>
+                                <Routes>
+                                    <Route path='/' element={<CategoriesPage/>}/>
+                                    <Route path='favorites' element={<FavoritesPage/>}/>
+                                    <Route path='recipes' element={<SearchResultsPage/>}/>
+                                    <Route path='category/:name' element={<SingleCategoryPage/>}/>
+                                    <Route path='country/:region' element={<SearchByCountryPage/>}/>
+                                    <Route path='meal/:idMeal' element={<RecipePage/>}/>
+                                    <Route path='/*' element={<CategoriesPage/>}/>
+                                </Routes>
+                            </Layout>
+                        </motion.main>
+                        <Footer/>
+                    </div>
+                </AppState>
+            </QueryClientProvider>
         </Router>
-      </AppState>
-    </div>
-  );
+    );
 }

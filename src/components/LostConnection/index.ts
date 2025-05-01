@@ -1,1 +1,1 @@
-export * from './LostConnection';
+export * from './LostConnection.tsx'

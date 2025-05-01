@@ -1,51 +1,49 @@
-import renderer from 'react-test-renderer';
-import { Loader } from './Loader';
-import { AppContext } from 'context/AppContext';
+import {Loader} from './Loader';
+import {AppContext} from '@/context/AppContext';
+import {it, expect, vi} from 'vitest';
+import {render} from "@testing-library/react";
+
 
 const context = {
-  state: {
-    favorites: [],
-    theme: 'light',
-    isLoading: false,
-  },
-  addToFavorites: jest.fn(),
-  removeFromFavorites: jest.fn(),
-  switchTheme: jest.fn(),
-  setIsLoading: jest.fn(),
+    state: {
+        favorites: [],
+        theme: 'light',
+        isLoading: false,
+    },
+    addToFavorites: vi.fn(),
+    removeFromFavorites: vi.fn(),
+    switchTheme: vi.fn(),
+    setIsLoading: vi.fn(),
 };
 
 it('should render transparent loader when loading is false', () => {
-  const tree = renderer
-    .create(
-      <AppContext.Provider value={context}>
-        <Loader />
-      </AppContext.Provider>
+    const tree = render(
+        <AppContext.Provider value={context}>
+            <Loader/>
+        </AppContext.Provider>
     )
-    .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
 });
 
 it('should show loader when loading', () => {
-  const context = {
-    state: {
-      favorites: [],
-      theme: 'light',
-      isLoading: true,
-    },
-    addToFavorites: jest.fn(),
-    removeFromFavorites: jest.fn(),
-    switchTheme: jest.fn(),
-    setIsLoading: jest.fn(),
-  };
+    const context = {
+        state: {
+            favorites: [],
+            theme: 'light',
+            isLoading: true,
+        },
+        addToFavorites: vi.fn(),
+        removeFromFavorites: vi.fn(),
+        switchTheme: vi.fn(),
+        setIsLoading: vi.fn(),
+    };
 
-  const tree = renderer
-    .create(
-      <AppContext.Provider value={context}>
-        <Loader />
-      </AppContext.Provider>
+    const tree = render(
+        <AppContext.Provider value={context}>
+            <Loader/>
+        </AppContext.Provider>
     )
-    .toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
 });

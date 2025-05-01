@@ -1,1 +1,1 @@
-export * from './YoutubeIframe';
+export * from './YoutubeIframe.tsx';

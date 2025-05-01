@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --min-height-*: initial;
+    --min-height-0: 0;
+    --min-height-300: 300px;
+    --min-height-1\/4: 25%;
+    --min-height-1\/2: 50%;
+    --min-height-3\/4: 75%;
+    --min-height-full: 100%;
+    --min-height-170p: 170px;
+
+    --animate-bounce200: bounce 1s infinite 200ms;
+    --animate-bounce400: bounce 1s infinite 400ms;
+
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(-100%);
+        }
+        50% {
+            transform: translateY(0);
+        }
+    }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+.content {
+    overflow: auto;
+
+    @supports (block-size: 100dvh) {
+    }
+}
+
+.main-container {
+    block-size: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    @supports (block-size: 100dvh) {
+        block-size: 100dvh;
+    }
+}
+
+.footer {
+    block-size: 4rem;
+}

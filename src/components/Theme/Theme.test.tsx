@@ -1,36 +1,37 @@
-import { Theme } from './Theme';
-import { AppContext } from 'context/AppContext';
-import { render } from '@testing-library/react';
-import { ContextTypes } from 'appTypes';
+import {Theme} from './Theme';
+import {AppContext} from '@context/AppContext';
+import {render} from '@testing-library/react';
+import {ContextTypes} from '@/appTypes';
+import {it, expect} from 'vitest';
 
 it('should render html without classes', () => {
-  const context = {
-    state: {
-      theme: 'light',
-    },
-  };
+    const context = {
+        state: {
+            theme: 'light',
+        },
+    };
 
-  render(
-    <AppContext.Provider value={context as ContextTypes}>
-      <Theme />
-    </AppContext.Provider>
-  );
+    render(
+        <AppContext.Provider value={context as ContextTypes}>
+            <Theme/>
+        </AppContext.Provider>
+    );
 
-  expect(document.documentElement).not.toHaveAttribute('class');
+    expect(document.documentElement.getAttribute('class')).not.toBe('dark');
 });
 
 it("should add 'dark' class to html", () => {
-  const context = {
-    state: {
-      theme: 'dark',
-    },
-  };
+    const context = {
+        state: {
+            theme: 'dark',
+        },
+    };
 
-  render(
-    <AppContext.Provider value={context as ContextTypes}>
-      <Theme />
-    </AppContext.Provider>
-  );
+    render(
+        <AppContext.Provider value={context as ContextTypes}>
+            <Theme/>
+        </AppContext.Provider>
+    );
 
-  expect(document.documentElement).toHaveAttribute('class', 'dark');
+    expect(document.documentElement.getAttribute('class')).toBe('dark');
 });

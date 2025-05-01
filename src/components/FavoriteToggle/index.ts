@@ -1,1 +1,1 @@
-export * from './FavoriteToggle';
+export * from './FavoriteToggle.tsx';
