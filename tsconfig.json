@@ -27,7 +27,8 @@
       "@context/*": ["src/context/*"],
       "@pages/*": ["src/pages/*"],
       "@hooks/*": ["src/hooks/*"],
-    }
+    },
+    "types": ["vitest/jsdom"]
   },
   "include": ["./src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -4,27 +4,13 @@ import {it, expect} from 'vitest';
 
 const data = {
     altText: 'English Breakfast',
-    imgLink: 'https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg',
-    imgPlaceholder:
-        'https://via.placeholder.com/500.png/546E7A?text=English Breakfast',
+    imgLink: 'https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg'
 };
 
 it('should render an image element with the provided link', () => {
     const tree = render(
         <RecipeImage
             imgLink={data.imgLink}
-            imgPlaceholder={data.imgPlaceholder}
-            altText={data.altText}
-        />
-    )
-
-    expect(tree).toMatchSnapshot();
-});
-
-it('should render an image element with a placeholder link', () => {
-    const tree = render(
-        <RecipeImage
-            imgPlaceholder={data.imgPlaceholder}
             altText={data.altText}
         />
     )
@@ -36,7 +22,6 @@ it('should render an image element with the current alt', () => {
     render(
         <RecipeImage
             imgLink={data.imgLink}
-            imgPlaceholder={data.imgPlaceholder}
             altText={data.altText}
         />
     );
@@ -45,3 +30,15 @@ it('should render an image element with the current alt', () => {
 
     expect(image.getAttribute('alt')).toBe(data.altText);
 });
+
+
+it('should render an image element with a placeholder link', () => {
+    const tree = render(
+        <RecipeImage
+            altText={data.altText}
+        />
+    )
+
+    expect(tree).toMatchSnapshot();
+});
+

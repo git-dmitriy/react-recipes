@@ -1,4 +1,4 @@
-import renderer from 'react-test-renderer';
+import {render} from '@testing-library/react';
 import {Ingredients} from './index';
 import {it, expect} from 'vitest';
 
@@ -20,7 +20,7 @@ it('should render correctly', () => {
         strMeasure7: '1 Slice',
     };
 
-    const tree = renderer.create(<Ingredients props={data}/>).toJSON();
+    const {container} = render(<Ingredients props={data}/>);
 
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
 });
