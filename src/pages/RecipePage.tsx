@@ -12,7 +12,7 @@ export const RecipePage: React.FC = () => {
     const {idMeal} = useParams();
 
     const {status, data} = useQuery({
-        queryKey: ['recipe'],
+        queryKey: ['recipe', idMeal],
         queryFn: async () => {
             const data = await getMealById(idMeal as string);
 

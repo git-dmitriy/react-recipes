@@ -10,7 +10,7 @@ export const SingleCategoryPage: React.FC = () => {
     const {name} = useParams();
 
     const categoryQuery = useQuery({
-        queryKey: ['singleCategory'], queryFn: async () => {
+        queryKey: ['singleCategory', name], queryFn: async () => {
             const data = await getAllCategories();
             const category = data.categories.filter(
                 (item: CategoryItemTypes) => item.strCategory === name
@@ -21,7 +21,7 @@ export const SingleCategoryPage: React.FC = () => {
     })
 
     const mealsQuery = useQuery({
-        queryKey: ['meals'], queryFn: async () => {
+        queryKey: ['meals', name], queryFn: async () => {
             const data = await getFilteredCategory(name as string);
             return data.meals;
         }
