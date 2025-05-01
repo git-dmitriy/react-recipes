@@ -29,7 +29,6 @@ export type RecipeItemTypes = {
 export type RecipeImageTypes = {
     imgLink?: string;
     altText: string;
-    imgPlaceholder: string;
 };
 
 export type StateTypes = {
