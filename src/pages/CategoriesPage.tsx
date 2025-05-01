@@ -1,35 +1,28 @@
-import React, {useState, useEffect, useContext} from 'react';
 import {getAllCategories} from '@/api-utils.ts';
 import {CategoryList} from '@components/CategoryList';
-import {CategoryItemTypes} from '@/appTypes';
-import {AppContext} from '@context/AppContext';
+import {useQuery} from '@tanstack/react-query';
+import {Loader} from "@components/Loader";
 
 export const CategoriesPage: React.FC = () => {
-    const [catalog, setCatalog] = useState([]);
-    const {setIsLoading} = useContext(AppContext);
+    const {status, data, error} = useQuery({
+        queryKey: ['categories'], queryFn: async () => {
+            const data = await getAllCategories();
 
-    useEffect(() => {
+            return data.categories;
+        }
+    })
 
-        setIsLoading(true);
+    if (status === 'pending') {
+        return <Loader/>
+    }
 
-        getAllCategories()
-            .then((data) => {
-                const categories = data.categories.sort(
-                    (a: CategoryItemTypes, b: CategoryItemTypes) =>
-                        a.strCategory > b.strCategory ? 1 : -1
-                );
-                setCatalog(categories);
-            })
-            .catch((e) => {
-                console.warn(e);
-            })
-            .finally(() => setIsLoading(false));
-
-        return () => {
-        };
-    }, []);
+    if (status === 'error') {
+        return <span>Something went wrong: {error.message}</span>
+    }
 
     return (
-        <>{!!catalog.length && <CategoryList catalog={catalog}/>}</>
+        <>
+            {<CategoryList catalog={data}/>}
+        </>
     );
 };

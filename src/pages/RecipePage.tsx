@@ -1,4 +1,3 @@
-import {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import {getMealById} from '@/api-utils.ts';
 import {Ingredients} from '@components/Ingredients';
@@ -6,92 +5,77 @@ import {YoutubeIframe} from '@components/YoutubeIframe';
 import {RecipeImage} from '@components/RecipeImage';
 import {FavoriteToggle} from '@components/FavoriteToggle';
 import {CategoriesLink} from '@components/CategoriesLink';
-import {MealItemTypes} from '@/appTypes';
-import {AppContext} from '@context/AppContext';
+import {useQuery} from "@tanstack/react-query";
+import {Loader} from "@components/Loader";
 
 export const RecipePage: React.FC = () => {
     const {idMeal} = useParams();
-    const [recipe, setRecipe] = useState<MealItemTypes | null>(null);
-    const [recipeNotExist, setRecipeNotExist] = useState(false);
-    const [imgPlaceholder, setImgPlaceholder] = useState('');
-    const [youtubeLink, setYoutubeLink] = useState('');
-    const placeholder = 'https://via.placeholder.com/500.png/546E7A?text=';
-    const {setIsLoading} = useContext(AppContext);
 
-    useEffect(() => {
+    const {status, data} = useQuery({
+        queryKey: ['recipe'],
+        queryFn: async () => {
+            const data = await getMealById(idMeal as string);
 
-        setIsLoading(true);
+            if (data.meals === 'Invalid ID') {
+                throw new Error('')
+            }
 
-        if (idMeal) {
-            getMealById(idMeal)
-                .then((data) => {
-                    if (data.meals === 'Invalid ID') {
-                        setRecipeNotExist(true);
-                    } else {
-                        setRecipe(data.meals[0]);
-                        setImgPlaceholder(placeholder + data.meals[0].strMeal);
-                        setYoutubeLink(data.meals[0].strYoutube);
-                    }
-                })
-                .catch((e) => {
-                    console.warn(e);
-                    setRecipeNotExist(true);
-                })
-                .finally(() => setIsLoading(false));
-        }
-        return () => {
-        };
-    }, [idMeal]);
+            return data.meals[0];
+        },
+    })
 
-    if (recipeNotExist) {
+    if (status === 'pending') {
+        return <Loader/>
+    }
+
+    if (status === 'error') {
         return (
             <div className="h-100 grid place-items-center">
                 <h2 className='text-2xl text-center'>There is no such recipe</h2>
             </div>
-        );
-    }
-
-    if (recipe) {
-        return (
-            <>
-                <div
-                    className='flex flex-col items-center mb-10'
-                >
-                    <div className='flex justify-center mb-5'>
-                        <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
-                            {recipe.strMeal}
-                        </h2>
-
-                        <FavoriteToggle meal={recipe}/>
-                    </div>
-
-                    <CategoriesLink
-                        category={recipe.strCategory || ''}
-                        country={recipe.strArea || ''}
-                    />
-
-                    <div className='flex flex-col-reverse mt-6 sm:grid grid-cols-2 gap-10'>
-                        <p className='leading-relaxed text-xl text-justify mb-4'>
-                            {recipe.strInstructions}
-                        </p>
-
-                        <div>
-                            <div className='rounded-3xl overflow-hidden mb-10'>
-                                <RecipeImage
-                                    imgLink={recipe.strMealThumb}
-                                    altText={recipe.strMeal}
-                                    imgPlaceholder={imgPlaceholder}
-                                />
-                            </div>
-                            <Ingredients props={recipe}/>
-                        </div>
-                    </div>
-                </div>
-
-                {youtubeLink?.length ? (
-                    <YoutubeIframe address={youtubeLink.slice(32)}/>
-                ) : null}
-            </>
         )
     }
+
+
+    return (
+        <>
+            <div
+                className='flex flex-col items-center mb-10'
+            >
+                <div className='flex justify-center mb-5'>
+                    <h2 className='font-semibold text-center text-2xl sm:text-3xl'>
+                        {data.strMeal}
+                    </h2>
+
+                    <FavoriteToggle meal={data}/>
+                </div>
+
+                <CategoriesLink
+                    category={data.strCategory || ''}
+                    country={data.strArea || ''}
+                />
+
+                <div className='flex flex-col-reverse mt-6 sm:grid grid-cols-2 gap-10'>
+                    <p className='leading-relaxed text-xl text-justify mb-4'>
+                        {data.strInstructions}
+                    </p>
+
+                    <div>
+                        <div className='rounded-3xl overflow-hidden mb-10'>
+                            <RecipeImage
+                                imgLink={data.strMealThumb}
+                                altText={data.strMeal}
+                            />
+                        </div>
+                        <Ingredients props={data}/>
+                    </div>
+                </div>
+            </div>
+
+            {data.strYoutube?.length ? (
+                <YoutubeIframe address={data.strYoutube.slice(32)}/>
+            ) : null}
+        </>
+    );
+
 };

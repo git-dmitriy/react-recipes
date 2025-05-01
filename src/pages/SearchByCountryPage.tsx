@@ -1,38 +1,30 @@
 import {useParams} from 'react-router';
-import {useState, useEffect, useContext} from 'react';
 import {getFilteredCategoryByCountry} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
-import {AppContext} from '@context/AppContext';
+import {useQuery} from "@tanstack/react-query";
+import {Loader} from "@components/Loader";
 
 export const SearchByCountryPage: React.FC = () => {
     const {region} = useParams();
-    const [meals, setMeals] = useState();
-    const [isCountryExist, setIsCountryExist] = useState(true);
-    const {setIsLoading} = useContext(AppContext);
 
-    useEffect(() => {
-        setIsLoading(true);
+    const {status, data} = useQuery({
+        queryKey: ['search'],
+        queryFn: async () => {
+            const data = await getFilteredCategoryByCountry(region as string);
 
-        if (region) {
-            getFilteredCategoryByCountry(region)
-                .then((data) => {
-                    if (!data.meals) {
-                        setIsCountryExist(false);
-                        return;
-                    }
-                    setMeals(data.meals);
-                })
-                .catch((e) => {
-                    console.warn(e);
-                })
-                .finally(() => setIsLoading(false));
-        }
+            if (data.meals.length === 0) {
+                throw new Error('')
+            }
 
-        return () => {
-        };
-    }, [region]);
+            return data.meals;
+        },
+    })
 
-    if (!isCountryExist) {
+    if (status === 'pending') {
+        return <Loader/>;
+    }
+
+    if (status === 'error') {
         return (
             <div className='h-100 grid place-items-center'>
                 <h2 className='text-2xl text-center'>
@@ -47,7 +39,7 @@ export const SearchByCountryPage: React.FC = () => {
             <div className='max-w-4xl mx-auto text-center text-2xl mb-5'>
                 {region} cuisine:
             </div>
-            {meals && <MealsList meals={meals}/>}
+            {<MealsList meals={data}/>}
         </>
     );
 };

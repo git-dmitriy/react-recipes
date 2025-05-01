@@ -1,61 +1,48 @@
-import React, {useEffect, useState, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import {getFilteredCategory, getAllCategories} from '@/api-utils.ts';
 import {MealsList} from '@components/MealsList';
 import {AboutCategory} from '@components/AboutCategory';
 import {CategoryItemTypes} from '@/appTypes';
-import {AppContext} from '@context/AppContext';
+import {useQuery} from "@tanstack/react-query";
+import {Loader} from "@components/Loader";
 
 export const SingleCategoryPage: React.FC = () => {
     const {name} = useParams();
-    const [meals, setMeals] = useState([]);
-    const [categoryInfo, setCategoryInfo] = useState<CategoryItemTypes | null>(
-        null
-    );
-    const [isCategoryExist, setIsCategoryExist] = useState(true);
 
-    const {setIsLoading} = useContext(AppContext);
+    const categoryQuery = useQuery({
+        queryKey: ['singleCategory'], queryFn: async () => {
+            const data = await getAllCategories();
+            const category = data.categories.filter(
+                (item: CategoryItemTypes) => item.strCategory === name
+            );
 
-    useEffect(() => {
-
-        setIsLoading(true);
-
-        if (name) {
-            getAllCategories()
-                .then((data) => {
-                    const category = data.categories.filter(
-                        (item: CategoryItemTypes) => item.strCategory === name
-                    );
-
-                    if (category.length === 0) {
-                        setIsCategoryExist(false);
-                    }
-
-                    setCategoryInfo(category[0]);
-                    getFilteredCategory(name).then((data) => setMeals(data.meals));
-                })
-                .catch((e) => {
-                    console.warn(e);
-                })
-                .finally(() => setIsLoading(false));
-
-            return () => {
-            };
+            return category[0];
         }
-    }, [name]);
+    })
 
-    if (isCategoryExist === false) {
+    const mealsQuery = useQuery({
+        queryKey: ['meals'], queryFn: async () => {
+            const data = await getFilteredCategory(name as string);
+            return data.meals;
+        }
+    })
+
+    if (categoryQuery.status === 'pending') {
+        return <Loader/>
+    }
+
+    if (categoryQuery.status === 'error') {
         return (
             <div className="h-full grid place-items-center">
-                <h2 className='text-2xl text-center'>There is no such category "{name}"</h2>
+                <h2 className='text-2xl text-center'>Something went wrong</h2>
             </div>
-        );
+        )
     }
 
     return (
         <>
-            {categoryInfo ? <AboutCategory categoryInfo={categoryInfo}/> : null}
-            {meals.length !== 0 && <MealsList meals={meals}/>}
+            {!!categoryQuery.data && <AboutCategory categoryInfo={categoryQuery.data}/>}
+            {mealsQuery.status === 'success' ? <MealsList meals={mealsQuery.data}/> : null}
         </>
     );
 };
