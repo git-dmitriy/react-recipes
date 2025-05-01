@@ -7,18 +7,18 @@ exports[`should render an image element with a placeholder link 1`] = `
     <div>
       <img
         alt="English Breakfast"
-        class="object-cover object-center w-full"
+        class="object-cover object-center w-full bg-white"
         loading="lazy"
-        src="https://via.placeholder.com/500.png/546E7A?text=English Breakfast"
+        src="/src/assets/meal-placeholder.svg"
       />
     </div>
   </body>,
   "container": <div>
     <img
       alt="English Breakfast"
-      class="object-cover object-center w-full"
+      class="object-cover object-center w-full bg-white"
       loading="lazy"
-      src="https://via.placeholder.com/500.png/546E7A?text=English Breakfast"
+      src="/src/assets/meal-placeholder.svg"
     />
   </div>,
   "debug": [Function],

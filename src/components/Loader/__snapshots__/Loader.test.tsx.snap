@@ -6,8 +6,8 @@ exports[`should render transparent loader when loading is false 1`] = `
   "baseElement": <body>
     <div>
       <div
-        aria-busy="false"
-        class="fixed inset-0 flex justify-center items-center my-20 -z-10"
+        aria-busy="true"
+        class="fixed inset-0 flex justify-center items-center my-20"
         role="alert"
       >
         <div
@@ -28,8 +28,8 @@ exports[`should render transparent loader when loading is false 1`] = `
   </body>,
   "container": <div>
     <div
-      aria-busy="false"
-      class="fixed inset-0 flex justify-center items-center my-20 -z-10"
+      aria-busy="true"
+      class="fixed inset-0 flex justify-center items-center my-20"
       role="alert"
     >
       <div
@@ -108,7 +108,7 @@ exports[`should show loader when loading 1`] = `
     <div>
       <div
         aria-busy="true"
-        class="fixed inset-0 flex justify-center items-center my-20 z-10"
+        class="fixed inset-0 flex justify-center items-center my-20"
         role="alert"
       >
         <div
@@ -130,7 +130,7 @@ exports[`should show loader when loading 1`] = `
   "container": <div>
     <div
       aria-busy="true"
-      class="fixed inset-0 flex justify-center items-center my-20 z-10"
+      class="fixed inset-0 flex justify-center items-center my-20"
       role="alert"
     >
       <div
