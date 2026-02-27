@@ -1,28 +1,44 @@
-import {getAllCategories} from '@/api-utils.ts';
+import {getAllCategories} from '@/api-utils';
 import {CategoryList} from '@components/CategoryList';
 import {useQuery} from '@tanstack/react-query';
-import {Loader} from "@components/Loader";
+import {Loader} from '@components/Loader';
 
 export const CategoriesPage: React.FC = () => {
     const {status, data, error} = useQuery({
-        queryKey: ['categories'], queryFn: async () => {
-            const data = await getAllCategories();
-
-            return data.categories;
-        }
-    })
+        queryKey: ['categories'],
+        queryFn: async () => {
+            const response = await getAllCategories();
+            if (!response?.categories || !Array.isArray(response.categories)) {
+                throw new Error('Invalid categories response');
+            }
+            return response.categories;
+        },
+    });
 
     if (status === 'pending') {
-        return <Loader/>
+        return <Loader/>;
     }
 
     if (status === 'error') {
-        return <span>Something went wrong: {error.message}</span>
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        return (
+            <div className="h-full grid place-items-center">
+                <span className="text-center">Something went wrong: {message}</span>
+            </div>
+        );
+    }
+
+    if (!data || data.length === 0) {
+        return (
+            <div className="h-full grid place-items-center">
+                <span className="text-center">No categories available.</span>
+            </div>
+        );
     }
 
     return (
         <>
-            {<CategoryList catalog={data}/>}
+            <CategoryList catalog={data}/>
         </>
     );
 };

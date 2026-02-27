@@ -1,9 +1,9 @@
-import {getMealByName} from '@/api-utils.ts';
+import {getMealByName} from '@/api-utils';
 import {useSearchQuery} from '@hooks/useSearchQuery';
 import {MealsList} from '@components/MealsList';
 import {NotFound} from '@components/NotFound';
-import {useQuery} from "@tanstack/react-query";
-import {Loader} from "@components/Loader";
+import {useQuery} from '@tanstack/react-query';
+import {Loader} from '@components/Loader';
 
 export const SearchResultsPage: React.FC = () => {
     const query = useSearchQuery();
@@ -14,13 +14,11 @@ export const SearchResultsPage: React.FC = () => {
         queryKey: ['search', searchQuery],
         enabled: hasSearchQuery,
         queryFn: async () => {
-            const data = await getMealByName(searchQuery);
-
-            if (!data.meals || data.meals.length === 0) {
+            const response = await getMealByName(searchQuery);
+            if (!response?.meals || !Array.isArray(response.meals) || response.meals.length === 0) {
                 throw new Error('No meals found');
             }
-
-            return data.meals;
+            return response.meals;
         },
     });
 
@@ -44,9 +42,13 @@ export const SearchResultsPage: React.FC = () => {
         );
     }
 
-    return (
-        <>
-            <MealsList meals={data}/>
-        </>
-    );
+    if (!data) {
+        return (
+            <div className="h-full grid place-items-center">
+                <h2 className="text-center">No results to display.</h2>
+            </div>
+        );
+    }
+
+    return <MealsList meals={data}/>;
 };

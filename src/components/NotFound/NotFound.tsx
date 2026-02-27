@@ -1,38 +1,41 @@
 import {useContext, useEffect, useState} from 'react';
-import {getRandomMeal} from '@/api-utils.ts';
+import {getRandomMeal} from '@/api-utils';
 import {Meal} from '@components/Meal';
 import {LostConnection} from '@components/LostConnection';
 import {AppContext} from '@context/AppContext';
 import {MealItemTypes} from '@/appTypes';
-
 
 type P = {
     target: string;
 };
 
 export const NotFound: React.FC<P> = ({target}) => {
-    const [randomMeal, setRandomMeal] = useState<MealItemTypes>();
+    const [randomMeal, setRandomMeal] = useState<MealItemTypes | null>(null);
     const [disconnected, setDisconnected] = useState(false);
 
     const {setIsLoading} = useContext(AppContext);
 
     useEffect(() => {
-        let cleanupFuse = true;
+        let cancelled = false;
 
         setIsLoading(true);
 
         getRandomMeal()
-            .then((data) => {
-                cleanupFuse && setRandomMeal(data.meals[0]);
+            .then((response) => {
+                const meal = response?.meals?.[0];
+                if (!cancelled && meal) {
+                    setRandomMeal(meal);
+                }
             })
-            .catch((e) => {
-                console.warn(e);
-                setDisconnected(true);
+            .catch(() => {
+                if (!cancelled) {
+                    setDisconnected(true);
+                }
             })
             .finally(() => setIsLoading(false));
 
         return () => {
-            cleanupFuse = false;
+            cancelled = true;
         };
     }, []);
 
@@ -52,8 +55,8 @@ export const NotFound: React.FC<P> = ({target}) => {
                 <div>Try to cook this</div>
                 <div className='w-12 h-1 bg-red-500 rounded-xs mt-2 mb-4'/>
             </div>
-            <ul className='rounded-lg overflow-hidden w-4/6 sm:w-2/3 md:2/4 lg:w-md'>
-                {randomMeal && <Meal {...randomMeal} />}
+            <ul className="rounded-lg overflow-hidden w-4/6 sm:w-2/3 md:2/4 lg:w-md">
+                {randomMeal ? <Meal {...randomMeal} /> : null}
             </ul>
         </div>
     );
