@@ -1,37 +1,20 @@
 import {Theme} from './Theme';
-import {AppContext} from '@context/AppContext';
+import {useAppStore} from '@/store/useAppStore';
 import {render} from '@testing-library/react';
-import {ContextTypes} from '@/appTypes';
-import {it, expect} from 'vitest';
+import {it, expect, beforeEach} from 'vitest';
+
+beforeEach(() => {
+    useAppStore.setState({theme: 'light', favorites: [], isLoading: false});
+});
 
 it('should render html without classes', () => {
-    const context = {
-        state: {
-            theme: 'light',
-        },
-    };
-
-    render(
-        <AppContext.Provider value={context as ContextTypes}>
-            <Theme/>
-        </AppContext.Provider>
-    );
-
+    useAppStore.setState({theme: 'light'});
+    render(<Theme/>);
     expect(document.documentElement.getAttribute('class')).not.toBe('dark');
 });
 
 it("should add 'dark' class to html", () => {
-    const context = {
-        state: {
-            theme: 'dark',
-        },
-    };
-
-    render(
-        <AppContext.Provider value={context as ContextTypes}>
-            <Theme/>
-        </AppContext.Provider>
-    );
-
+    useAppStore.setState({theme: 'dark'});
+    render(<Theme/>);
     expect(document.documentElement.getAttribute('class')).toBe('dark');
 });
