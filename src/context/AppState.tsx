@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 import {
     ADD_TO_FAVORITE,
     SWITCH_THEME,
@@ -21,6 +21,11 @@ export const AppState = ({children}: P) => {
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        window.localStorage.setItem('favorites', JSON.stringify(state.favorites));
+        window.localStorage.setItem('theme', state.theme);
+    }, [state.favorites, state.theme]);
 
     const addToFavorites = (item: MealItemTypes) => {
         dispatch({
