@@ -1,30 +1,16 @@
 import {useParams} from 'react-router-dom';
-import {getFilteredCategory, getAllCategories} from '@/api-utils';
+import {getFilteredCategory} from '@/api-utils';
+import {categoriesQueryOptions} from '@/queryOptions';
 import {MealsList} from '@components/MealsList';
 import {AboutCategory} from '@components/AboutCategory';
-import {CategoryItemTypes} from '@/appTypes';
 import {useQuery} from '@tanstack/react-query';
 import {Loader} from '@components/Loader';
 
 export const SingleCategoryPage: React.FC = () => {
     const {name} = useParams();
 
-    const categoryQuery = useQuery({
-        queryKey: ['singleCategory', name],
-        queryFn: async () => {
-            const response = await getAllCategories();
-            if (!response?.categories || !Array.isArray(response.categories)) {
-                throw new Error('Invalid categories response');
-            }
-            const category = response.categories.find(
-                (item: CategoryItemTypes) => item.strCategory === name
-            );
-            if (!category) {
-                throw new Error('Category not found');
-            }
-            return category;
-        },
-    });
+    const categoriesQuery = useQuery(categoriesQueryOptions);
+    const category = categoriesQuery.data?.find((item) => item.strCategory === name);
 
     const mealsQuery = useQuery({
         queryKey: ['meals', name],
@@ -37,23 +23,31 @@ export const SingleCategoryPage: React.FC = () => {
         },
     });
 
-    if (categoryQuery.status === 'pending') {
-        return <Loader/>
+    if (categoriesQuery.status === 'pending') {
+        return <Loader/>;
     }
 
-    if (categoryQuery.status === 'error') {
+    if (categoriesQuery.status === 'error') {
         return (
             <div className="h-full grid place-items-center">
-                <h2 className='text-2xl text-center'>Something went wrong</h2>
+                <h2 className="text-2xl text-center">Something went wrong</h2>
             </div>
-        )
+        );
+    }
+
+    if (!category) {
+        return (
+            <div className="h-full grid place-items-center">
+                <h2 className="text-2xl text-center">Category not found</h2>
+            </div>
+        );
     }
 
     const meals = mealsQuery.data ?? [];
 
     return (
         <>
-            {categoryQuery.data && <AboutCategory categoryInfo={categoryQuery.data}/>}
+            <AboutCategory categoryInfo={category}/>
             {mealsQuery.status === 'pending' && <Loader/>}
             {mealsQuery.status === 'success' && (
                 meals.length > 0 ? (

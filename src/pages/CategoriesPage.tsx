@@ -1,19 +1,10 @@
-import {getAllCategories} from '@/api-utils';
+import {categoriesQueryOptions} from '@/queryOptions';
 import {CategoryList} from '@components/CategoryList';
 import {useQuery} from '@tanstack/react-query';
 import {Loader} from '@components/Loader';
 
 export const CategoriesPage: React.FC = () => {
-    const {status, data, error} = useQuery({
-        queryKey: ['categories'],
-        queryFn: async () => {
-            const response = await getAllCategories();
-            if (!response?.categories || !Array.isArray(response.categories)) {
-                throw new Error('Invalid categories response');
-            }
-            return response.categories;
-        },
-    });
+    const {status, data, error} = useQuery(categoriesQueryOptions);
 
     if (status === 'pending') {
         return <Loader/>;
