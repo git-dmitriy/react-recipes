@@ -1,3 +1,10 @@
+import {
+    ADD_TO_FAVORITE,
+    REMOVE_FROM_FAVORITE,
+    SWITCH_THEME,
+    SET_IS_LOADING,
+} from '@context/contextTypes';
+
 export type CategoryItemTypes = {
     idCategory: string;
     strCategory: string;
@@ -38,15 +45,10 @@ export type StateTypes = {
 };
 
 export type ActionTypes =
-    | { type: ADD_TO_FAVORITE; payload: MealItemTypes }
-    | { type: REMOVE_FROM_FAVORITE; payload: MealItemTypes }
-    | { type: SWITCH_THEME; payload: 'light' | 'dark' }
-    | { type: SET_IS_LOADING; payload: boolean };
-
-type ADD_TO_FAVORITE = 'ADD_TO_FAVORITE';
-type REMOVE_FROM_FAVORITE = 'REMOVE_FROM_FAVORITE';
-type SWITCH_THEME = 'SWITCH_THEME';
-type SET_IS_LOADING = 'SET_IS_LOADING';
+    | { type: typeof ADD_TO_FAVORITE; payload: MealItemTypes }
+    | { type: typeof REMOVE_FROM_FAVORITE; payload: MealItemTypes }
+    | { type: typeof SWITCH_THEME; payload: 'light' | 'dark' }
+    | { type: typeof SET_IS_LOADING; payload: boolean };
 
 export type ContextTypes = {
     state: StateTypes;
