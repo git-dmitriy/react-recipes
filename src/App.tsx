@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {AppState} from '@context/AppState.tsx';
 import {Header} from '@components/Header';
 import {Footer} from '@components/Footer';
 import {FavoritesPage} from '@pages/FavoritesPage';
@@ -21,27 +20,25 @@ export default function App() {
     return (
         <Router>
             <QueryClientProvider client={queryClient}>
-                <AppState>
-                    <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
-                        <Theme/>
-                        <Header/>
-                        <motion.main className='content h-full'>
-                            <Layout>
-                                <ScrollToTop/>
-                                <Routes>
-                                    <Route path='/' element={<CategoriesPage/>}/>
-                                    <Route path='favorites' element={<FavoritesPage/>}/>
-                                    <Route path='recipes' element={<SearchResultsPage/>}/>
-                                    <Route path='category/:name' element={<SingleCategoryPage/>}/>
-                                    <Route path='country/:region' element={<SearchByCountryPage/>}/>
-                                    <Route path='meal/:idMeal' element={<RecipePage/>}/>
-                                    <Route path='/*' element={<CategoriesPage/>}/>
-                                </Routes>
-                            </Layout>
-                        </motion.main>
-                        <Footer/>
-                    </div>
-                </AppState>
+                <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
+                    <Theme/>
+                    <Header/>
+                    <motion.main className='content h-full'>
+                        <Layout>
+                            <ScrollToTop/>
+                            <Routes>
+                                <Route path='/' element={<CategoriesPage/>}/>
+                                <Route path='favorites' element={<FavoritesPage/>}/>
+                                <Route path='recipes' element={<SearchResultsPage/>}/>
+                                <Route path='category/:name' element={<SingleCategoryPage/>}/>
+                                <Route path='country/:region' element={<SearchByCountryPage/>}/>
+                                <Route path='meal/:idMeal' element={<RecipePage/>}/>
+                                <Route path='/*' element={<CategoriesPage/>}/>
+                            </Routes>
+                        </Layout>
+                    </motion.main>
+                    <Footer/>
+                </div>
             </QueryClientProvider>
         </Router>
     );

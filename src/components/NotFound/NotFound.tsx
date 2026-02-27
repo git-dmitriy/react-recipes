@@ -1,9 +1,9 @@
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {getRandomMeal} from '@/api-utils';
 import {Meal} from '@components/Meal';
 import {LostConnection} from '@components/LostConnection';
-import {AppContext} from '@context/AppContext';
-import {MealItemTypes} from '@/appTypes';
+import {useAppStore} from '@/store/useAppStore';
+import type {MealItemTypes} from '@/appTypes';
 
 type P = {
     target: string;
@@ -13,7 +13,7 @@ export const NotFound: React.FC<P> = ({target}) => {
     const [randomMeal, setRandomMeal] = useState<MealItemTypes | null>(null);
     const [disconnected, setDisconnected] = useState(false);
 
-    const {setIsLoading} = useContext(AppContext);
+    const setIsLoading = useAppStore((store) => store.setIsLoading);
 
     useEffect(() => {
         let cancelled = false;

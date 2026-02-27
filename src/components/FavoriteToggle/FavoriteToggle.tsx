@@ -2,10 +2,8 @@ import {
     BsFillBookmarkPlusFill,
     BsFillBookmarkCheckFill,
 } from 'react-icons/bs';
-
-import {useState, useEffect, useContext} from 'react';
-import {AppContext} from '@context/AppContext';
-import {MealItemTypes} from '@/appTypes';
+import {useAppStore} from '@/store/useAppStore';
+import type {MealItemTypes} from '@/appTypes';
 
 type P = {
     meal: MealItemTypes;
@@ -13,16 +11,11 @@ type P = {
 };
 
 export const FavoriteToggle: React.FC<P> = ({meal, isDark = false}) => {
-    const [isFavorite, setIsFavorite] = useState<boolean | null>(null);
-    const {state, addToFavorites, removeFromFavorites} = useContext(AppContext);
+    const favorites = useAppStore((store) => store.favorites);
+    const addToFavorites = useAppStore((store) => store.addToFavorites);
+    const removeFromFavorites = useAppStore((store) => store.removeFromFavorites);
 
-    useEffect(
-        () =>
-            setIsFavorite(
-                !!state.favorites.find((item) => item.idMeal === meal.idMeal)
-            ),
-        [state.favorites]
-    );
+    const isFavorite = favorites.some((item) => item.idMeal === meal.idMeal);
 
     const addToFavorite = () => {
         addToFavorites(meal);
