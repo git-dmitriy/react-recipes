@@ -13,16 +13,17 @@
     --min-height-full: 100%;
     --min-height-170p: 170px;
 
-    --animate-bounce200: bounce 1s infinite 200ms;
-    --animate-bounce400: bounce 1s infinite 400ms;
+    --animate-bounce: loader-bounce 0.6s ease-in-out infinite;
+    --animate-bounce200: loader-bounce 0.6s ease-in-out infinite 0.1s;
+    --animate-bounce400: loader-bounce 0.6s ease-in-out infinite 0.2s;
 
-    @keyframes bounce {
+    @keyframes loader-bounce {
         0%,
         100% {
-            transform: translateY(-100%);
+            transform: translateY(0) translateZ(0);
         }
         50% {
-            transform: translateY(0);
+            transform: translateY(-100%) translateZ(0);
         }
     }
 }
@@ -64,4 +65,10 @@
 
 .footer {
     block-size: 4rem;
+}
+
+/* GPU layer for loader dots to avoid jank */
+.loader-dot {
+    will-change: transform;
+    backface-visibility: hidden;
 }

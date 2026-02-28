@@ -11,16 +11,16 @@ exports[`should render loader 1`] = `
         role="alert"
       >
         <div
-          class="flex"
+          class="flex gap-1"
         >
           <div
-            class="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce"
+            class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce"
           />
           <div
-            class="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce200"
+            class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce200"
           />
           <div
-            class="h-5 w-5 bg-yellow-400 rounded-full animate-bounce400"
+            class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce400"
           />
         </div>
       </div>
@@ -33,16 +33,16 @@ exports[`should render loader 1`] = `
       role="alert"
     >
       <div
-        class="flex"
+        class="flex gap-1"
       >
         <div
-          class="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce"
+          class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce"
         />
         <div
-          class="h-5 w-5 bg-yellow-400 rounded-full mr-1 animate-bounce200"
+          class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce200"
         />
         <div
-          class="h-5 w-5 bg-yellow-400 rounded-full animate-bounce400"
+          class="h-5 w-5 bg-yellow-400 rounded-full loader-dot animate-bounce400"
         />
       </div>
     </div>
