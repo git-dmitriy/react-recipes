@@ -8,10 +8,11 @@ import {SearchResultsPage} from '@pages/SearchResultsPage';
 import {ScrollToTop} from '@components/ScrollToTop';
 import {SearchByCountryPage} from '@pages/SearchByCountryPage';
 import {Theme} from '@components/Theme';
-import {SingleCategoryPage} from "@pages/SingleCategoryPage.tsx";
+import {SingleCategoryPage} from '@pages/SingleCategoryPage';
 import {motion} from 'motion/react';
-import {Layout} from "@components/Layout";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {Layout} from '@components/Layout';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {ReloadPrompt} from '@components/ReloadPrompt';
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ export default function App() {
                         </Layout>
                     </motion.main>
                     <Footer/>
+                    <ReloadPrompt/>
                 </div>
             </QueryClientProvider>
         </Router>
