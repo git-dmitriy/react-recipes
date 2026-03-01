@@ -17,14 +17,21 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
                 <div className='flex justify-center items-center'>
-          <span className='mr-3 text-right'>
-            © {new Date().getFullYear()} Dmitriy Shalberkin
-          </span>
+                    <span className='mr-3 text-right'>
+                      © {new Date().getFullYear()} {' '}
+                        <a
+                            className='hover:text-gray-400 transition duration-300'
+                            target='_blank'
+                            rel='noreferrer'
+                            href="https://dmitriy-shalberkin.ru"
+                        >dmitriy-shalberkin.ru</a>
+                    </span>
                     <a
                         className='text-4xl hover:text-gray-400 transition duration-300'
                         target='_blank'
                         rel='noreferrer'
                         href='https://github.com/git-dmitriy'
+                        aria-label="GitHub account"
                     >
                         <FaGithub className='fill-current'/>
                     </a>

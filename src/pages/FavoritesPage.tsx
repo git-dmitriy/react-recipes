@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { AppContext } from '@context/AppContext';
-import { MealsList } from '@components/MealsList';
+import React from 'react';
+import {useAppStore} from '@/store/useAppStore';
+import {MealsList} from '@components/MealsList';
 
 export const FavoritesPage: React.FC = () => {
-    const { state } = useContext(AppContext);
+    const favorites = useAppStore((store) => store.favorites);
 
-    if (state.favorites.length === 0) {
+    if (favorites.length === 0) {
         return (
             <div className='h-full grid place-items-center'>
                 <h2 className='mx-auto font-bold'>
@@ -16,6 +16,6 @@ export const FavoritesPage: React.FC = () => {
     }
 
     return (
-        <MealsList meals={state.favorites}/>
+        <MealsList meals={favorites}/>
     );
 };

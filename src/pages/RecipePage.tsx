@@ -1,12 +1,12 @@
 import {useParams} from 'react-router-dom';
-import {getMealById} from '@/api-utils.ts';
+import {getMealById} from '@/api-utils';
 import {Ingredients} from '@components/Ingredients';
 import {YoutubeIframe} from '@components/YoutubeIframe';
 import {RecipeImage} from '@components/RecipeImage';
 import {FavoriteToggle} from '@components/FavoriteToggle';
 import {CategoriesLink} from '@components/CategoriesLink';
-import {useQuery} from "@tanstack/react-query";
-import {Loader} from "@components/Loader";
+import {useQuery} from '@tanstack/react-query';
+import {Loader} from '@components/Loader';
 
 export const RecipePage: React.FC = () => {
     const {idMeal} = useParams();
@@ -14,28 +14,37 @@ export const RecipePage: React.FC = () => {
     const {status, data} = useQuery({
         queryKey: ['recipe', idMeal],
         queryFn: async () => {
-            const data = await getMealById(idMeal as string);
-
-            if (data.meals === 'Invalid ID') {
-                throw new Error('')
+            const response = await getMealById(idMeal as string);
+            if (!response?.meals || !Array.isArray(response.meals)) {
+                throw new Error('Recipe not found');
             }
-
-            return data.meals[0];
+            const meal = response.meals[0];
+            if (!meal) {
+                throw new Error('Recipe not found');
+            }
+            return meal;
         },
-    })
+    });
 
     if (status === 'pending') {
-        return <Loader/>
+        return <Loader/>;
     }
 
     if (status === 'error') {
         return (
             <div className="h-100 grid place-items-center">
-                <h2 className='text-2xl text-center'>There is no such recipe</h2>
+                <h2 className="text-2xl text-center">There is no such recipe</h2>
             </div>
-        )
+        );
     }
 
+    if (!data) {
+        return (
+            <div className="h-100 grid place-items-center">
+                <h2 className="text-2xl text-center">Recipe data is missing</h2>
+            </div>
+        );
+    }
 
     return (
         <>

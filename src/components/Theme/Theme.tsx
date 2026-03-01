@@ -1,8 +1,8 @@
-import {useEffect, useContext, useRef} from 'react';
-import {AppContext} from '@context/AppContext';
+import {useEffect, useRef} from 'react';
+import {useAppStore} from '@/store/useAppStore';
 
 export const Theme = () => {
-    const {state} = useContext(AppContext);
+    const theme = useAppStore((store) => store.theme);
     const firstRender = useRef(true);
 
     useEffect(() => {
@@ -17,12 +17,12 @@ export const Theme = () => {
             );
             firstRender.current = false;
         }
-        if (state.theme === 'dark') {
+        if (theme === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
-    }, [state]);
+    }, [theme]);
 
     return null;
 };

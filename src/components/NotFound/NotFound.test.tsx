@@ -1,10 +1,9 @@
 import {NotFound} from './NotFound';
-import {AppContext} from '@context/AppContext';
-import {ContextTypes} from '@/appTypes';
+import {useAppStore} from '@/store/useAppStore';
 import {MemoryRouter} from 'react-router-dom';
 import {render, screen, waitFor} from '@testing-library/react';
 import {getRandomMeal} from '@/api-utils';
-import {it, expect, vi} from 'vitest';
+import {it, expect, vi, beforeEach} from 'vitest';
 import '@testing-library/jest-dom';
 
 vi.mock('@/api-utils', (): { getRandomMeal: typeof getRandomMeal } => ({
@@ -23,30 +22,16 @@ vi.mock('@/api-utils', (): { getRandomMeal: typeof getRandomMeal } => ({
         }),
 }));
 
-const setIsLoading = vi.fn();
-const context = {
-    state: {
-        favorites: [],
-        theme: 'light',
-        isLoading: false,
-    },
-    setIsLoading,
-    addToFavorites: vi.fn(),
-    removeFromFavorites: vi.fn(),
-    switchTheme: vi.fn(),
-};
+beforeEach(() => {
+    useAppStore.setState({favorites: [], theme: 'light', isLoading: false});
+});
 
 it('should render correctly', () => {
-    const target = '';
-
     const tree = render(
-        <AppContext.Provider value={context as ContextTypes}>
-            <MemoryRouter>
-                <NotFound target={target}/>
-            </MemoryRouter>
-        </AppContext.Provider>
-    )
-
+        <MemoryRouter>
+            <NotFound target=""/>
+        </MemoryRouter>
+    );
     expect(tree).toMatchSnapshot();
 });
 
@@ -55,20 +40,16 @@ it('should load random meal', async () => {
     const meal = 'Roast fennel and aubergine paella';
 
     render(
-        <AppContext.Provider value={context as ContextTypes}>
-            <MemoryRouter>
-                <NotFound target={target}/>
-            </MemoryRouter>
-        </AppContext.Provider>
+        <MemoryRouter>
+            <NotFound target={target}/>
+        </MemoryRouter>
     );
 
     const searchMeal = screen.getByRole('heading');
-
     expect(searchMeal).toBeInTheDocument();
 
     await waitFor(() => {
         const randomMealTitle = screen.getByText(meal);
-
         expect(randomMealTitle).toBeInTheDocument();
     });
 });

@@ -1,37 +1,92 @@
+import type {CategoryItemTypes, MealItemTypes} from '@/appTypes';
+
 const API_KEY = '1';
 const API_URL = `https://www.themealdb.com/api/json/v1/${API_KEY}`;
 
-export const getMealById = async (mealId: string) => {
-    const response = await fetch(API_URL + `/lookup.php?i=${mealId}`);
-    return await response.json();
+export type MealDbMealsResponse = {
+    meals: MealItemTypes[] | null;
 };
 
-export const getMealByName = async (name: string) => {
-    const response = await fetch(API_URL + `/search.php?s=${name}`);
-    return await response.json();
+export type MealDbCategoriesResponse = {
+    categories: CategoryItemTypes[];
 };
 
-export const getAllCategories = async () => {
-    const response = await fetch(API_URL + '/categories.php');
-    return await response.json();
+export type MealDbAreaListItem = { strArea: string };
+
+export type MealDbAreasResponse = {
+    meals: MealDbAreaListItem[];
 };
 
-export const getListOfCountries = async () => {
-    const response = await fetch(API_URL + '/list.php?a=list');
-    return await response.json();
+export class ApiError extends Error {
+    constructor(
+        message: string,
+        public readonly status?: number,
+        public readonly cause?: unknown
+    ) {
+        super(message);
+        this.name = 'ApiError';
+    }
+}
+
+async function apiFetch<T>(url: string): Promise<T> {
+    let response: Response;
+
+    try {
+        response = await fetch(url);
+    } catch (cause) {
+        throw new ApiError('Network request failed', undefined, cause);
+    }
+
+    if (!response.ok) {
+        throw new ApiError(
+            `Request failed: ${response.status} ${response.statusText}`,
+            response.status
+        );
+    }
+
+    try {
+        return (await response.json()) as T;
+    } catch (cause) {
+        throw new ApiError('Invalid JSON response', response.status, cause);
+    }
+}
+
+export const getMealById = async (mealId: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/lookup.php?i=${encodeURIComponent(mealId)}`;
+    return apiFetch<MealDbMealsResponse>(url);
 };
 
-export const getFilteredCategory = async (catName: string) => {
-    const response = await fetch(API_URL + `/filter.php?c=${catName}`);
-    return await response.json();
+export const getMealByName = async (name: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/search.php?s=${encodeURIComponent(name)}`;
+    return apiFetch<MealDbMealsResponse>(url);
 };
 
-export const getFilteredCategoryByCountry = async (area: string) => {
-    const response = await fetch(API_URL + `/filter.php?a=${area}`);
-    return await response.json();
+export const getAllCategories = async (): Promise<MealDbCategoriesResponse> => {
+    const url = `${API_URL}/categories.php`;
+    return apiFetch<MealDbCategoriesResponse>(url);
 };
 
-export const getRandomMeal = async () => {
-    const response = await fetch(API_URL + '/random.php');
-    return await response.json();
+export const getListOfCountries = async (): Promise<MealDbAreasResponse> => {
+    const url = `${API_URL}/list.php?a=list`;
+    return apiFetch<MealDbAreasResponse>(url);
+};
+
+export const getFilteredCategory = async (catName: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/filter.php?c=${encodeURIComponent(catName)}`;
+    return apiFetch<MealDbMealsResponse>(url);
+};
+
+export const getFilteredCategoryByCountry = async (area: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/filter.php?a=${encodeURIComponent(area)}`;
+    return apiFetch<MealDbMealsResponse>(url);
+};
+
+export const getMealsByIngredient = async (ingredient: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/filter.php?i=${encodeURIComponent(ingredient)}`;
+    return apiFetch<MealDbMealsResponse>(url);
+};
+
+export const getRandomMeal = async (): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/random.php`;
+    return apiFetch<MealDbMealsResponse>(url);
 };

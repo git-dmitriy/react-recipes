@@ -1,30 +1,73 @@
-# React + TypeScript + Vite
+# React Recipes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for browsing recipes: meal categories, search by name or ingredient, filter by country, and recipe pages with ingredients and video. Favorites and theme are stored locally; the app can be installed as a PWA and used offline.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Categories** — list of meal categories (TheMealDB)
+- **Recipes by category** — meals in a selected category with category description
+- **Recipes by country** — filter by cuisine region
+- **Search** — by meal name or ingredient
+- **Recipe page** — name, photo, ingredients, instructions, video (YouTube)
+- **Favorites** — add and remove recipes, persisted in localStorage
+- **Theme** — light/dark, persisted in localStorage
+- **PWA** — install on device, offline support, update prompt
 
-## Expanding the ESLint configuration
+## Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+| Category        | Technology           |
+|-----------------|----------------------|
+| UI              | React 19, TypeScript |
+| Build           | Vite 7, SWC          |
+| Styles          | Tailwind CSS 4       |
+| Animation       | Motion               |
+| Routing         | React Router 7       |
+| Server state    | TanStack React Query |
+| Global state    | Zustand              |
+| PWA             | vite-plugin-pwa, Workbox |
+| Tests           | Vitest, Testing Library |
+| Linting         | ESLint 9 (flat config) |
 
-- Configure the top-level `parserOptions` property like this:
+Recipe data is provided by [TheMealDB API](https://www.themealdb.com/api.php).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Scripts
+
+```bash
+npm run dev      # development server
+npm run build    # production build
+npm run preview  # preview production build
+npm run lint     # run ESLint
+npm test         # run tests
+npm run coverage # test coverage report
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Project structure
+
+```
+src/
+├── main.tsx           # entry point
+├── App.tsx            # routing and app shell
+├── appTypes.ts        # shared types
+├── api-utils.ts       # TheMealDB API client
+├── queryOptions.ts    # shared React Query options
+├── store/
+│   └── useAppStore.ts # Zustand: favorites, theme, loading
+├── pages/             # pages (categories, recipe, search, favorites, etc.)
+├── components/       # reusable components
+├── context/           # context types and constants (legacy)
+├── hooks/             # custom hooks
+└── assets/            # static assets
+```
+
+## Install and run
+
+```bash
+npm install
+npm run dev
+```
+
+The app will be available at the URL shown by Vite (usually `http://localhost:5173`).
+
+## License
+
+Private.

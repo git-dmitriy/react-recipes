@@ -37,10 +37,20 @@ exports[`renders correctly 1`] = `
               class="mr-3 text-right"
             >
               © 
-              2025
-               Dmitriy Shalberkin
+              2026
+               
+               
+              <a
+                class="hover:text-gray-400 transition duration-300"
+                href="https://dmitriy-shalberkin.ru"
+                rel="noreferrer"
+                target="_blank"
+              >
+                dmitriy-shalberkin.ru
+              </a>
             </span>
             <a
+              aria-label="GitHub account"
               class="text-4xl hover:text-gray-400 transition duration-300"
               href="https://github.com/git-dmitriy"
               rel="noreferrer"
@@ -99,10 +109,20 @@ exports[`renders correctly 1`] = `
             class="mr-3 text-right"
           >
             © 
-            2025
-             Dmitriy Shalberkin
+            2026
+             
+             
+            <a
+              class="hover:text-gray-400 transition duration-300"
+              href="https://dmitriy-shalberkin.ru"
+              rel="noreferrer"
+              target="_blank"
+            >
+              dmitriy-shalberkin.ru
+            </a>
           </span>
           <a
+            aria-label="GitHub account"
             class="text-4xl hover:text-gray-400 transition duration-300"
             href="https://github.com/git-dmitriy"
             rel="noreferrer"

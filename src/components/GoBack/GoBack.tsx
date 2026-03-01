@@ -1,21 +1,12 @@
-import {useEffect, useState} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {FaArrowLeft} from 'react-icons/fa';
-import {motion} from "motion/react"
+import {motion} from 'motion/react';
 
 export const GoBack: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [isHome, setIsHome] = useState(false);
-
-    useEffect(() => {
-        if (location.pathname === '/') {
-            setIsHome(true);
-        } else {
-            setIsHome(false);
-        }
-    }, [location]);
+    const isHome = location.pathname === '/';
 
     const onClickHandler = () => {
         if (window.history.length === 1) {
@@ -31,6 +22,7 @@ export const GoBack: React.FC = () => {
         >
             {!isHome ?
                 <motion.button
+                    type="button"
                     initial={{opacity: 0}}
                     exit={{opacity: 0}}
                     animate={{opacity: 1}}

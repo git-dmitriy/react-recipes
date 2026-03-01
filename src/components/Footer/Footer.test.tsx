@@ -13,15 +13,18 @@ it('renders correctly', () => {
 it('show owner name', () => {
     render(<Footer/>);
 
-    const owner = screen.getByText(/Dmitriy Shalberkin/, {selector: 'span'});
+    const ownerLink = screen.getByRole('link', {name: /dmitriy-shalberkin\.ru/i});
 
-    expect(owner).toBeDefined();
+    expect(ownerLink).toBeInTheDocument();
+    expect(ownerLink).toHaveAttribute('href', 'https://dmitriy-shalberkin.ru');
+    expect(ownerLink).toHaveAttribute('target', '_blank');
+    expect(ownerLink).toHaveAttribute('rel', 'noreferrer')
 });
 
 it('provide link to github', () => {
     render(<Footer/>);
 
-    const githubLink = screen.getByRole('link');
+    const githubLink = screen.getByRole('link', {name: 'GitHub account'});
 
     expect(githubLink.getAttribute('href')).toBe('https://github.com/git-dmitriy');
 });
