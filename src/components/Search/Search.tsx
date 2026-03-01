@@ -46,7 +46,7 @@ export const Search: React.FC = () => {
                     role='searchbox'
                     type='text'
                     className='focus:outline-hidden focus:ring-2 dark:placeholder:text-gray-600 bg-gray-100 focus:ring-red-500 shadow-xs rounded-full w-52 sm:w-60 md:w-72 lg:w-80 xl:w-96 border-0 p-3 pl-10 min-w-full'
-                    placeholder='Search by name...'
+                    placeholder="Search by name or ingredient..."
                     value={searchQuery}
                     ref={searchInputRef}
                     onChange={onChangeHandler}

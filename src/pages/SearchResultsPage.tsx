@@ -1,9 +1,17 @@
-import {getMealByName} from '@/api-utils';
+import {getMealByName, getMealsByIngredient} from '@/api-utils';
 import {useSearchQuery} from '@hooks/useSearchQuery';
 import {MealsList} from '@components/MealsList';
 import {NotFound} from '@components/NotFound';
 import {useQuery} from '@tanstack/react-query';
 import {Loader} from '@components/Loader';
+import type {MealItemTypes} from '@/appTypes';
+
+function mergeMealsByName(mealsByName: MealItemTypes[], mealsByIngredient: MealItemTypes[]): MealItemTypes[] {
+    const byId = new Map<string, MealItemTypes>();
+    for (const m of mealsByName) byId.set(m.idMeal, m);
+    for (const m of mealsByIngredient) if (!byId.has(m.idMeal)) byId.set(m.idMeal, m);
+    return Array.from(byId.values());
+}
 
 export const SearchResultsPage: React.FC = () => {
     const query = useSearchQuery();
@@ -14,11 +22,17 @@ export const SearchResultsPage: React.FC = () => {
         queryKey: ['search', searchQuery],
         enabled: hasSearchQuery,
         queryFn: async () => {
-            const response = await getMealByName(searchQuery);
-            if (!response?.meals || !Array.isArray(response.meals) || response.meals.length === 0) {
+            const [byNameRes, byIngredientRes] = await Promise.all([
+                getMealByName(searchQuery),
+                getMealsByIngredient(searchQuery),
+            ]);
+            const mealsByName = Array.isArray(byNameRes?.meals) ? byNameRes.meals : [];
+            const mealsByIngredient = Array.isArray(byIngredientRes?.meals) ? byIngredientRes.meals : [];
+            const merged = mergeMealsByName(mealsByName, mealsByIngredient);
+            if (merged.length === 0) {
                 throw new Error('No meals found');
             }
-            return response.meals;
+            return merged;
         },
     });
 

@@ -81,6 +81,11 @@ export const getFilteredCategoryByCountry = async (area: string): Promise<MealDb
     return apiFetch<MealDbMealsResponse>(url);
 };
 
+export const getMealsByIngredient = async (ingredient: string): Promise<MealDbMealsResponse> => {
+    const url = `${API_URL}/filter.php?i=${encodeURIComponent(ingredient)}`;
+    return apiFetch<MealDbMealsResponse>(url);
+};
+
 export const getRandomMeal = async (): Promise<MealDbMealsResponse> => {
     const url = `${API_URL}/random.php`;
     return apiFetch<MealDbMealsResponse>(url);
