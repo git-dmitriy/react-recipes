@@ -37,7 +37,7 @@ export const NotFound: React.FC<P> = ({target}) => {
         return () => {
             cancelled = true;
         };
-    }, []);
+    }, [setIsLoading]);
 
     if (disconnected) {
         return <LostConnection/>;

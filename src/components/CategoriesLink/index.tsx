@@ -1,1 +1,1 @@
-export * from './CategoriesLink.tsx';
+export {CategoriesLink} from './CategoriesLink.tsx';

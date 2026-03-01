@@ -21,26 +21,26 @@ export const Search: React.FC = () => {
         }
     };
 
-    const onChangeHanlder: ChangeEventHandler<HTMLInputElement> = (event) => {
-        event.preventDefault();
+    const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const onSubmitHanlder = () => {
+    const onSubmitHandler = (e: React.FormEvent) => {
+        e.preventDefault();
         handleSearch(searchQuery);
     };
 
-    const onKeyDownHanlder: KeyboardEventHandler = (e) => {
+    const onKeyDownHandler: KeyboardEventHandler = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            onSubmitHanlder();
+            handleSearch(searchQuery);
             setSearchQuery('');
-            if (searchInputRef.current !== null) searchInputRef.current.blur();
+            searchInputRef.current?.blur();
         }
     };
 
     return (
-        <form className='flex' onSubmit={onSubmitHanlder}>
+        <form className="flex" onSubmit={onSubmitHandler}>
             <div className='relative my-2 mx-auto dark:text-gray-900'>
                 <input
                     role='searchbox'
@@ -49,12 +49,12 @@ export const Search: React.FC = () => {
                     placeholder='Search by name...'
                     value={searchQuery}
                     ref={searchInputRef}
-                    onChange={onChangeHanlder}
-                    onKeyDown={onKeyDownHanlder}
+                    onChange={onChangeHandler}
+                    onKeyDown={onKeyDownHandler}
                 />
                 <span
                     className='absolute left-0 top-1/2 transform -translate-y-1/2 ml-4 '
-                    onClick={onSubmitHanlder}
+                    onClick={() => handleSearch(searchQuery)}
                 >
                     <BsSearch className='fill-current'/>
                 </span>
