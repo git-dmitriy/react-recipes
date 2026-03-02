@@ -6,7 +6,7 @@ exports[`should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="container h-full px-3 sm:px-5 py-10 mx-auto"
+        class="container h-full px-3 sm:px-5 2xl:px-12 py-10 mx-auto"
       >
         <div />
       </div>
@@ -14,7 +14,7 @@ exports[`should render correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="container h-full px-3 sm:px-5 py-10 mx-auto"
+      class="container h-full px-3 sm:px-5 2xl:px-12 py-10 mx-auto"
     >
       <div />
     </div>
