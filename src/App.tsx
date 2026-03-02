@@ -11,16 +11,17 @@ import {Theme} from '@components/Theme';
 import {SingleCategoryPage} from '@pages/SingleCategoryPage';
 import {motion} from 'motion/react';
 import {Layout} from '@components/Layout';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {ReloadPrompt} from '@components/ReloadPrompt';
-
-const queryClient = new QueryClient();
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { ReloadPrompt } from '@components/ReloadPrompt';
+import { queryClient, persister, persistMaxAge } from '@/queryClient';
 
 export default function App() {
-
     return (
         <Router>
-            <QueryClientProvider client={queryClient}>
+            <PersistQueryClientProvider
+                client={queryClient}
+                persistOptions={{ persister, maxAge: persistMaxAge }}
+            >
                 <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
                     <Theme/>
                     <Header/>
@@ -41,7 +42,7 @@ export default function App() {
                     <Footer/>
                     <ReloadPrompt/>
                 </div>
-            </QueryClientProvider>
+            </PersistQueryClientProvider>
         </Router>
     );
 }
