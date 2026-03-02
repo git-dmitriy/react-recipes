@@ -79,11 +79,13 @@ export const RecipePage: React.FC = () => {
                         <Ingredients props={data}/>
                     </div>
                 </div>
+
+                {data.strYoutube ? (
+                    <YoutubeIframe src={data.strYoutube} />
+                ) : null}
             </div>
 
-            {data.strYoutube?.length ? (
-                <YoutubeIframe address={data.strYoutube.slice(32)}/>
-            ) : null}
+
         </>
     );
 
