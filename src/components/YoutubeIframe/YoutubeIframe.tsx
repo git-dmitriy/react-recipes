@@ -4,9 +4,9 @@ type P = {
 
 export const YoutubeIframe: React.FC<P> = ({address}) => {
     return (
-        <div className='relative h-0 mt-8' style={{paddingBottom: '56.25%'}}>
+        <div className='relative mt-8' >
             <iframe
-                className='absolute top-0 left-0 w-full h-full'
+                className='w-full h-full'
                 title='Video instruction'
                 width='100%'
                 height='500px'
