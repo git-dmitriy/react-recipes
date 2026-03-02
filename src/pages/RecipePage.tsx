@@ -80,8 +80,8 @@ export const RecipePage: React.FC = () => {
                     </div>
                 </div>
 
-                {data.strYoutube?.length ? (
-                    <YoutubeIframe address={data.strYoutube.slice(32)}/>
+                {data.strYoutube ? (
+                    <YoutubeIframe src={data.strYoutube} />
                 ) : null}
             </div>
 
