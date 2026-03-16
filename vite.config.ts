@@ -36,41 +36,18 @@ export default defineConfig({
                 categories: ['food', 'lifestyle'],
                 orientation: 'portrait',
             },
-            workbox: {
-                globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-                runtimeCaching: [
-                    {
-                        urlPattern: /^https:\/\/www\.themealdb\.com\/api\/.*/i,
-                        handler: 'NetworkFirst',
-                        options: {
-                            cacheName: 'themealdb-api',
-                            expiration: {maxEntries: 100, maxAgeSeconds: 60 * 60 * 24},
-                            networkTimeoutSeconds: 10,
-                            cacheableResponse: {statuses: [0, 200]},
-                        },
-                    },
-                ],
-                navigateFallback: '/index.html',
-                navigateFallbackDenylist: [/^\/api\//],
-            },
+            strategies: 'injectManifest',
+            srcDir: 'src',
+            filename: 'sw.ts',
+            injectRegister: 'auto',
             devOptions: {
                 enabled: false,
             },
         }),
     ],
     build: {
-        rollupOptions: {
-            output: {
-                manualChunks(id) {
-                    if (id.includes('node_modules')) {
-                        if (id.includes('react-dom') || id.includes('react/')) return 'vendor-react';
-                        if (id.includes('react-router') || id.includes('motion') || id.includes('zustand')) return 'vendor-ui';
-                        if (id.includes('@tanstack')) return 'vendor-query';
-                        return 'vendor';
-                    }
-                },
-            },
-        },
+        // use esbuild for minification to avoid terser renderChunk issues
+        minify: 'esbuild',
     },
     resolve: {
         alias: {
