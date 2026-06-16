@@ -9,6 +9,7 @@ import {Loader} from '@components/Loader';
 import {motion} from 'motion/react';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {ReloadPrompt} from '@components/ReloadPrompt';
+import {PageNotFound} from '@components/PageNotFound';
 import {queryClient, persister, persistMaxAge} from '@/queryClient';
 
 const CategoriesPage = lazy(() => import('@pages/CategoriesPage').then((m) => ({default: m.CategoriesPage})));
@@ -39,7 +40,7 @@ export default function App() {
                                     <Route path='category/:name' element={<SingleCategoryPage/>}/>
                                     <Route path='country/:region' element={<SearchByCountryPage/>}/>
                                     <Route path='meal/:idMeal' element={<RecipePage/>}/>
-                                    <Route path='/*' element={<CategoriesPage/>}/>
+                                    <Route path='/*' element={<PageNotFound/>}/>
                                 </Routes>
                             </Suspense>
                         </Layout>

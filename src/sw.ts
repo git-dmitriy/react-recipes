@@ -1,25 +1,25 @@
+/// <reference lib="webworker" />
 import {clientsClaim} from 'workbox-core'
 import {cleanupOutdatedCaches, precacheAndRoute} from 'workbox-precaching'
 import {registerRoute, NavigationRoute} from 'workbox-routing'
 import {NetworkFirst} from 'workbox-strategies'
 
+type PrecacheManifestEntry = string | {
+    url: string;
+    revision?: string | null;
+};
+
 declare let self: ServiceWorkerGlobalScope & {
-    __WB_MANIFEST: any
+    __WB_MANIFEST: PrecacheManifestEntry[];
 }
 
-// Take control of uncontrolled clients as soon as the SW activates
 clientsClaim()
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error skipWaiting is available in Service Worker global scope at runtime
 self.skipWaiting()
 
-// Precache files injected by workbox at build time
 precacheAndRoute(self.__WB_MANIFEST || [])
 
-// Clean up old precaches when manifest changes
 cleanupOutdatedCaches()
 
-// SPA navigation fallback to index.html (exclude API calls)
 const navigationRoute = new NavigationRoute(async ({request, url}) => {
     if (request.mode !== 'navigate') {
         return fetch(request)
@@ -31,7 +31,6 @@ const navigationRoute = new NavigationRoute(async ({request, url}) => {
 })
 registerRoute(navigationRoute)
 
-// Runtime caching for ThemealDB API
 registerRoute(
     ({url}) => url.origin === 'https://www.themealdb.com' && url.pathname.startsWith('/api/'),
     new NetworkFirst({
@@ -39,4 +38,3 @@ registerRoute(
         networkTimeoutSeconds: 10,
     }),
 )
-

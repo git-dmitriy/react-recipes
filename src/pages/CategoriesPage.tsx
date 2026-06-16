@@ -1,35 +1,34 @@
 import {categoriesQueryOptions} from '@/queryOptions';
 import {CategoryList} from '@components/CategoryList';
+import {QueryBoundary} from '@components/QueryBoundary';
 import {useQuery} from '@tanstack/react-query';
-import {Loader} from '@components/Loader';
 
 export const CategoriesPage: React.FC = () => {
-    const {status, data, error} = useQuery(categoriesQueryOptions);
-
-    if (status === 'pending') {
-        return <Loader/>;
-    }
-
-    if (status === 'error') {
-        const message = error instanceof Error ? error.message : 'Unknown error';
-        return (
-            <div className="h-full grid place-items-center">
-                <span className="text-center">Something went wrong: {message}</span>
-            </div>
-        );
-    }
-
-    if (!data || data.length === 0) {
-        return (
-            <div className="h-full grid place-items-center">
-                <span className="text-center">No categories available.</span>
-            </div>
-        );
-    }
+    const query = useQuery(categoriesQueryOptions);
 
     return (
-        <>
-            <CategoryList catalog={data}/>
-        </>
+        <QueryBoundary
+            query={query}
+            errorFallback={(error) => (
+                <div className="h-full grid place-items-center">
+                    <span className="text-center">Something went wrong: {error.message}</span>
+                </div>
+            )}
+            emptyFallback={
+                <div className="h-full grid place-items-center">
+                    <span className="text-center">No categories available.</span>
+                </div>
+            }
+        >
+            {(data) =>
+                data.length === 0 ? (
+                    <div className="h-full grid place-items-center">
+                        <span className="text-center">No categories available.</span>
+                    </div>
+                ) : (
+                    <CategoryList catalog={data}/>
+                )
+            }
+        </QueryBoundary>
     );
 };
