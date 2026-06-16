@@ -76,12 +76,12 @@ export const RecipePage: React.FC = () => {
                                 altText={data.strMeal}
                             />
                         </div>
-                        <Ingredients props={data}/>
+                        <Ingredients meal={data}/>
                     </div>
                 </div>
 
                 {data.strYoutube ? (
-                    <YoutubeIframe src={data.strYoutube} />
+                    <YoutubeIframe src={data.strYoutube}/>
                 ) : null}
             </div>
 

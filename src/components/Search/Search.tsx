@@ -16,7 +16,7 @@ export const Search: React.FC = () => {
         if (searchQuery.trim().length !== 0) {
             navigate({
                 pathname: '/recipes',
-                search: `search=${searchQuery}`,
+                search: new URLSearchParams({search: searchQuery.trim()}).toString(),
             });
         }
     };

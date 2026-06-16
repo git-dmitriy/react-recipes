@@ -4,7 +4,7 @@ import {render} from '@testing-library/react';
 import {it, expect, beforeEach} from 'vitest';
 
 beforeEach(() => {
-    useAppStore.setState({theme: 'light', favorites: [], isLoading: false});
+    useAppStore.setState({theme: 'light', favorites: []});
 });
 
 it('should render html without classes', () => {

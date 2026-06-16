@@ -4,6 +4,9 @@ import {it, expect} from 'vitest';
 
 it('should render correctly', () => {
     const data = {
+        idMeal: '1',
+        strMeal: 'Full English Breakfast',
+        strMealThumb: 'https://example.com/meal.jpg',
         strIngredient1: 'Sausages',
         strIngredient2: 'Bacon',
         strIngredient3: 'Mushrooms',
@@ -20,7 +23,7 @@ it('should render correctly', () => {
         strMeasure7: '1 Slice',
     };
 
-    const {container} = render(<Ingredients props={data}/>);
+    const {container} = render(<Ingredients meal={data}/>);
 
     expect(container).toMatchSnapshot();
 });

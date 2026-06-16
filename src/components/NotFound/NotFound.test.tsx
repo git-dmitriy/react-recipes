@@ -23,7 +23,7 @@ vi.mock('@/api-utils', (): { getRandomMeal: typeof getRandomMeal } => ({
 }));
 
 beforeEach(() => {
-    useAppStore.setState({favorites: [], theme: 'light', isLoading: false});
+    useAppStore.setState({favorites: [], theme: 'light'});
 });
 
 it('should render correctly', () => {
