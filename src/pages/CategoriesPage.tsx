@@ -14,11 +14,6 @@ export const CategoriesPage: React.FC = () => {
                     <span className="text-center">Something went wrong: {error.message}</span>
                 </div>
             )}
-            emptyFallback={
-                <div className="h-full grid place-items-center">
-                    <span className="text-center">No categories available.</span>
-                </div>
-            }
         >
             {(data) =>
                 data.length === 0 ? (

@@ -35,7 +35,7 @@ export default function App() {
                             <Suspense fallback={<Loader/>}>
                                 <Routes>
                                     <Route path='/' element={<CategoriesPage/>}/>
-                                    <Route path='favorites' element={<FavoritesPage/>}/>
+                                    <Route path='/favorites' element={<FavoritesPage/>}/>
                                     <Route path='recipes' element={<SearchResultsPage/>}/>
                                     <Route path='category/:name' element={<SingleCategoryPage/>}/>
                                     <Route path='country/:region' element={<SearchByCountryPage/>}/>

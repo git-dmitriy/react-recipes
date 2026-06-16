@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
 
                 <li>
                     <NavLink
-                        to='favorites'
+                        to='/favorites'
                         aria-label="Favorites"
                         className={({isActive}) =>
                             iconLinkClassName + (isActive ? activeIconLink : '')
