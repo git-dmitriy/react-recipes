@@ -1,17 +1,22 @@
+import type {MealDetailTypes} from '@/appTypes';
+
 export type Ingredient = {
     name: string;
     measure: string;
 };
 
-export function getMealIngredients(meal: Record<string, string | undefined>): Ingredient[] {
+export function getMealIngredients(
+    meal: MealDetailTypes | Record<string, string | undefined>,
+): Ingredient[] {
+    const fields = meal as Record<string, string | undefined>;
     const result: Ingredient[] = [];
 
     for (let i = 1; i <= 20; i++) {
-        const name = meal[`strIngredient${i}`]?.trim();
+        const name = fields[`strIngredient${i}`]?.trim();
         if (name) {
             result.push({
                 name,
-                measure: meal[`strMeasure${i}`]?.trim() ?? '',
+                measure: fields[`strMeasure${i}`]?.trim() ?? '',
             });
         }
     }

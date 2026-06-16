@@ -1,8 +1,8 @@
 import {getMealIngredients} from '@/utils/getMealIngredients';
-import type {MealItemTypes} from '@/appTypes';
+import type {MealDetailTypes} from '@/appTypes';
 
 type Props = {
-    meal: MealItemTypes;
+    meal: MealDetailTypes;
 };
 
 export const Ingredients: React.FC<Props> = ({meal}) => {
