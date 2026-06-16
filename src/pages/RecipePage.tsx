@@ -10,7 +10,18 @@ import {useQuery} from '@tanstack/react-query';
 
 export const RecipePage: React.FC = () => {
     const {idMeal} = useParams();
-    const query = useQuery(recipeQueryOptions(idMeal as string));
+    const query = useQuery({
+        ...recipeQueryOptions(idMeal as string),
+        enabled: Boolean(idMeal),
+    });
+
+    if (!idMeal) {
+        return (
+            <div className="h-100 grid place-items-center">
+                <h2 className="text-2xl text-center">There is no such recipe</h2>
+            </div>
+        );
+    }
 
     return (
         <QueryBoundary
