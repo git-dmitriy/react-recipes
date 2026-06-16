@@ -29,6 +29,8 @@ export const FavoriteToggle: React.FC<P> = ({meal, isDark = false}) => {
         <div className='mx-2 mt-2'>
             {isFavorite ? (
                 <button
+                    type="button"
+                    aria-label="Remove from favorites"
                     className='cursor-pointer text-2xl text-red-500 transition duration-200 uppercase'
                     onClick={removeFromFavorite}
                 >
@@ -36,6 +38,8 @@ export const FavoriteToggle: React.FC<P> = ({meal, isDark = false}) => {
                 </button>
             ) : (
                 <button
+                    type="button"
+                    aria-label="Add to favorites"
                     className={`cursor-pointer text-2xl text-gray-900 ${
                         isDark ? '' : 'dark:text-orange-200'
                     } hover:text-red-500 transition duration-200 uppercase`}
