@@ -28,3 +28,13 @@ it('provide link to github', () => {
 
     expect(githubLink.getAttribute('href')).toBe('https://github.com/git-dmitriy');
 });
+
+it('links to TheMealDB attribution', () => {
+    render(<Footer/>);
+
+    const link = screen.getByRole('link', {name: /recipe data by themealdb/i});
+
+    expect(link).toHaveAttribute('href', 'https://www.themealdb.com');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noreferrer');
+});

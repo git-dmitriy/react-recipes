@@ -1,5 +1,7 @@
 # React Recipes
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A web app for browsing recipes: meal categories, search by name or ingredient, filter by country, and recipe pages with
 ingredients and video. Favorites and theme are stored locally; the app can be installed as a PWA and used offline.
 
@@ -76,4 +78,22 @@ The app will be available at the URL shown by Vite (usually `http://localhost:51
 
 ## License
 
-Private.
+### Source code
+
+This project's source code is licensed under the [MIT License](LICENSE).
+
+### Third-party content (TheMealDB)
+
+Recipe names, descriptions, images, and related metadata are loaded from the
+[TheMealDB API](https://www.themealdb.com/api.php). This project does **not**
+claim ownership of meal content. Users and deployers must comply with
+TheMealDB's terms of use.
+
+The PWA service worker ([`src/sw.ts`](src/sw.ts)) may cache API responses and
+static assets for offline use (including the `themealdb-api` runtime cache).
+
+### Open-source dependencies
+
+Application dependencies (React, Vite, TanStack Query, Workbox, and others) are
+listed in [`package.json`](package.json) and [`package-lock.json`](package-lock.json).
+Icons are provided by [react-icons](https://react-icons.github.io/react-icons/) (MIT).
