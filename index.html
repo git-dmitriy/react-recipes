@@ -6,12 +6,24 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-    <meta name="theme-color" content="#eab308"/>
+    <meta name="theme-color" content="#f8ea9f"/>
     <meta name="description" content="Recipe app — browse categories and meals, save favorites"/>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
     <meta name="apple-mobile-web-app-title" content="Recipes"/>
     <title>React Recipes</title>
+    <script>
+        try {
+            const stored = JSON.parse(localStorage.getItem('app-storage') || '{}');
+            const theme = stored?.state?.theme;
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.colorScheme = 'dark';
+                document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#1f2937');
+                document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', 'black-translucent');
+            }
+        } catch {}
+    </script>
 </head>
 <body>
 <div id="root"></div>
