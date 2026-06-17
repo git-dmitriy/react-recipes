@@ -1,7 +1,14 @@
 import {QueryBoundary} from './QueryBoundary';
 import {render, screen} from '@testing-library/react';
 import type {UseQueryResult} from '@tanstack/react-query';
-import {it, expect, describe} from 'vitest';
+import {ApiError} from '@/api-utils';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
+
+vi.mock('@/hooks/useOnlineStatus', () => ({
+    useOnlineStatus: vi.fn(() => true),
+}));
+
+import {useOnlineStatus} from '@/hooks/useOnlineStatus';
 
 function createQueryResult<T>(overrides: Partial<UseQueryResult<T, Error>>): UseQueryResult<T, Error> {
     return {
@@ -16,6 +23,10 @@ function createQueryResult<T>(overrides: Partial<UseQueryResult<T, Error>>): Use
 }
 
 describe('QueryBoundary', () => {
+    beforeEach(() => {
+        vi.mocked(useOnlineStatus).mockReturnValue(true);
+    });
+
     it('renders loading state', () => {
         render(
             <QueryBoundary query={createQueryResult({isPending: true, status: 'pending'})}>
@@ -77,5 +88,24 @@ describe('QueryBoundary', () => {
         );
 
         expect(screen.getByText('Empty')).toBeInTheDocument();
+    });
+
+    it('renders LostConnection for offline network errors without custom fallback', () => {
+        vi.mocked(useOnlineStatus).mockReturnValue(false);
+
+        render(
+            <QueryBoundary
+                query={createQueryResult({
+                    isError: true,
+                    isPending: false,
+                    status: 'error',
+                    error: new ApiError('Network request failed'),
+                })}
+            >
+                {() => <div>Content</div>}
+            </QueryBoundary>,
+        );
+
+        expect(screen.getByText('The Internet connection is lost')).toBeInTheDocument();
     });
 });

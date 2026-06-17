@@ -9,6 +9,8 @@ import {Loader} from '@components/Loader';
 import {motion} from 'motion/react';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {ReloadPrompt} from '@components/ReloadPrompt';
+import {OfflineBanner} from '@components/OfflineBanner';
+import {InstallPrompt} from '@components/InstallPrompt';
 import {PageNotFound} from '@components/PageNotFound';
 import {queryClient, persister, persistMaxAge} from '@/queryClient';
 
@@ -29,6 +31,7 @@ export default function App() {
                 <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
                     <Theme/>
                     <Header/>
+                    <OfflineBanner/>
                     <motion.main className='content h-full'>
                         <Layout>
                             <ScrollToTop/>
@@ -46,6 +49,7 @@ export default function App() {
                         </Layout>
                     </motion.main>
                     <Footer/>
+                    <InstallPrompt/>
                     <ReloadPrompt/>
                 </div>
             </PersistQueryClientProvider>

@@ -1,8 +1,10 @@
 /// <reference lib="webworker" />
 import {clientsClaim} from 'workbox-core'
-import {cleanupOutdatedCaches, precacheAndRoute} from 'workbox-precaching'
+import {CacheableResponsePlugin} from 'workbox-cacheable-response'
+import {ExpirationPlugin} from 'workbox-expiration'
+import {cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute} from 'workbox-precaching'
 import {registerRoute, NavigationRoute} from 'workbox-routing'
-import {NetworkFirst} from 'workbox-strategies'
+import {CacheFirst, NetworkFirst} from 'workbox-strategies'
 
 type PrecacheManifestEntry = string | {
     url: string;
@@ -14,20 +16,14 @@ declare let self: ServiceWorkerGlobalScope & {
 }
 
 clientsClaim()
-self.skipWaiting()
 
 precacheAndRoute(self.__WB_MANIFEST || [])
 
 cleanupOutdatedCaches()
 
-const navigationRoute = new NavigationRoute(async ({request, url}) => {
-    if (request.mode !== 'navigate') {
-        return fetch(request)
-    }
-    if (url.pathname.startsWith('/api/')) {
-        return fetch(request)
-    }
-    return fetch('/index.html')
+const handler = createHandlerBoundToURL('/index.html')
+const navigationRoute = new NavigationRoute(handler, {
+    denylist: [/^\/api\//],
 })
 registerRoute(navigationRoute)
 
@@ -36,5 +32,28 @@ registerRoute(
     new NetworkFirst({
         cacheName: 'themealdb-api',
         networkTimeoutSeconds: 10,
+        plugins: [
+            new CacheableResponsePlugin({statuses: [0, 200]}),
+            new ExpirationPlugin({
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
+                purgeOnQuotaError: true,
+            }),
+        ],
+    }),
+)
+
+registerRoute(
+    ({url}) => url.origin === 'https://www.themealdb.com' && url.pathname.startsWith('/images/'),
+    new CacheFirst({
+        cacheName: 'themealdb-images',
+        plugins: [
+            new CacheableResponsePlugin({statuses: [0, 200]}),
+            new ExpirationPlugin({
+                maxEntries: 200,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+                purgeOnQuotaError: true,
+            }),
+        ],
     }),
 )

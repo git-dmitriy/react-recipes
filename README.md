@@ -42,6 +42,8 @@ npm run preview  # preview production build
 npm run lint     # run ESLint
 npm test         # run tests
 npm run coverage # test coverage report
+npm run generate-pwa-assets  # regenerate PNG/maskable icons from favicon.svg
+npm run pwa:audit          # build and run Lighthouse PWA audit
 ```
 
 ## Project structure
@@ -60,10 +62,15 @@ src/
 ├── pages/                # route pages
 ├── components/           # reusable components
 │   ├── QueryBoundary/    # loading/error wrapper for queries
+│   ├── OfflineBanner/    # offline status banner
+│   ├── InstallPrompt/    # custom PWA install prompt
+│   ├── ReloadPrompt/     # SW update / offline ready prompt
 │   └── PageNotFound/     # 404 page
+├── hooks/
+│   └── useOnlineStatus.ts
 ├── utils/
-│   └── getMealIngredients.ts
-├── hooks/                # custom hooks
+│   ├── getMealIngredients.ts
+│   └── isNetworkError.ts
 └── assets/               # static assets
 ```
 
@@ -75,6 +82,18 @@ npm run dev
 ```
 
 The app will be available at the URL shown by Vite (usually `http://localhost:5173`).
+
+## PWA / Offline behavior
+
+The app can be installed as a PWA. After the first visit, the service worker caches the app shell and may store API responses and meal images for offline use.
+
+| Works offline | Does not work offline |
+|---------------|------------------------|
+| App shell and client-side routing | New search or uncached categories |
+| Favorites (localStorage) | YouTube video playback |
+| Previously viewed recipes (data + photos) | Random recipe suggestion on empty search |
+
+To test offline mode: run `npm run build && npm run preview`, open the app, browse a few recipes, then enable offline in browser DevTools and reload.
 
 ## License
 

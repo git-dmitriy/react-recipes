@@ -17,6 +17,7 @@ export default defineConfig({
             '@components': path.resolve(__dirname, './src/components'),
             '@pages': path.resolve(__dirname, './src/pages'),
             '@hooks': path.resolve(__dirname, './src/hooks'),
+            'virtual:pwa-register/react': path.resolve(__dirname, './src/test/mocks/pwa-register.ts'),
         },
     },
 })
