@@ -1,5 +1,6 @@
 import {useEffect, useRef} from 'react';
 import {useAppStore} from '@/store/useAppStore';
+import {applyThemeChrome} from '@/utils/applyThemeChrome';
 
 export const Theme = () => {
     const theme = useAppStore((store) => store.theme);
@@ -17,11 +18,8 @@ export const Theme = () => {
             );
             firstRender.current = false;
         }
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+
+        applyThemeChrome(theme);
     }, [theme]);
 
     return null;

@@ -1,42 +1,59 @@
+/// <reference lib="webworker" />
 import {clientsClaim} from 'workbox-core'
-import {cleanupOutdatedCaches, precacheAndRoute} from 'workbox-precaching'
+import {CacheableResponsePlugin} from 'workbox-cacheable-response'
+import {ExpirationPlugin} from 'workbox-expiration'
+import {cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute} from 'workbox-precaching'
 import {registerRoute, NavigationRoute} from 'workbox-routing'
-import {NetworkFirst} from 'workbox-strategies'
+import {CacheFirst, NetworkFirst} from 'workbox-strategies'
+
+type PrecacheManifestEntry = string | {
+    url: string;
+    revision?: string | null;
+};
 
 declare let self: ServiceWorkerGlobalScope & {
-    __WB_MANIFEST: any
+    __WB_MANIFEST: PrecacheManifestEntry[];
 }
 
-// Take control of uncontrolled clients as soon as the SW activates
 clientsClaim()
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error skipWaiting is available in Service Worker global scope at runtime
-self.skipWaiting()
 
-// Precache files injected by workbox at build time
 precacheAndRoute(self.__WB_MANIFEST || [])
 
-// Clean up old precaches when manifest changes
 cleanupOutdatedCaches()
 
-// SPA navigation fallback to index.html (exclude API calls)
-const navigationRoute = new NavigationRoute(async ({request, url}) => {
-    if (request.mode !== 'navigate') {
-        return fetch(request)
-    }
-    if (url.pathname.startsWith('/api/')) {
-        return fetch(request)
-    }
-    return fetch('/index.html')
+const handler = createHandlerBoundToURL('/index.html')
+const navigationRoute = new NavigationRoute(handler, {
+    denylist: [/^\/api\//],
 })
 registerRoute(navigationRoute)
 
-// Runtime caching for ThemealDB API
 registerRoute(
     ({url}) => url.origin === 'https://www.themealdb.com' && url.pathname.startsWith('/api/'),
     new NetworkFirst({
         cacheName: 'themealdb-api',
         networkTimeoutSeconds: 10,
+        plugins: [
+            new CacheableResponsePlugin({statuses: [0, 200]}),
+            new ExpirationPlugin({
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
+                purgeOnQuotaError: true,
+            }),
+        ],
     }),
 )
 
+registerRoute(
+    ({url}) => url.origin === 'https://www.themealdb.com' && url.pathname.startsWith('/images/'),
+    new CacheFirst({
+        cacheName: 'themealdb-images',
+        plugins: [
+            new CacheableResponsePlugin({statuses: [0, 200]}),
+            new ExpirationPlugin({
+                maxEntries: 200,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+                purgeOnQuotaError: true,
+            }),
+        ],
+    }),
+)

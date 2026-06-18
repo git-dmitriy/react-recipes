@@ -9,6 +9,9 @@ import {Loader} from '@components/Loader';
 import {motion} from 'motion/react';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import {ReloadPrompt} from '@components/ReloadPrompt';
+import {OfflineBanner} from '@components/OfflineBanner';
+import {InstallPrompt} from '@components/InstallPrompt';
+import {PageNotFound} from '@components/PageNotFound';
 import {queryClient, persister, persistMaxAge} from '@/queryClient';
 
 const CategoriesPage = lazy(() => import('@pages/CategoriesPage').then((m) => ({default: m.CategoriesPage})));
@@ -28,23 +31,25 @@ export default function App() {
                 <div className='main-container bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-orange-100'>
                     <Theme/>
                     <Header/>
+                    <OfflineBanner/>
                     <motion.main className='content h-full'>
                         <Layout>
                             <ScrollToTop/>
                             <Suspense fallback={<Loader/>}>
                                 <Routes>
                                     <Route path='/' element={<CategoriesPage/>}/>
-                                    <Route path='favorites' element={<FavoritesPage/>}/>
+                                    <Route path='/favorites' element={<FavoritesPage/>}/>
                                     <Route path='recipes' element={<SearchResultsPage/>}/>
                                     <Route path='category/:name' element={<SingleCategoryPage/>}/>
                                     <Route path='country/:region' element={<SearchByCountryPage/>}/>
                                     <Route path='meal/:idMeal' element={<RecipePage/>}/>
-                                    <Route path='/*' element={<CategoriesPage/>}/>
+                                    <Route path='/*' element={<PageNotFound/>}/>
                                 </Routes>
                             </Suspense>
                         </Layout>
                     </motion.main>
                     <Footer/>
+                    <InstallPrompt/>
                     <ReloadPrompt/>
                 </div>
             </PersistQueryClientProvider>

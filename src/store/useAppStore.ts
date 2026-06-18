@@ -7,11 +7,9 @@ type Theme = 'light' | 'dark';
 type AppState = {
     favorites: MealItemTypes[];
     theme: Theme;
-    isLoading: boolean;
     addToFavorites: (item: MealItemTypes) => void;
     removeFromFavorites: (item: MealItemTypes) => void;
     switchTheme: (mode: Theme) => void;
-    setIsLoading: (status: boolean) => void;
 };
 
 export const useAppStore = create<AppState>()(
@@ -19,12 +17,13 @@ export const useAppStore = create<AppState>()(
         (set) => ({
             favorites: [],
             theme: 'light',
-            isLoading: false,
 
             addToFavorites: (item) =>
-                set((state) => ({
-                    favorites: [...state.favorites, item],
-                })),
+                set((state) =>
+                    state.favorites.some((f) => f.idMeal === item.idMeal)
+                        ? state
+                        : {favorites: [...state.favorites, item]}
+                ),
 
             removeFromFavorites: (item) =>
                 set((state) => ({
@@ -36,8 +35,6 @@ export const useAppStore = create<AppState>()(
                     set({theme: mode});
                 }
             },
-
-            setIsLoading: (status) => set({isLoading: status}),
         }),
         {
             name: 'app-storage',

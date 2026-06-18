@@ -5,7 +5,7 @@ import {it, expect, beforeEach} from 'vitest';
 import {render} from '@testing-library/react';
 
 beforeEach(() => {
-    useAppStore.setState({favorites: [], theme: 'light', isLoading: false});
+    useAppStore.setState({favorites: [], theme: 'light'});
 });
 
 const data = {

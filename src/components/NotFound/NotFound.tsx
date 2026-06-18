@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {getRandomMeal} from '@/api-utils';
 import {Meal} from '@components/Meal';
 import {LostConnection} from '@components/LostConnection';
-import {useAppStore} from '@/store/useAppStore';
 import type {MealItemTypes} from '@/appTypes';
 
 type P = {
@@ -13,12 +12,8 @@ export const NotFound: React.FC<P> = ({target}) => {
     const [randomMeal, setRandomMeal] = useState<MealItemTypes | null>(null);
     const [disconnected, setDisconnected] = useState(false);
 
-    const setIsLoading = useAppStore((store) => store.setIsLoading);
-
     useEffect(() => {
         let cancelled = false;
-
-        setIsLoading(true);
 
         getRandomMeal()
             .then((response) => {
@@ -31,13 +26,12 @@ export const NotFound: React.FC<P> = ({target}) => {
                 if (!cancelled) {
                     setDisconnected(true);
                 }
-            })
-            .finally(() => setIsLoading(false));
+            });
 
         return () => {
             cancelled = true;
         };
-    }, [setIsLoading]);
+    }, []);
 
     if (disconnected) {
         return <LostConnection/>;
