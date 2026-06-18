@@ -44,6 +44,10 @@ npm test         # run tests
 npm run coverage # test coverage report
 npm run generate-pwa-assets  # regenerate PNG/maskable icons from favicon.svg
 npm run pwa:audit          # build and run Lighthouse PWA audit
+npm run release            # bump version, update CHANGELOG, create git tag
+npm run release:patch      # force next patch release
+npm run release:minor      # force next minor release
+npm run release:major      # force next major release
 ```
 
 ## Project structure
@@ -53,6 +57,7 @@ src/
 ├── main.tsx              # entry point
 ├── App.tsx               # routing and app shell
 ├── appTypes.ts           # shared types
+├── appVersion.ts         # app version from package.json
 ├── api-utils.ts          # TheMealDB API client
 ├── queryClient.ts        # React Query client and persist config
 ├── queryOptions.ts       # shared React Query options
@@ -94,6 +99,39 @@ The app can be installed as a PWA. After the first visit, the service worker cac
 | Previously viewed recipes (data + photos) | Random recipe suggestion on empty search |
 
 To test offline mode: run `npm run build && npm run preview`, open the app, browse a few recipes, then enable offline in browser DevTools and reload.
+
+## Releases
+
+Versioning follows [Semantic Versioning](https://semver.org/). Release notes live in [`CHANGELOG.md`](CHANGELOG.md). The footer shows the current version from [`package.json`](package.json) at build time.
+
+| Commit type | Version bump |
+|-------------|----------------|
+| `fix:` | patch |
+| `feat:` | minor |
+| `feat!:` or `BREAKING CHANGE:` | major |
+
+### First release (v1.0.0)
+
+After merging the versioning setup into `main`:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+gh release create v1.0.0 --title "v1.0.0" --notes-file CHANGELOG.md
+```
+
+### Subsequent releases
+
+```bash
+npm test -- --run && npm run lint && npm run build
+npm run release          # auto bump from conventional commits since last tag
+# or: npm run release:minor / release:patch / release:major
+
+git push --follow-tags origin main
+gh release create vX.Y.Z --title "vX.Y.Z" --notes-file CHANGELOG.md
+```
+
+Deployed users receive updates via the PWA `ReloadPrompt`, not through an app store.
 
 ## License
 

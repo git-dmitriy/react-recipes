@@ -38,3 +38,9 @@ it('links to TheMealDB attribution', () => {
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noreferrer');
 });
+
+it('displays app version', () => {
+    render(<Footer/>);
+
+    expect(screen.getByText('v1.0.0')).toBeInTheDocument();
+});

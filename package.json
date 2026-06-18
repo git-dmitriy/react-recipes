@@ -2,7 +2,7 @@
   "name": "react-recipes",
   "private": true,
   "license": "MIT",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -12,7 +12,11 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023",
-    "pwa:audit": "npm run build && lhci autorun"
+    "pwa:audit": "npm run build && lhci autorun",
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
   },
   "dependencies": {
     "@tanstack/query-async-storage-persister": "^5.90.24",
@@ -45,6 +49,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "jsdom": "^29.0.0",
     "postcss": "^8.5.8",
+    "standard-version": "^9.5.0",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",

@@ -1,5 +1,6 @@
 import {FaGithub} from 'react-icons/fa';
-import Logo from '@assets/logo.svg'
+import Logo from '@assets/logo.svg';
+import {APP_VERSION} from '@/appVersion';
 
 export const Footer: React.FC = () => {
     return (
@@ -14,6 +15,7 @@ export const Footer: React.FC = () => {
                             loading="lazy"
                         />
                         <span className='ms-2'>Recipes</span>
+                        <span className="text-xs text-gray-500 ms-1">v{APP_VERSION}</span>
                     </div>
                     <div className='flex justify-center items-center'>
                         <span className='mr-3 text-right'>
@@ -44,6 +46,7 @@ export const Footer: React.FC = () => {
                 >
                     Recipe data by TheMealDB
                 </a>
+
             </div>
         </footer>
     );
